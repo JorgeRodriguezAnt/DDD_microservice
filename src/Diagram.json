@@ -1,0 +1,110 @@
+{"Class":[
+
+    {
+        "class_name": "LineItem",
+        "class_stereotype": "Entity",
+        "class_visibility": "public",
+        "class_is_abstract": "no",
+          "class_attributes":[{
+              "attribute_name" : "lineitemid",
+              "attribute_type" : "string",
+              "attribute_is_identifier" : "yes",
+              "attribute_visibility": "public",
+              "attribute_multiplicity": "none",
+              "attribute_allies_null": "no"
+           },{
+             "attribute_name" : "order",
+              "attribute_type" : "Order",
+              "attribute_is_identifier" : "no",
+              "attribute_visibility": "public",
+              "attribute_multiplicity": "none",
+              "attribute_allies_null": "no"
+           },{
+             "attribute_name" : "itemId",
+              "attribute_type" : "string",
+              "attribute_is_identifier" : "no",
+              "attribute_visibility": "public",
+              "attribute_multiplicity": "none",
+              "attribute_allies_null": "no"
+          },{
+              "attribute_name" : "itemName",
+              "attribute_type" : "string",
+              "attribute_is_identifier" : "no",
+              "attribute_visibility": "public",
+              "attribute_multiplicity": "none",
+              "attribute_allies_null": "no"
+         },{
+              "attribute_name" : "price",
+              "attribute_type" : "double",
+              "attribute_is_identifier" : "no",
+              "attribute_visibility": "public",
+              "attribute_multiplicity": "none",
+              "attribute_allies_null": "no"
+        },{
+              "attribute_name" : "quantity",
+              "attribute_type" : "integer",
+              "attribute_is_identifier" : "no",
+              "attribute_visibility": "public",
+              "attribute_multiplicity": "none",
+              "attribute_allies_null": "no"
+        },{
+              "attribute_name" : "subTotal",
+              "attribute_type" : "double",
+              "attribute_is_identifier" : "no",
+              "attribute_visibility": "public",
+              "attribute_multiplicity": "none",
+              "attribute_allies_null": "no"
+       }
+    ],
+    
+        "class_operations":[{
+        "operation_visibility": "none",
+        "operation_name" : "none",
+        "operation_parameters" : [{
+               "param_name": "none",
+               "param_type": "none",
+               "return_type": "none"
+      },{
+               "param_name": "none",
+               "param_type": "none",
+               "return_type": "none"
+    }]
+    }]
+    },{
+        "class_name": "MoneytoryValue",
+        "class_stereotype": "value_object",
+        "class_visibility": "public",
+        "class_is_abstract": "no",
+        "class_attributes":[{
+              "attribute_name" : "total",
+              "attribute_type" : "double",
+              "attribute_is_identifier" : "no",
+              "attribute_visibility": "public",
+              "attribute_multiplicity": "none",
+              "attribute_allies_null": "no"
+           },{
+             "attribute_name" : "unit",
+              "attribute_type" : "string",
+              "attribute_is_identifier" : "no",
+              "attribute_visibility": "public",
+              "attribute_multiplicity": "none",
+              "attribute_allies_null": "no"
+           }
+    ],
+    
+       "class_operations":[{
+       "operation_visibility": "none",
+       "operation_name" : "none",
+       "operation_parameters" : [{
+             "param_name": "none",
+             "param_type": "none",
+             "return_type": "none"
+      },{
+            "param_name": "none",
+            "param_type": "none",
+            "return_type": "none"
+    }]
+    }]
+    }
+    ]
+    }
