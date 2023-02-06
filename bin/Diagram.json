@@ -2,11 +2,11 @@
     "Class":[
 
     {
-        "class_name": "LineItem",
+        "class_name": "lineitemid",
         "class_stereotype": "Entity",
         "class_visibility": "public",
         "class_is_abstract": "no",
-          "class_attributes":[{
+        "class_attributes":[{
               "attribute_name" : "lineitemid",
               "attribute_type" : "string",
               "attribute_is_identifier" : "yes",

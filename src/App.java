@@ -1,9 +1,15 @@
 public class App {
     public static void main(String[] args) throws Exception {
-        JsonTransformer json = new JsonTransformer();
+        /* JsonTransformer json = new JsonTransformer();
         
-        json.JsonParser();
+        json.JsonParser(); */
+
+        JsonValitor json = new JsonValitor();
+        json.Valitor();
+        
         
         
     }
+
+   
 }
