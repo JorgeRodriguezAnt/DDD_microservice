@@ -1,33 +1,80 @@
+import java.io.FileReader;
 import java.util.ArrayList;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
+/* import org.json.simple.parser.ParseException; */
 
 
 
 public class JsonTransformer {
   // JSON String
-   String jsonString = "[{\"value_object_name\":\"MoneytoryValue\",\"value_object_stereotype\":\"value_object\",\"value_object_attributes\":[{\"attribute_name\":\"total\",\"attribute_type\":\"double\"},{\"attribute_name\":\"unit\",\"attribute_type\":\"string\"}]},{\"value_object_name\":\"MoneytoryValue2\",\"value_object_stereotype\":\"value_object\",\"value_object_attributes\":[{\"attribute_name\":\"total2\",\"attribute_type\":\"double\"},{\"attribute_name\":\"unit2\",\"attribute_type\":\"string\"}]}]";
+ /*   String jsonString = "[{\"value_object_name\":\"MoneytoryValue\",\"value_object_stereotype\":\"value_object\",\"value_object_attributes\":[{\"attribute_name\":\"total\",\"attribute_type\":\"double\"},{\"attribute_name\":\"unit\",\"attribute_type\":\"string\"}]},{\"value_object_name\":\"MoneytoryValue2\",\"value_object_stereotype\":\"value_object\",\"value_object_attributes\":[{\"attribute_name\":\"total2\",\"attribute_type\":\"double\"},{\"attribute_name\":\"unit2\",\"attribute_type\":\"string\"}]}]"; */
    
   public JsonTransformer(){
 
   }
-
-  public JsonTransformer(String jsonString){
-    this.jsonString = jsonString;
-  }
-
-
   public void JsonParser() {
 
-    CreateFile file = new CreateFile();
+    FileValueObject file = new FileValueObject();
     JSONParser parser = new JSONParser();
-   
+
     try {
+      //Read Json
+       Object obj = parser.parse(new FileReader("src/Diagram.json"));
+       
+       JSONObject jsonObject = (JSONObject)obj;
+
+
+       JSONArray jsonArray = (JSONArray) jsonObject.get("Class");
+       
+       
+       for (int i = 0; i <jsonArray.size(); i++) {
+         
+         JSONObject att = (JSONObject) jsonArray.get(i);
+         JSONArray arrayAtt= (JSONArray) att.get("class_attributes");
+        
+         ArrayList<String> arrAttName = new ArrayList<>();//name attribute
+         ArrayList<String> arrAttType= new ArrayList<>();//type attribute
+         ArrayList<String> arrAttIdentifier= new ArrayList<>();//identifier attribute
+         ArrayList<String> arrAttVisibility= new ArrayList<>();//visibility attribute
+
+          String className = (String) ((JSONObject)jsonArray.get(i)).get("class_name");
+          String classStereotype = (String) ((JSONObject)jsonArray.get(i)).get("class_stereotype");
+          String classVisibility = (String) ((JSONObject)jsonArray.get(i)).get("class_visibility");
+      
+         
+          for (int j = 0; j < arrayAtt.size(); j++) {
+
+            String attName = (String) ((JSONObject)arrayAtt.get(j)).get("attribute_name");
+            String attType = (String) ((JSONObject)arrayAtt.get(j)).get("attribute_type");
+            String attIdentifier = (String) ((JSONObject)arrayAtt.get(j)).get("attribute_is_identifier");
+            String attVisibility = (String) ((JSONObject)arrayAtt.get(j)).get("attribute_visibility");
+            
+            arrAttName.add(attName);
+            arrAttType.add(attType);
+            arrAttIdentifier.add(attIdentifier);
+            arrAttVisibility.add(attVisibility);
+            
+          }
+         
+         if(classStereotype.equals("value_object")){
+          System.out.println("archivo");
+          file.Create(className);
+          file.Write(className, classStereotype, classVisibility, arrAttName, arrAttType, arrAttIdentifier, arrAttVisibility);
+         }
+         
+          
+       }
+
+    } catch(Exception e) {
+       e.printStackTrace();
+    }
+   
+     /* try {
 
         // Parse JSON string using JSON parser.
-        Object object = parser.parse(jsonString);
+        Object obj = parser.parse(new FileReader("src/Diagram.json"));
         JSONArray array = (JSONArray) object;
       
         // Get JSON object from JSON array.
@@ -60,7 +107,7 @@ public class JsonTransformer {
          
       } catch (ParseException e) {
         e.printStackTrace();
-      }
+      }  */
   }
 
 

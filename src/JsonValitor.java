@@ -13,6 +13,7 @@ public class JsonValitor {
     public void Valitor(){
 
         JSONParser parser = new JSONParser();
+        JsonTransformer jTransformer = new JsonTransformer();
       try {
         //Read Json
          Object obj = parser.parse(new FileReader("src/Diagram.json"));
@@ -32,7 +33,7 @@ public class JsonValitor {
             if(className==null || className.trim().isEmpty() ) {
                 System.out.println("error");
                 return;
-            }else System.out.println(" nombre clase "+className);
+            }
         
            
             for (int j = 0; j < arrayAtt.size(); j++) {
@@ -40,13 +41,15 @@ public class JsonValitor {
               if(attName==null || attName.trim().isEmpty() ) {
                 System.out.println("error");
                 return;
-              }else System.out.println(attName);
+              }
 
               String attType = (String) ((JSONObject)arrayAtt.get(j)).get("attribute_type");
               if(attType==null || attType.trim().isEmpty() ) {
                 System.out.println("error");
                 return;
-              }else System.out.println(attType);
+              }
+              
+              jTransformer.JsonParser();
               
             }
            
