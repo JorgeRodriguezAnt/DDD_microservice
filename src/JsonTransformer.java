@@ -16,7 +16,8 @@ public class JsonTransformer {
   }
   public void JsonParser() {
 
-    FileValueObject file = new FileValueObject();
+    FileValueObject fileVO = new FileValueObject();
+    FileEntity fileEntity = new FileEntity();
     JSONParser parser = new JSONParser();
 
     try {
@@ -58,10 +59,16 @@ public class JsonTransformer {
             
           }
          
-         if(classStereotype.equals("value_object")){
+          if(classStereotype.equals("value_object")){
           System.out.println("archivo");
-          file.Create(className);
-          file.Write(className, classStereotype, classVisibility, arrAttName, arrAttType, arrAttIdentifier, arrAttVisibility);
+          fileVO.Create(className);
+          fileVO.Write(className, classStereotype, classVisibility, arrAttName, arrAttType, arrAttIdentifier, arrAttVisibility);
+         } 
+
+         if(classStereotype.equals("Entity")){
+          System.out.println("archivo");
+          fileEntity.Create(className);
+          fileEntity.Write(className, classStereotype, classVisibility, arrAttName, arrAttType, arrAttIdentifier, arrAttVisibility);
          }
          
           
