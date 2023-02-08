@@ -65,10 +65,6 @@ public class FileEntity {
          
           }
 
-
-
-
-
         //toString
         myWriter.write("\n@Override\n");
         myWriter.write("public String toString() {\n");
