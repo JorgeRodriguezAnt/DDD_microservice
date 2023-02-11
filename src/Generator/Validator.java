@@ -1,19 +1,20 @@
-import java.io.FileReader;
+package Generator;
 
+import java.io.FileReader;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
+public class Validator {
+    
 
-public class JsonValidator {
-    public JsonValidator(){
-      
+    public Validator(){
+
     }
 
-    public void Valitor(){
-
+    public void JsonValidator(){
         JSONParser parser = new JSONParser();
-        JsonTransformer jTransformer = new JsonTransformer();
+        
         String msg = "Invalid JSON. Error in ";
       try {
         //Read Json
@@ -63,11 +64,11 @@ public class JsonValidator {
            
             
          }
-         jTransformer.JsonParser();
+         
 
       } catch(Exception e) {
          e.printStackTrace();
       }
-      }
     }
 
+}

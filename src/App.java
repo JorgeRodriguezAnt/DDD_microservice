@@ -4,7 +4,7 @@ public class App {
         
         json.JsonParser(); */
 
-        JsonValitor json = new JsonValitor();
+        JsonValidator json = new JsonValidator();
         json.Valitor();
         
         
