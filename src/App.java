@@ -1,13 +1,15 @@
+import Generator.Validator;
+
 public class App {
     public static void main(String[] args) throws Exception {
-        /* JsonTransformer json = new JsonTransformer();
         
-        json.JsonParser(); */
 
-        JsonValidator json = new JsonValidator();
-        json.Valitor();
+        /* JsonValidator json = new JsonValidator();
+        json.Valitor(); */
         
+        Validator json = new Validator();
         
+        json.JsonValidator();
         
     }
 

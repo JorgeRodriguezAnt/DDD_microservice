@@ -1,13 +1,23 @@
 package Model;
 
-import java.util.Set;
+import java.util.List;
+
 
 public class Operation {
     
   public String Name;
   public String Visibility;
   public String ReturnType;
-  public Set<Parameter> Parameters;
+  public List<Parameter> Parameters;
+
+  
+
+  public Operation(String name, String visibility, String returnType, List<Parameter> parameters) {
+    Name = name;
+    Visibility = visibility;
+    ReturnType = returnType;
+    Parameters = parameters;
+  }
 
   public String getName() {
     return Name;
@@ -33,7 +43,7 @@ public class Operation {
     ReturnType = returnType;
   }
 
-  public Set<Parameter> getParameters() {
+  public List<Parameter> getParameters() {
     return Parameters;
   }
 

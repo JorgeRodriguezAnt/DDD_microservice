@@ -5,9 +5,21 @@ public class Attribute {
     public String Name;
     public String Type;
     public String IsIdentifier;
+    public String Visibility;
     public String Multiplicity;
     public String IsNuliable;
-    
+     
+
+    public Attribute(String name, String type, String isIdentifier, String visibility, String multiplicity,
+            String isNuliable) {
+        Name = name;
+        Type = type;
+        IsIdentifier = isIdentifier;
+        Visibility = visibility;
+        Multiplicity = multiplicity;
+        IsNuliable = isNuliable;
+    }
+
     public String getName() {
         return Name;
     }
@@ -32,6 +44,13 @@ public class Attribute {
         IsIdentifier = isIdentifier;
     }
 
+    public String getVisibility() {
+        return Visibility;
+    }
+
+    public void setVisibility(String visibility) {
+        Visibility = visibility;
+    }
     public String getMultiplicity() {
         return Multiplicity;
     }

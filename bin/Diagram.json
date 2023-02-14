@@ -61,19 +61,18 @@
         "class_operations":[{
         "operation_visibility": "none",
         "operation_name" : "none",
+        "return_type" : "none",
         "operation_parameters" : [{
                "param_name": "none",
-               "param_type": "none",
-               "return_type": "none"
+               "param_type": "none"
       },{
                "param_name": "none",
-               "param_type": "none",
-               "return_type": "none"
+               "param_type": "none"
     }]
     }]
     },{
         "class_name": "MoneytoryValue",
-        "class_stereotype": "value_object",
+        "class_stereotype": "Value Object",
         "class_visibility": "public",
         "class_is_abstract": "no",
         "class_attributes":[{
@@ -96,14 +95,13 @@
        "class_operations":[{
        "operation_visibility": "none",
        "operation_name" : "none",
+       "return_type" : "none",
        "operation_parameters" : [{
              "param_name": "none",
-             "param_type": "none",
-             "return_type": "none"
+             "param_type": "none"
       },{
             "param_name": "none",
-            "param_type": "none",
-            "return_type": "none"
+            "param_type": "none"
     }]
     }]
     }

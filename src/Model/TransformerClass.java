@@ -1,20 +1,25 @@
 package Model;
 
-import java.util.Set;
 
-public class TransformerClass {
+import java.util.List;
+
+
+public abstract class TransformerClass {
     
     public String Name;
     public String Stereotype;
     public String Visibility;
-    public Set<Attribute> Attributes;
-    public Set<Operation> Operations;
-
-
-    public void invokeTransformer(){
-
+    public List<Attribute> Attributes;
+    public List<Operation> Operations;
+    
+    public TransformerClass(String name, String stereotype, String visibility, List<Attribute> attributes,
+            List<Operation> operations) {
+        Name = name;
+        Stereotype = stereotype;
+        Visibility = visibility;
+        Attributes = attributes;
+        Operations = operations;
     }
-
 
     public String getName() {
         return Name;
@@ -31,13 +36,22 @@ public class TransformerClass {
     }
 
 
-    public Set<Attribute> getAttributes() {
+    public List<Attribute> getAttributes() {
         return Attributes;
     }
 
 
-    public Set<Operation> getOperations() {
+    public List<Operation> getOperations() {
         return Operations;
+    }
+
+    public void setAttributes(List<Attribute> attributes) {
+        Attributes = attributes;
+    }
+
+
+    public void setOperations(List<Operation> operations) {
+        Operations = operations;
     }
 
 
