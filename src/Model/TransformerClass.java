@@ -6,62 +6,67 @@ import java.util.List;
 
 public abstract class TransformerClass {
     
-    public String Name;
-    public String Stereotype;
-    public String Visibility;
-    public List<Attribute> Attributes;
-    public List<Operation> Operations;
+    protected TransformationStrategy transformationStrategy;
+
+    public String name;
+    public String stereotype;
+    public String visibility;
+    public List<Attribute> attributes;
+    public List<Operation> operations;
+
+
     
     public TransformerClass() {
     }
 
-    public TransformerClass(String name, String stereotype, String visibility, List<Attribute> attributes,
-            List<Operation> operations) {
-        Name = name;
-        Stereotype = stereotype;
-        Visibility = visibility;
-        Attributes = attributes;
-        Operations = operations;
+    public TransformerClass(String pname, String pstereotype, String pvisibility, List<Attribute> pattributes,
+            List<Operation> poperations) {
+        name = pname;
+        stereotype = pstereotype;
+        visibility = pvisibility;
+        attributes = pattributes;
+        operations = poperations;
     }
 
     public String getName() {
-        return Name;
+        return name;
     }
 
 
     public String getStereotype() {
-        return Stereotype;
+        return stereotype;
     }
 
 
     public String getVisibility() {
-        return Visibility;
+        return visibility;
     }
 
 
     public List<Attribute> getAttributes() {
-        return Attributes;
+        return attributes;
     }
 
 
     public List<Operation> getOperations() {
-        return Operations;
+        return operations;
     }
 
-    public void setAttributes(List<Attribute> attributes) {
-        Attributes = attributes;
-    }
-
-
-    public void setOperations(List<Operation> operations) {
-        Operations = operations;
+    public void setAttributes(List<Attribute> pattributes) {
+        attributes = pattributes;
     }
 
 
-    @Override
-    public String toString() {
-        return "TransformerClass [Name=" + Name + ", Stereotype=" + Stereotype + ", Visibility=" + Visibility
-                + ", Attributes=" + Attributes + ", Operations=" + Operations + "]";
+    public void setOperations(List<Operation> poperations) {
+        operations = poperations;
+    }
+
+
+   
+
+    public void invokeTransformation(){
+        transformationStrategy.createFile(this.name);
+        transformationStrategy.writeFile(this.name, this.stereotype, this.visibility, this.attributes);
     }
 
     

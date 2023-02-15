@@ -8,7 +8,7 @@ public class EntityTransformer implements TransformationStrategy {
     //Create file(s) Entity(ies)
 
     @Override
-    public void Create(String className) {
+    public void createFile(String className) {
         // TODO Auto-generated method stub
         try {  
             File myObj = new File("C:\\Users\\JoJa Morrison\\Documents\\Tesis\\Proximo semestre\\implement\\" + className + ".java");  
@@ -25,7 +25,7 @@ public class EntityTransformer implements TransformationStrategy {
     }
 
     @Override
-    public void Write(String className, String classStereotype, String classVisibility, List<Attribute>Attributes) {
+    public void writeFile(String className, String classStereotype, String classVisibility, List<Attribute>Attributes) {
         // TODO Auto-generated method stub
 
         try {  

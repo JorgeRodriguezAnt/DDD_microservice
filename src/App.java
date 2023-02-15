@@ -1,4 +1,8 @@
+import java.util.List;
+
+import Generator.Transformer;
 import Generator.Validator;
+import Model.TransformerClass;
 
 public class App {
     public static void main(String[] args) throws Exception {
@@ -9,7 +13,11 @@ public class App {
         
         Validator json = new Validator();
         
-        json.JsonValidator();
+        List<TransformerClass> classestoTransform = json.validateJSON();
+        
+        Transformer myTransfomer = new Transformer(classestoTransform);
+        
+        myTransfomer.transform();
         
     }
 
