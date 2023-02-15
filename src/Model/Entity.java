@@ -2,7 +2,7 @@ package Model;
 
 import java.util.List;
 
-import Generator.Validator;
+
 
 
 public class Entity extends TransformerClass {
