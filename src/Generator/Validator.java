@@ -118,11 +118,19 @@ public class Validator {
           
            Object.add(new Entity(className, classStereotype, classVisibility, Attributes, Operations));
           
+           //Create file(s) entities
            Entity entities = new Entity( new EntityTransformer());
-           if(Object.get(i).Stereotype.equals("Entity")){entities.invokeTransformation(Object.get(i).Name, Object.get(i).Stereotype, Object.get(i).Visibility, Object.get(i).getAttributes(), Object.get(i).getOperations());}
+           if(Object.get(i).Stereotype.equals("Entity")){
+            
+            entities.invokeTransformation(Object.get(i).Name, Object.get(i).Stereotype, Object.get(i).Visibility, Object.get(i).getAttributes(), Object.get(i).getOperations());
+          }
 
+           //Create file(s) value objects
            ValueObject valueObjects = new ValueObject( new ValueObjectTransformer());
-           if(Object.get(i).Stereotype.equals("Value Object")){valueObjects.invokeTransformation(Object.get(i).Name, Object.get(i).Stereotype, Object.get(i).Visibility, Object.get(i).getAttributes(), Object.get(i).getOperations());}
+           if(Object.get(i).Stereotype.equals("Value Object")){
+
+            valueObjects.invokeTransformation(Object.get(i).Name, Object.get(i).Stereotype, Object.get(i).Visibility, Object.get(i).getAttributes(), Object.get(i).getOperations());
+          }
           
           
         
