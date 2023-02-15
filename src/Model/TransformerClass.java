@@ -12,6 +12,9 @@ public abstract class TransformerClass {
     public List<Attribute> Attributes;
     public List<Operation> Operations;
     
+    public TransformerClass() {
+    }
+
     public TransformerClass(String name, String stereotype, String visibility, List<Attribute> attributes,
             List<Operation> operations) {
         Name = name;

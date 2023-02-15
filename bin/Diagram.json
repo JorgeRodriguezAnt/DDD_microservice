@@ -60,13 +60,13 @@
     
         "class_operations":[{
         "operation_visibility": "none",
-        "operation_name" : "none",
+        "operation_name" : "nones",
         "return_type" : "none",
         "operation_parameters" : [{
-               "param_name": "none",
+               "param_name": "nones",
                "param_type": "none"
       },{
-               "param_name": "none",
+               "param_name": "nonet",
                "param_type": "none"
     }]
     }]
@@ -97,10 +97,10 @@
        "operation_name" : "none",
        "return_type" : "none",
        "operation_parameters" : [{
-             "param_name": "none",
+             "param_name": "nonex",
              "param_type": "none"
       },{
-            "param_name": "none",
+            "param_name": "nonee",
             "param_type": "none"
     }]
     }]
