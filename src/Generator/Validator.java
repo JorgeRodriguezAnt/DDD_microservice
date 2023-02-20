@@ -13,7 +13,7 @@ import model.Attribute;
 import model.Entity;
 import model.Operation;
 import model.Parameter;
-import model.Relation;
+
 import model.TransformerClass;
 import model.ValueObject;
 
@@ -154,24 +154,6 @@ public class Validator {
             break;
           }
     }
-
-    //Relations
-
-   /*  JSONArray jsonArrayRelation = (JSONArray) jsonObject.get("Relation");
-    for (int t = 0; t < jsonArrayRelation.size(); t++) {
-      List<Relation> Relations = new ArrayList<>();
-      
-      String relId = (String) ((JSONObject)jsonArrayRelation.get(t)).get("Relation_Id");
-      String relType = (String) ((JSONObject)jsonArrayRelation.get(t)).get("Relation_type");
-      String relMultStart = (String) ((JSONObject)jsonArrayRelation.get(t)).get("Relation_Multiplicity_Start");
-      String relRoleNameStart = (String) ((JSONObject)jsonArrayRelation.get(t)).get("Relation_Role_Name_Start");
-      String relClassStart = (String) ((JSONObject)jsonArrayRelation.get(t)).get("Relation_Class_Start");
-      String relMultEnd = (String) ((JSONObject)jsonArrayRelation.get(t)).get("Relation_Multiplicity_End");
-      String relRoleNameEnd= (String) ((JSONObject)jsonArrayRelation.get(t)).get("Relation_Role_Name_End");
-      String relClassEnd = (String) ((JSONObject)jsonArrayRelation.get(t)).get("Relation_Class_End");
-
-      Relations.add(new Relation(relId, relId, relRoleNameStart, relClassStart, relId, relRoleNameEnd, relClassEnd));
-    } */
 
     
       
