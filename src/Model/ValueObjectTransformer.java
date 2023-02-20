@@ -1,4 +1,4 @@
-package Model;
+package model;
 
 import java.util.List;
 import java.io.File; 
@@ -25,7 +25,7 @@ public class ValueObjectTransformer implements TransformationStrategy{
     }
 
     @Override
-    public void writeFile(String className, String classStereotype, String classVisibility, List<Attribute>Attributes) {
+    public void writeFile(String className, String classStereotype, String classVisibility, List<Attribute>Attributes, List<Operation> operations) {
         // TODO Auto-generated method stub
 
         try {  

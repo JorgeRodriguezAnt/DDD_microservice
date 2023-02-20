@@ -1,8 +1,6 @@
-package Model;
+package model;
 
 import java.util.List;
-
-
 
 
 public class Entity extends TransformerClass {
@@ -11,9 +9,9 @@ public class Entity extends TransformerClass {
         this.transformationStrategy = new EntityTransformer();
     }
 
-    public Entity(String name, String stereotype, String visibility, List<Attribute> attributes,
+    public Entity(String id,String name, String stereotype, String visibility, List<Attribute> attributes,
             List<Operation> operations) {
-        super(name, stereotype, visibility, attributes, operations);
+        super(id,name, stereotype, visibility, attributes, operations);
         //TODO Auto-generated constructor stub
 
         this.transformationStrategy = new EntityTransformer();

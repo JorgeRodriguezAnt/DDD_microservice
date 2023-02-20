@@ -4,9 +4,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import java.io.FileWriter;
-public class EntityTransformer implements TransformationStrategy {
-    //Create file(s) Entity(ies)
 
+public class AggregateRootTransformer implements TransformationStrategy {
     @Override
     public void createFile(String className) {
         // TODO Auto-generated method stub
@@ -34,7 +33,11 @@ public class EntityTransformer implements TransformationStrategy {
 
         //Attributes
          for (int i = 0; i <  Attributes.size(); i++) {
-          myWriter.write(Attributes.get(i).Visibility + " " + Attributes.get(i).Type.substring(0, 1).toUpperCase() + Attributes.get(i).Type.substring( 1).toLowerCase() + " " +  Attributes.get(i).Name +";\n");
+          if(Attributes.get(i).Multiplicity.equals("yes")){
+            myWriter.write(Attributes.get(i).Visibility + " " + "List<"+Attributes.get(i).Name +">" + " " +  Attributes.get(i).Name +";\n");
+          }else{
+            myWriter.write(Attributes.get(i).Visibility + " " + Attributes.get(i).Type.substring(0, 1).toUpperCase() + Attributes.get(i).Type.substring( 1).toLowerCase() + " " +  Attributes.get(i).Name +";\n");
+          }
         } 
         
         //Constructor
@@ -45,12 +48,33 @@ public class EntityTransformer implements TransformationStrategy {
             if(i !=  Attributes.size()-1){
               myWriter.write(", ");
             }
-            } 
-            myWriter.write(") {\n"); 
-           for (int j = 0; j <  Attributes.size(); j++) {
+        } 
+        myWriter.write(") {\n"); 
+        for (int j = 0; j <  Attributes.size(); j++) {
             myWriter.write("\tthis." +  Attributes.get(j).Name + " = " +  Attributes.get(j).Name +";\n");
-          }
-          myWriter.write("}\n");
+        }
+        myWriter.write("}\n");
+
+        //Methods
+        
+         for (int t = 0; t < operations.size(); t++) {
+           
+            myWriter.write("\n" + operations.get(t).Visibility + " " + operations.get(t).ReturnType +  " " + operations.get(t).Name+ "(" );
+              myWriter.write( operations.get(t).Parameters.get(t).Type + " " + operations.get(t).Parameters.get(t).Name);   
+            
+             /* System.out.println(operations.get(t).Parameters); 
+                for (int i = 0; i < operations.get(t).Parameters.size(); i++) {
+                    myWriter.write( ", " + operations.get(t).Parameters.get(i).Type + " " + operations.get(t).Parameters.get(i).Name); 
+                    System.out.println(operations.get(t).Parameters);
+            }   */
+            
+             myWriter.write(" )" + "{ }\n");
+             
+         
+        } 
+       
+        
+        
 
         //getter
        
@@ -95,5 +119,4 @@ public class EntityTransformer implements TransformationStrategy {
         e.printStackTrace();
       } 
     }
-    
 }

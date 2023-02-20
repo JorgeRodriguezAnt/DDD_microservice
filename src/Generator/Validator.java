@@ -1,4 +1,4 @@
-package Generator;
+package generator;
 
 import java.io.FileReader;
 import java.util.ArrayList;
@@ -8,19 +8,24 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
-import Model.Attribute;
-import Model.Entity;
-import Model.Operation;
-import Model.Parameter;
-import Model.TransformerClass;
-import Model.ValueObject;
+import model.AggregateRoot;
+import model.Attribute;
+import model.Entity;
+import model.Operation;
+import model.Parameter;
+import model.Relation;
+import model.TransformerClass;
+import model.ValueObject;
+
 
 
 public class Validator {
     
   private static final String entityType = "Entity";
   private static final String valueObjectType = "Value Object";
-
+  private static final String aggregateRootType = "Aggregate Root";
+  
+  AddAttributesAggregate addAttributes = new AddAttributesAggregate();
 
   List<TransformerClass> classesToTransform;
   
@@ -55,6 +60,9 @@ public class Validator {
           List<Attribute> Attributes = new ArrayList<>();
           List<Operation> Operations = new ArrayList<>();
           List<Parameter> Parameters = new ArrayList<>();  
+
+
+          String classId = (String) ((JSONObject) jsonArray.get(i)).get("class_id");
 
           // Validation: Class name is blank
           
@@ -107,29 +115,63 @@ public class Validator {
             
             
             // Parameter
-            JSONObject param= (JSONObject) arrayOperation.get(k); 
-            JSONArray arrayparam= (JSONArray) param.get("operation_parameters");
+              JSONObject param= (JSONObject) arrayOperation.get(k); 
+              JSONArray arrayparam= (JSONArray) param.get("operation_parameters");
           
               for (int l = 0; l < arrayparam.size(); l++) {
                 String paramName = (String) ((JSONObject)arrayparam.get(l)).get("param_name"); 
                 String paramType = (String) ((JSONObject)arrayparam.get(l)).get("param_type");
-              
+                
                 Parameters.add(new Parameter(paramName, paramType));
 
-            }  
+            }   
 
             Operations.add(new Operation(opName, opVisibility, opReturn, Parameters));
+
+            
+
+            
+            
           }
+
           
+
+          
+         
           switch (classStereotype ) {
             case entityType:
-              classesToTransform.add(new Entity(className, classStereotype, classVisibility, Attributes, Operations));
+              classesToTransform.add(new Entity(classId,className, classStereotype, classVisibility, Attributes, Operations));
               break;
             case valueObjectType:
-              classesToTransform.add(new ValueObject(className, classStereotype, classVisibility, Attributes, Operations));
+              classesToTransform.add(new ValueObject(classId,className, classStereotype, classVisibility, Attributes, Operations));
+            break;
+            case aggregateRootType:
+            
+            classesToTransform.add(new AggregateRoot(classId, className, classStereotype, classVisibility, Attributes, Operations)); 
+            addAttributes.addAttributes(Attributes);
+            
+            
             break;
           }
     }
+
+    //Relations
+
+   /*  JSONArray jsonArrayRelation = (JSONArray) jsonObject.get("Relation");
+    for (int t = 0; t < jsonArrayRelation.size(); t++) {
+      List<Relation> Relations = new ArrayList<>();
+      
+      String relId = (String) ((JSONObject)jsonArrayRelation.get(t)).get("Relation_Id");
+      String relType = (String) ((JSONObject)jsonArrayRelation.get(t)).get("Relation_type");
+      String relMultStart = (String) ((JSONObject)jsonArrayRelation.get(t)).get("Relation_Multiplicity_Start");
+      String relRoleNameStart = (String) ((JSONObject)jsonArrayRelation.get(t)).get("Relation_Role_Name_Start");
+      String relClassStart = (String) ((JSONObject)jsonArrayRelation.get(t)).get("Relation_Class_Start");
+      String relMultEnd = (String) ((JSONObject)jsonArrayRelation.get(t)).get("Relation_Multiplicity_End");
+      String relRoleNameEnd= (String) ((JSONObject)jsonArrayRelation.get(t)).get("Relation_Role_Name_End");
+      String relClassEnd = (String) ((JSONObject)jsonArrayRelation.get(t)).get("Relation_Class_End");
+
+      Relations.add(new Relation(relId, relId, relRoleNameStart, relClassStart, relId, relRoleNameEnd, relClassEnd));
+    } */
 
     
       

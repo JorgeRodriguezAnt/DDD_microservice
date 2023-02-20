@@ -1,8 +1,8 @@
-package Generator;
+package generator;
 
 import java.util.List;
 
-import Model.TransformerClass;
+import model.TransformerClass;
 
 public class Transformer{
     

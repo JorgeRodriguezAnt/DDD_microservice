@@ -1,8 +1,8 @@
 import java.util.List;
 
-import Generator.Transformer;
-import Generator.Validator;
-import Model.TransformerClass;
+import generator.Transformer;
+import generator.Validator;
+import model.TransformerClass;
 
 public class App {
     public static void main(String[] args) throws Exception {
