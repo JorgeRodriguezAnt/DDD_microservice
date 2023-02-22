@@ -119,19 +119,16 @@ public class Validator {
               JSONArray arrayparam= (JSONArray) param.get("operation_parameters");
           
               for (int l = 0; l < arrayparam.size(); l++) {
+                
                 String paramName = (String) ((JSONObject)arrayparam.get(l)).get("param_name"); 
                 String paramType = (String) ((JSONObject)arrayparam.get(l)).get("param_type");
-                
                 Parameters.add(new Parameter(paramName, paramType));
-
-            }   
-
-            Operations.add(new Operation(opName, opVisibility, opReturn, Parameters));
-
+                System.out.println(opName + ":" + paramName);
+                
+              }   
             
-
-            
-            
+             Operations.add(new Operation(opName, opVisibility, opReturn, Parameters));
+      
           }
 
           
@@ -150,6 +147,9 @@ public class Validator {
             classesToTransform.add(new AggregateRoot(classId, className, classStereotype, classVisibility, Attributes, Operations)); 
             addAttributes.addAttributes(Attributes);
             
+              System.out.println(Operations); 
+            
+              
             
             break;
           }
