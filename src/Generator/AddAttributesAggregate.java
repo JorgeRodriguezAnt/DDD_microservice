@@ -50,12 +50,15 @@ public class AddAttributesAggregate {
           Relations.add(new Relation(relId, relType, relMultStart, relRoleNameStart, relClassStart, relMultEnd, relRoleNameEnd, relClassEnd));
 
           if(Relations.get(t).relationMultiplicityStart.equals("1..*") || Relations.get(t).relationMultiplicityStart.equals("0..*")){
-            pattributes.add(new Attribute(Relations.get(t).relationClassEnd, Relations.get(t).relationClassEnd, "no", "private","yes", null));
+            String typeAtt = "List<"+Relations.get(t).relationClassEnd +">";
+           ;
+            pattributes.add(new Attribute(Relations.get(t).relationRoleNameEnd, typeAtt, "no", "private","yes", null));
           }else{
-            pattributes.add(new Attribute(Relations.get(t).relationClassEnd, Relations.get(t).relationClassEnd, "no", "private","no", null));
+            pattributes.add(new Attribute(Relations.get(t).relationClassEnd, Relations.get(t).relationRoleNameEnd, "no", "private","no", null));
           }
+          
         }
-
+       
 
 
        

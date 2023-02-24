@@ -16,6 +16,7 @@ import model.Parameter;
 
 import model.TransformerClass;
 import model.ValueObject;
+import util.Errors;
 
 
 
@@ -36,6 +37,7 @@ public class Validator {
   public List<TransformerClass> validateJSON(){
     JSONParser parser = new JSONParser();
     String msg = "Invalid JSON. Error in ";
+    Errors errors = new Errors();
     try {
         //Read Json
         Object obj = parser.parse(new FileReader("src/Diagram.json"));
@@ -158,7 +160,9 @@ public class Validator {
     
       
     } catch(Exception e) {
-        e.printStackTrace();
+       /*  e.printStackTrace(); */
+        System.out.println("este es el error");
+        errors.append(e);
     }
 
     return this.classesToTransform;

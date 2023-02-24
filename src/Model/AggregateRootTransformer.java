@@ -33,11 +33,12 @@ public class AggregateRootTransformer implements TransformationStrategy {
 
         //Attributes
          for (int i = 0; i <  Attributes.size(); i++) {
-          if(Attributes.get(i).Multiplicity.equals("yes")){
-            myWriter.write(Attributes.get(i).Visibility + " " + "List<"+Attributes.get(i).Name +">" + " " +  Attributes.get(i).Name +";\n");
+           if(Attributes.get(i).Multiplicity.equals("yes")){
+            myWriter.write(Attributes.get(i).Visibility + " " +Attributes.get(i).Type  + " " +  Attributes.get(i).Name +";\n");
           }else{
             myWriter.write(Attributes.get(i).Visibility + " " + Attributes.get(i).Type.substring(0, 1).toUpperCase() + Attributes.get(i).Type.substring( 1).toLowerCase() + " " +  Attributes.get(i).Name +";\n");
-          }
+          } 
+          /* myWriter.write(Attributes.get(i).Visibility + " " + Attributes.get(i).Type.substring(0, 1).toUpperCase() + Attributes.get(i).Type.substring( 1).toLowerCase() + " " +  Attributes.get(i).Name +";\n"); */
         } 
         
         //Constructor

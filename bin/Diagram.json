@@ -186,7 +186,7 @@
         "Relation_Class_Start": "Order",
         "Relation_Multiplicity_End": "1",
         "Relation_Role_Name_End": "Tiene",
-        "Relation_Class_End": "moneytoryValue"
+        "Relation_Class_End": "moneytoryValue" 
   
   },{
        "Relation_Id": "5",
