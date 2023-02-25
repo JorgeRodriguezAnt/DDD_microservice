@@ -1,0 +1,38 @@
+{
+    "Class":[
+    {
+        "class_id": "id_class",
+        "class_name": "name_class",
+        "class_stereotype": "type_stereorype(Entity,VO,Aggregate Root...)",
+        "class_visibility": "type_visibility(private,public...)",
+        "class_is_abstract": "yes_or_not",
+        "class_attributes":[{
+              "attribute_name" : "name_attribute",
+              "attribute_type" : "type_attribute",
+              "attribute_is_identifier" : "yes_or_not",
+              "attribute_visibility": "type_visibility(private,public...)",
+              "attribute_multiplicity": "yes_or_not",
+              "attribute_allies_null": "yes_or_not"
+        }],
+        "class_operations":[{
+        "operation_visibility": "type_visibility(private,public...)",
+        "operation_name" : "name_operation",
+        "return_type" : "name_return",
+        "operation_parameters" : [{
+               "param_name": "name_parameter",
+               "param_type": "type_parameter"
+      }]
+    }]
+}]
+,   "Relation" : [
+    {
+      "Relation_Id": "id_relation",
+      "Relation_type": "Composition",
+      "Relation_Multiplicity_Start": "1",
+      "Relation_Role_Name_Start": "Permite",
+      "Relation_Class_Start": "Order",
+      "Relation_Multiplicity_End": "1",
+      "Relation_Role_Name_End": "Tiene",
+      "Relation_Class_End": "moneytoryValue" 
+    }]
+} 

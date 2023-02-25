@@ -161,7 +161,7 @@ public class Validator {
       
     } catch(Exception e) {
        /*  e.printStackTrace(); */
-        System.out.println("este es el error");
+        
         errors.append(e);
     }
 
