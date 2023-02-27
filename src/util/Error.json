@@ -27,12 +27,12 @@
 ,   "Relation" : [
     {
       "Relation_Id": "id_relation",
-      "Relation_type": "Composition",
-      "Relation_Multiplicity_Start": "1",
-      "Relation_Role_Name_Start": "Permite",
-      "Relation_Class_Start": "Order",
-      "Relation_Multiplicity_End": "1",
-      "Relation_Role_Name_End": "Tiene",
-      "Relation_Class_End": "moneytoryValue" 
+      "Relation_type": "type_relation",
+      "Relation_Multiplicity_Start": "type_multiplicity(0,1,0..*,1..*,*)",
+      "Relation_Role_Name_Start": "role_name_start",
+      "Relation_Class_Start": "id_class",
+      "Relation_Multiplicity_End": "type_multiplicity(0,1,0..*,1..*,*)",
+      "Relation_Role_Name_End": "role_name_end",
+      "Relation_Class_End": "id_class" 
     }]
 } 

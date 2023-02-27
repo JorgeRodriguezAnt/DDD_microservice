@@ -42,7 +42,6 @@ public class Validator {
         //Read Json
         Object obj = parser.parse(new FileReader("src/Diagram.json"));
         
-        
         // Validation: is a JSOn object and containds classess
         JSONObject jsonObject = (JSONObject)obj;
         //Not a Valid JSON object
@@ -65,50 +64,43 @@ public class Validator {
 
 
           String classId = (String) ((JSONObject) jsonArray.get(i)).get("class_id");
-
-          // Validation: Class name is blank
-          
           String className = (String) ((JSONObject)jsonArray.get(i)).get("class_name");
-          if(className==null || className.trim().isEmpty() ) {
-              System.out.println(msg + "class_name");
-              System.exit(0);
-          }
-      
-          // Validation: Class name is blank
           String classStereotype = (String) ((JSONObject)jsonArray.get(i)).get("class_stereotype");
-          if(classStereotype==null || classStereotype.trim().isEmpty() ) {
-            System.out.println(msg + "class_stereotype");
-            System.exit(0);
-          }
+         
 
           String classVisibility = (String) ((JSONObject)jsonArray.get(i)).get("class_visibility");
 
-          //Atributtes
+          //In case of missing essential data of the class, send an error
+
+          if( (className==null || className.trim().isEmpty()) || (classStereotype==null || classStereotype.trim().isEmpty()) ){
+            System.out.println("Empty, white or null spaces are not allowed in the json\n");
+            errors.toJSON();
+            System.exit(0);
+          }
+
+          //Creation of attributes 
           for (int j = 0; j < arrayAtt.size(); j++) {
 
             
             String attName = (String) ((JSONObject)arrayAtt.get(j)).get("attribute_name");
-            if(attName==null || attName.trim().isEmpty() ) {
-              System.out.println(msg + "attribute_name");
-              System.exit(0);
-            }
-
             String attType = (String) ((JSONObject)arrayAtt.get(j)).get("attribute_type");
-            if(attType==null || attType.trim().isEmpty() ) {
-              System.out.println(msg + "attribute_type");
-              System.exit(0);
-            }
-            
             String attIdentifier = (String) ((JSONObject)arrayAtt.get(j)).get("attribute_is_identifier");
             String attVisibility = (String) ((JSONObject)arrayAtt.get(j)).get("attribute_visibility");
             String attMultiplicity = (String) ((JSONObject)arrayAtt.get(j)).get("attribute_multiplicity");
             String attNull = (String) ((JSONObject)arrayAtt.get(j)).get("attribute_allies_null");
+
+            //In case of missing essential data of the class, send an error
+
+              if( (attName.trim().isEmpty()) &&  ((attType.trim().isEmpty() ))){
+              System.out.println("Empty, white or null spaces are not allowed in the json\n");
+              
+            }  
             
             Attributes.add(new Attribute(attName, attType, attIdentifier, attVisibility, attMultiplicity,attNull ));
             
           }
 
-          //operations
+          //Creation of Operations
 
           for (int k = 0; k < arrayOperation.size(); k++) {
             String opName = (String) ((JSONObject)arrayOperation.get(k)).get("operation_name");
@@ -116,7 +108,8 @@ public class Validator {
             String opReturn = (String) ((JSONObject)arrayOperation.get(k)).get("return_type");
             
             
-            // Parameter
+            // Creation of parameters
+
               JSONObject param= (JSONObject) arrayOperation.get(k); 
               JSONArray arrayparam= (JSONArray) param.get("operation_parameters");
           

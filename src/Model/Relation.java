@@ -11,10 +11,11 @@ public class Relation {
     public String relationMultiplicityEnd;
     public String relationRoleNameEnd;
     public String relationClassEnd;
+    public String RelationClassId;
 
     public Relation(String relationId, String relationType, String relationMultiplicityStart,
             String relationRoleNameStart, String relationClassStar, String relationMultiplicityEnd,
-            String relationRoleNameEnd, String relationClassEnd) {
+            String relationRoleNameEnd, String relationClassEnd, String RelationClassId) {
         this.relationId = relationId;
         this.relationType = relationType;
         this.relationMultiplicityStart = relationMultiplicityStart;
@@ -23,6 +24,7 @@ public class Relation {
         this.relationMultiplicityEnd = relationMultiplicityEnd;
         this.relationRoleNameEnd = relationRoleNameEnd;
         this.relationClassEnd = relationClassEnd;
+        this.RelationClassId = RelationClassId;
     }
 
     public String getRelationId() {
@@ -95,6 +97,14 @@ public class Relation {
                 + relationMultiplicityStart + ", relationRoleNameStart=" + relationRoleNameStart
                 + ", relationClassStar=" + relationClassStar + ", relationMultiplicityEnd=" + relationMultiplicityEnd
                 + ", relationRoleNameEnd=" + relationRoleNameEnd + ", relationClassEnd=" + relationClassEnd + "]";
+    }
+
+    public String getRelationClassId() {
+        return RelationClassId;
+    }
+
+    public void setRelationClassId(String relationClassId) {
+        RelationClassId = relationClassId;
     }
 
 

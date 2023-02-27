@@ -6,7 +6,7 @@ import java.util.List;
 import java.io.FileWriter;
 public class EntityTransformer implements TransformationStrategy {
     //Create file(s) Entity(ies)
-
+    int finish = 0;
     @Override
     public void createFile(String className) {
         // TODO Auto-generated method stub
@@ -34,9 +34,16 @@ public class EntityTransformer implements TransformationStrategy {
 
         //Attributes
          for (int i = 0; i <  Attributes.size(); i++) {
-          myWriter.write(Attributes.get(i).Visibility + " " + Attributes.get(i).Type.substring(0, 1).toUpperCase() + Attributes.get(i).Type.substring( 1).toLowerCase() + " " +  Attributes.get(i).Name +";\n");
+          if(Attributes.get(i).Name.equals(" ") || Attributes.get(i).Type.equals(" ")){
+            myWriter.write("}");
+            finish = 1;
+            
+          }else{
+            myWriter.write(Attributes.get(i).Visibility + " " + Attributes.get(i).Type.substring(0, 1).toUpperCase() + Attributes.get(i).Type.substring( 1).toLowerCase() + " " +  Attributes.get(i).Name +";\n");
+          }
         } 
         
+        if(finish==0){
         //Constructor
         myWriter.write("\n" + classVisibility + " "+ className +"(");
         
@@ -87,7 +94,7 @@ public class EntityTransformer implements TransformationStrategy {
         myWriter.write("]\";\n");
         myWriter.write("}\n");
         myWriter.write("\n}\n");
-        
+        }
         myWriter.close();
         System.out.println("Successfully wrote to the file.");
       } catch (IOException e) {

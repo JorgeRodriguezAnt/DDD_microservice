@@ -78,19 +78,12 @@
           "class_visibility": "public",
           "class_is_abstract": "no",
           "class_attributes":[{
-                "attribute_name" : "total",
-                "attribute_type" : "double",
-                "attribute_is_identifier" : "no",
-                "attribute_visibility": "public",
-                "attribute_multiplicity": "none",
-                "attribute_allies_null": "no"
-             },{
-               "attribute_name" : "unit",
-                "attribute_type" : "string",
-                "attribute_is_identifier" : "no",
-                "attribute_visibility": "public",
-                "attribute_multiplicity": "none",
-                "attribute_allies_null": "no"
+                "attribute_name" : "test",
+                "attribute_type" : "String",
+                "attribute_is_identifier" : "no ",
+                "attribute_visibility": " public",
+                "attribute_multiplicity": " no",
+                "attribute_allies_null": "no "
              }
       ],
       
@@ -186,7 +179,8 @@
         "Relation_Class_Start": "Order",
         "Relation_Multiplicity_End": "1",
         "Relation_Role_Name_End": "Tiene",
-        "Relation_Class_End": "moneytoryValue" 
+        "Relation_Class_End": "moneytoryValue",
+        "Relation_Class_id": "2" 
   
   },{
        "Relation_Id": "5",
@@ -196,7 +190,8 @@
        "Relation_Class_Start": "Order",
        "Relation_Multiplicity_End": "1",
        "Relation_Role_Name_End": "Tiene",
-       "Relation_Class_End": "lineItem"
+       "Relation_Class_End": "lineItem",
+       "Relation_Class_id": "1" 
   }
   
   

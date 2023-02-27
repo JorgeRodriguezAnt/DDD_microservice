@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.text.html.parser.Entity;
+
 import model.Attribute;
 import model.Relation;
 
@@ -26,10 +28,15 @@ public class AddAttributesAggregate {
     public void addAttributes(List<Attribute> pattributes) throws FileNotFoundException, IOException, ParseException{
         
 
+        Validator validator = new Validator() {};
+        /* validator.validateJSON(); */
+       
+       /* validator.classesToTransform.size(); */
+        
+
         JSONParser parser = new JSONParser();
         Object obj = parser.parse(new FileReader("src/Diagram.json"));
-        
-        
+      
         // Validation: is a JSOn object and containds classess
         JSONObject jsonObject = (JSONObject)obj;
 
@@ -46,15 +53,17 @@ public class AddAttributesAggregate {
           String relMultEnd = (String) ((JSONObject)jsonArrayRelation.get(t)).get("Relation_Multiplicity_End");
           String relRoleNameEnd= (String) ((JSONObject)jsonArrayRelation.get(t)).get("Relation_Role_Name_End");
           String relClassEnd = (String) ((JSONObject)jsonArrayRelation.get(t)).get("Relation_Class_End");
+          String relClassId = (String) ((JSONObject)jsonArrayRelation.get(t)).get("Relation_Class_id");
+
     
-          Relations.add(new Relation(relId, relType, relMultStart, relRoleNameStart, relClassStart, relMultEnd, relRoleNameEnd, relClassEnd));
+          Relations.add(new Relation(relId, relType, relMultStart, relRoleNameStart, relClassStart, relMultEnd, relRoleNameEnd, relClassEnd, relClassId));
 
           if(Relations.get(t).relationMultiplicityStart.equals("1..*") || Relations.get(t).relationMultiplicityStart.equals("0..*")){
             String typeAtt = "List<"+Relations.get(t).relationClassEnd +">";
            ;
             pattributes.add(new Attribute(Relations.get(t).relationRoleNameEnd, typeAtt, "no", "private","yes", null));
           }else{
-            pattributes.add(new Attribute(Relations.get(t).relationClassEnd, Relations.get(t).relationRoleNameEnd, "no", "private","no", null));
+            pattributes.add(new Attribute(Relations.get(t).relationRoleNameEnd, Relations.get(t).relationClassEnd, "no", "private","no", null));
           }
           
         }
