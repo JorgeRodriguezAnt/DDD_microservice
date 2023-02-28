@@ -10,6 +10,7 @@ import javax.swing.text.html.parser.Entity;
 
 import model.Attribute;
 import model.Relation;
+import model.TransformerClass;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -25,13 +26,11 @@ public class AddAttributesAggregate {
 
     }
 
-    public void addAttributes(List<Attribute> pattributes) throws FileNotFoundException, IOException, ParseException{
+    public void addAttributes(List<Attribute> pattributes, List<TransformerClass> classesToTransform) throws FileNotFoundException, IOException, ParseException{
         
-
-        Validator validator = new Validator() {};
-        /* validator.validateJSON(); */
-       
-       /* validator.classesToTransform.size(); */
+      for (TransformerClass transformerClass : classesToTransform) {
+        System.out.println(transformerClass.id);
+      }
         
 
         JSONParser parser = new JSONParser();
@@ -58,10 +57,14 @@ public class AddAttributesAggregate {
     
           Relations.add(new Relation(relId, relType, relMultStart, relRoleNameStart, relClassStart, relMultEnd, relRoleNameEnd, relClassEnd, relClassId));
 
-          if(Relations.get(t).relationMultiplicityStart.equals("1..*") || Relations.get(t).relationMultiplicityStart.equals("0..*")){
-            String typeAtt = "List<"+Relations.get(t).relationClassEnd +">";
-           ;
-            pattributes.add(new Attribute(Relations.get(t).relationRoleNameEnd, typeAtt, "no", "private","yes", null));
+          if(Relations.get(t).relationMultiplicityEnd.contains("..*") || Relations.get(t).relationMultiplicityEnd.contains("..2")){
+            for (TransformerClass transformerClass : classesToTransform) {
+              if(transformerClass.id.equals(Relations.get(t).RelationClassId)){
+                String typeAtt = "List<"+transformerClass.name +">";
+                pattributes.add(new Attribute(Relations.get(t).relationRoleNameEnd, typeAtt, "no", "private","yes", null));
+              }
+            }
+            
           }else{
             pattributes.add(new Attribute(Relations.get(t).relationRoleNameEnd, Relations.get(t).relationClassEnd, "no", "private","no", null));
           }

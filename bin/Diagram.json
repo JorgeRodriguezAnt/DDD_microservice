@@ -185,10 +185,10 @@
   },{
        "Relation_Id": "5",
        "Relation_type": "Composition",
-       "Relation_Multiplicity_Start": "1..*",
+       "Relation_Multiplicity_Start": "1",
        "Relation_Role_Name_Start": "Compra",
        "Relation_Class_Start": "Order",
-       "Relation_Multiplicity_End": "1",
+       "Relation_Multiplicity_End": "1..*",
        "Relation_Role_Name_End": "Tiene",
        "Relation_Class_End": "lineItem",
        "Relation_Class_id": "1" 

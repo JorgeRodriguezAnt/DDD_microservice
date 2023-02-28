@@ -140,9 +140,11 @@ public class Validator {
             case aggregateRootType:
             
             classesToTransform.add(new AggregateRoot(classId, className, classStereotype, classVisibility, Attributes, Operations)); 
-            addAttributes.addAttributes(Attributes);
+           
+              addAttributes.addAttributes(Attributes, classesToTransform);
+             
             
-              System.out.println(Operations); 
+  
             
               
             
