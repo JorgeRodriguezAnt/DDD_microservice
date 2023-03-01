@@ -1,17 +1,12 @@
 package util;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.json.simple.JSONObject;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 public class Errors {
     
   
-    private List<String> errors;
+    /* private List<String> errors; */
 
     public void append(Exception e){
         

@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.text.html.parser.Entity;
+
 
 import model.Attribute;
 import model.Relation;
@@ -29,7 +29,7 @@ public class AddAttributesAggregate {
     public void addAttributes(List<Attribute> pattributes, List<TransformerClass> classesToTransform) throws FileNotFoundException, IOException, ParseException{
         
       for (TransformerClass transformerClass : classesToTransform) {
-        System.out.println(transformerClass.id);
+        System.out.println(transformerClass.operations);
       }
         
 
@@ -41,6 +41,8 @@ public class AddAttributesAggregate {
 
         JSONArray jsonArrayRelation = (JSONArray) jsonObject.get("Relation");
         List<Relation> Relations = new ArrayList<>();
+
+        // Creation list of object of Relations
         for (int t = 0; t < jsonArrayRelation.size(); t++) {
           
           
@@ -56,6 +58,8 @@ public class AddAttributesAggregate {
 
     
           Relations.add(new Relation(relId, relType, relMultStart, relRoleNameStart, relClassStart, relMultEnd, relRoleNameEnd, relClassEnd, relClassId));
+
+          //Add attributes with o whithout multiplicity
 
           if(Relations.get(t).relationMultiplicityEnd.contains("..*") || Relations.get(t).relationMultiplicityEnd.contains("..2")){
             for (TransformerClass transformerClass : classesToTransform) {

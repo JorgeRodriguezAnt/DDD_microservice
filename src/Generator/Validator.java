@@ -29,6 +29,7 @@ public class Validator {
   AddAttributesAggregate addAttributes = new AddAttributesAggregate();
 
   List<TransformerClass> classesToTransform;
+  int count = 0;
   
   public Validator(){
     classesToTransform = new ArrayList<TransformerClass>();
@@ -36,7 +37,6 @@ public class Validator {
 
   public List<TransformerClass> validateJSON(){
     JSONParser parser = new JSONParser();
-    String msg = "Invalid JSON. Error in ";
     Errors errors = new Errors();
     try {
         //Read Json
@@ -51,6 +51,7 @@ public class Validator {
           
         //Class
         for (int i = 0; i <jsonArray.size(); i++) {
+         
 
           // Check get class attributes and operations
           JSONObject att = (JSONObject) jsonArray.get(i);
@@ -87,14 +88,7 @@ public class Validator {
             String attIdentifier = (String) ((JSONObject)arrayAtt.get(j)).get("attribute_is_identifier");
             String attVisibility = (String) ((JSONObject)arrayAtt.get(j)).get("attribute_visibility");
             String attMultiplicity = (String) ((JSONObject)arrayAtt.get(j)).get("attribute_multiplicity");
-            String attNull = (String) ((JSONObject)arrayAtt.get(j)).get("attribute_allies_null");
-
-            //In case of missing essential data of the class, send an error
-
-              if( (attName.trim().isEmpty()) &&  ((attType.trim().isEmpty() ))){
-              System.out.println("Empty, white or null spaces are not allowed in the json\n");
-              
-            }  
+            String attNull = (String) ((JSONObject)arrayAtt.get(j)).get("attribute_allies_null"); 
             
             Attributes.add(new Attribute(attName, attType, attIdentifier, attVisibility, attMultiplicity,attNull ));
             
@@ -102,7 +96,10 @@ public class Validator {
 
           //Creation of Operations
 
+          
+          
           for (int k = 0; k < arrayOperation.size(); k++) {
+
             String opName = (String) ((JSONObject)arrayOperation.get(k)).get("operation_name");
             String opVisibility = (String) ((JSONObject)arrayOperation.get(k)).get("operation_visibility");
             String opReturn = (String) ((JSONObject)arrayOperation.get(k)).get("return_type");
@@ -110,19 +107,20 @@ public class Validator {
             
             // Creation of parameters
 
-              JSONObject param= (JSONObject) arrayOperation.get(k); 
+              JSONObject param= (JSONObject) arrayOperation.get(k);  
               JSONArray arrayparam= (JSONArray) param.get("operation_parameters");
-          
+              System.out.println("parametros: " + arrayparam);
+              
               for (int l = 0; l < arrayparam.size(); l++) {
                 
-                String paramName = (String) ((JSONObject)arrayparam.get(l)).get("param_name"); 
-                String paramType = (String) ((JSONObject)arrayparam.get(l)).get("param_type");
+               String paramName = (String) ((JSONObject)arrayparam.get(l)).get("param_name");
+               String paramType = (String) ((JSONObject)arrayparam.get(l)).get("param_type");
+
                 Parameters.add(new Parameter(paramName, paramType));
-                System.out.println(opName + ":" + paramName);
-                
               }   
-            
+             
              Operations.add(new Operation(opName, opVisibility, opReturn, Parameters));
+             
       
           }
 
@@ -136,19 +134,14 @@ public class Validator {
               break;
             case valueObjectType:
               classesToTransform.add(new ValueObject(classId,className, classStereotype, classVisibility, Attributes, Operations));
-            break;
+              break;
             case aggregateRootType:
-            
-            classesToTransform.add(new AggregateRoot(classId, className, classStereotype, classVisibility, Attributes, Operations)); 
-           
+              classesToTransform.add(new AggregateRoot(classId, className, classStereotype, classVisibility, Attributes, Operations)); 
               addAttributes.addAttributes(Attributes, classesToTransform);
-             
-            
-  
-            
+              break;
               
-            
-            break;
+              
+              
           }
     }
 

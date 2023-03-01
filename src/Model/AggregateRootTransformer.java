@@ -63,7 +63,10 @@ public class AggregateRootTransformer implements TransformationStrategy {
             myWriter.write("\n" + operations.get(t).Visibility + " " + operations.get(t).ReturnType +  " " + operations.get(t).Name+ "(" );
               /* myWriter.write( operations.get(t).Parameters.get(t).Type + " " + operations.get(t).Parameters.get(t).Name);    */
             for (int i = 0; i < operations.get(t).Parameters.size(); i++) {
-                    myWriter.write( ", " + operations.get(t).Parameters.get(i).Type + " " + operations.get(t).Parameters.get(i).Name); 
+                    myWriter.write( operations.get(t).Parameters.get(i).Type + " " + operations.get(t).Parameters.get(i).Name); 
+                    if( i != operations.get(t).Parameters.size()-1){
+                      myWriter.write(", ");
+                    }
                     
             }   
             
