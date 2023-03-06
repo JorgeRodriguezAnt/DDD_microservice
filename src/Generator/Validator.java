@@ -61,7 +61,7 @@ public class Validator {
           
           List<Attribute> Attributes = new ArrayList<>();
           List<Operation> Operations = new ArrayList<>();
-          List<Parameter> Parameters = new ArrayList<>();  
+          
 
 
           String classId = (String) ((JSONObject) jsonArray.get(i)).get("class_id");
@@ -110,6 +110,7 @@ public class Validator {
               JSONObject param= (JSONObject) arrayOperation.get(k);  
               JSONArray arrayparam= (JSONArray) param.get("operation_parameters");
               System.out.println("parametros: " + arrayparam);
+              List<Parameter> Parameters = new ArrayList<>();  
               
               for (int l = 0; l < arrayparam.size(); l++) {
                 
@@ -123,10 +124,6 @@ public class Validator {
              
       
           }
-
-          
-
-          
          
           switch (classStereotype ) {
             case entityType:
@@ -139,9 +136,6 @@ public class Validator {
               classesToTransform.add(new AggregateRoot(classId, className, classStereotype, classVisibility, Attributes, Operations)); 
               addAttributes.addAttributes(Attributes, classesToTransform);
               break;
-              
-              
-              
           }
     }
 
