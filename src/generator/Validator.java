@@ -1,12 +1,15 @@
 package generator;
 
+import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 import model.AggregateRoot;
 import model.Attribute;
@@ -135,12 +138,11 @@ public class Validator {
               break;
             case aggregateRootType:
               classesToTransform.add(new AggregateRoot(classId, className, classStereotype, classVisibility, Attributes, Operations)); 
-              addAttributes.addAttributes(Attributes, classesToTransform);
+              /* addAttributes.addAttributes(Attributes, classesToTransform); */
               break;
           }
 
-          validateRelations validateRelations = new validateRelations();
-          validateRelations.validate(classesToTransform);
+          
     }
 
     
@@ -148,9 +150,21 @@ public class Validator {
     } catch(Exception e) {
        /*  e.printStackTrace(); */
         
-        errors.append(e);
+        
     }
-
+    validateRelations validateRelations = new validateRelations();
+     try {
+      validateRelations.validate(classesToTransform);
+    } catch (FileNotFoundException e) {
+      // TODO Auto-generated catch block
+      errors.append(e);
+    } catch (IOException e) {
+      // TODO Auto-generated catch block
+      errors.append(e);
+    } catch (ParseException e) {
+      // TODO Auto-generated catch block
+      errors.append(e);
+    } 
     return this.classesToTransform;
   }
 

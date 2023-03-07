@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.management.Attribute;
+
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -38,23 +40,73 @@ public class validateRelations {
         String relMultStart = (String) ((JSONObject)jsonArrayRelation.get(t)).get("Relation_Multiplicity_Start");
         String relRoleNameStart = (String) ((JSONObject)jsonArrayRelation.get(t)).get("Relation_Role_Name_Start");
          String relClassStart = (String) ((JSONObject)jsonArrayRelation.get(t)).get("Relation_Class_Start");
+         String relClassIdStart = (String) ((JSONObject)jsonArrayRelation.get(t)).get("Relation_Class_id_Start");
+
         String relMultEnd = (String) ((JSONObject)jsonArrayRelation.get(t)).get("Relation_Multiplicity_End");
         String relRoleNameEnd= (String) ((JSONObject)jsonArrayRelation.get(t)).get("Relation_Role_Name_End");
         String relClassEnd = (String) ((JSONObject)jsonArrayRelation.get(t)).get  ("Relation_Class_End");
-        String relClassId = (String) ((JSONObject)jsonArrayRelation.get(t)).get("Relation_Class_id");
+        String relClassIdEnd = (String) ((JSONObject)jsonArrayRelation.get(t)).get("Relation_Class_id_End");
 
 
-         Relations.add(new Relation(relId, relType, relMultStart, relRoleNameStart, relClassStart, relMultEnd, relRoleNameEnd, relClassEnd, relClassId));
-  
-    }
+        Relations.add(new Relation(relId, relType, relMultStart, relRoleNameStart, relClassStart, relClassIdStart, relMultEnd, relRoleNameEnd, relClassEnd, relClassIdEnd));
+
+
+       for (TransformerClass transformerClass : classesToTransform) {
+            if(Relations.get(t).relationClassIdStart.equals(transformerClass.id)){
+
+                //Crear mensaje de error cuando el aggregate root en VO
+                if(transformerClass.stereotype.equals("Value Object")){
+                    System.out.println(transformerClass.id);
+                    System.exit(1);
+                }
+                if(transformerClass.stereotype.equals("Entity")){
+                    System.out.println("Warning entity(aggregate root)");
+                }
+                
+                if(Relations.get(t).relationMultiplicityEnd.contains("..*") || Relations.get(t).relationMultiplicityEnd.contains("..2")){
+                    System.out.println("jojo");
+                    System.out.println(Relations.get(t).RelationClassIdEnd);
+                        
+                    if(Relations.get(t).RelationClassIdEnd.equals(transformerClass.id))
+                        {
+                            System.out.println("pg");
+                        }
+                    if(transformerClass.id.equals(Relations.get(t).RelationClassIdEnd)){
+                        System.out.println(transformerClass.name);
+                        String typeAtt = "List<"+transformerClass.name +">";
+                        System.out.println("this:");
+                        transformerClass.attributes.add(new model.Attribute(Relations.get(t).relationRoleNameEnd, typeAtt, "no", "private","yes", null));
+                            
+                        }   
+                    }else{
+                        transformerClass.attributes.add(new model.Attribute(Relations.get(t).relationRoleNameEnd, Relations.get(t).relationClassEnd, "no", "private","no", null));
+                    } 
+                }
+       }
+
+ /* if(Relations.get(t).relationMultiplicityEnd.contains("..*") || Relations.get(t).relationMultiplicityEnd.contains("..2")){
+            for (TransformerClass transformerClass : classesToTransform) {
+              if(transformerClass.id.equals(Relations.get(t).RelationClassIdEnd)){
+                String typeAtt = "List<"+transformerClass.name +">";
+                transformerClass.attributes.add(new model.Attribute(Relations.get(t).relationRoleNameEnd, typeAtt, "no", "private","yes", null));
+               }else{
+                transformerClass.attributes.add(new model.Attribute(Relations.get(t).relationRoleNameEnd, Relations.get(t).relationClassEnd, "no", "private","no", null));
+              } 
+            } */
+            
+         
+
+   
 
     }
 
     
    
+        
 
-
-   
+        }
+        
+}
         
          
             
@@ -62,5 +114,5 @@ public class validateRelations {
         
     
     
-}
+
 

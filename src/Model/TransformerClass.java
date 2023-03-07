@@ -65,7 +65,7 @@ public abstract class TransformerClass {
         return operations;
     }
 
-    public void setAttributes(List<Attribute> pattributes) {
+    public void setAttributes(String relationRoleNameEnd, String typeAtt, String string, String string2, String string3, List<Attribute> pattributes) {
         attributes = pattributes;
     }
 

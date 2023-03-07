@@ -2,7 +2,7 @@
       "Class": [
         {
           "class_id": "1",
-          "class_name": "camila",
+          "class_name": "lineItem",
           "class_stereotype": "Entity",
           "class_visibility": "public",
           "class_is_abstract": "no",
@@ -208,10 +208,11 @@
           "Relation_Multiplicity_Start": "1",
           "Relation_Role_Name_Start": "Permite",
           "Relation_Class_Start": "Order",
+          "Relation_Class_id_Start": "1",
           "Relation_Multiplicity_End": "1",
           "Relation_Role_Name_End": "Tiene",
           "Relation_Class_End": "moneytoryValue",
-          "Relation_Class_id": "2"
+          "Relation_Class_id_End": "2"
         },
         {
           "Relation_Id": "5",
@@ -219,10 +220,11 @@
           "Relation_Multiplicity_Start": "1",
           "Relation_Role_Name_Start": "Compra",
           "Relation_Class_Start": "Order",
+          "Relation_Class_id_Start": "1",
           "Relation_Multiplicity_End": "1..*",
           "Relation_Role_Name_End": "Tiene",
           "Relation_Class_End": "lineItem",
-          "Relation_Class_id": "1"
+          "Relation_Class_id_End": "1"
         }
       ]
     }

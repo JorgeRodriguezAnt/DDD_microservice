@@ -29,39 +29,41 @@ public class AddAttributesAggregate {
     public void addAttributes(List<Attribute> pattributes, List<TransformerClass> classesToTransform) throws FileNotFoundException, IOException, ParseException{
         
       for (TransformerClass transformerClass : classesToTransform) {
-        System.out.println(transformerClass.operations);
+        System.out.println( "clases:" +transformerClass.name);
       }
         
 
-        JSONParser parser = new JSONParser();
-        Object obj = parser.parse(new FileReader("src/Diagram.json"));
-      
-        // Validation: is a JSOn object and containds classess
-        JSONObject jsonObject = (JSONObject)obj;
+      JSONParser parser = new JSONParser();
+      Object obj = parser.parse(new FileReader("src/Diagram.json"));
 
-        JSONArray jsonArrayRelation = (JSONArray) jsonObject.get("Relation");
-        List<Relation> Relations = new ArrayList<>();
+      // Validation: is a JSOn object and containds classess
+      JSONObject jsonObject = (JSONObject)obj;
 
-        // Creation list of object of Relations
-        for (int t = 0; t < jsonArrayRelation.size(); t++) {
-          
-          
-          String relId = (String) ((JSONObject)jsonArrayRelation.get(t)).get("Relation_Id");
-          String relType = (String) ((JSONObject)jsonArrayRelation.get(t)).get("Relation_type");
-          String relMultStart = (String) ((JSONObject)jsonArrayRelation.get(t)).get("Relation_Multiplicity_Start");
-          String relRoleNameStart = (String) ((JSONObject)jsonArrayRelation.get(t)).get("Relation_Role_Name_Start");
-          String relClassStart = (String) ((JSONObject)jsonArrayRelation.get(t)).get("Relation_Class_Start");
-          String relMultEnd = (String) ((JSONObject)jsonArrayRelation.get(t)).get("Relation_Multiplicity_End");
-          String relRoleNameEnd= (String) ((JSONObject)jsonArrayRelation.get(t)).get("Relation_Role_Name_End");
-          String relClassEnd = (String) ((JSONObject)jsonArrayRelation.get(t)).get("Relation_Class_End");
-          String relClassId = (String) ((JSONObject)jsonArrayRelation.get(t)).get("Relation_Class_id");
+      JSONArray jsonArrayRelation = (JSONArray) jsonObject.get("Relation");
+      List<Relation> Relations = new ArrayList<>();
 
+      // Creation list of object of Relations
+      for (int t = 0; t < jsonArrayRelation.size(); t++) {
     
-          Relations.add(new Relation(relId, relType, relMultStart, relRoleNameStart, relClassStart, relMultEnd, relRoleNameEnd, relClassEnd, relClassId));
+    
+        String relId = (String) ((JSONObject)jsonArrayRelation.get(t)).get("Relation_Id");
+        String relType = (String) ((JSONObject)jsonArrayRelation.get(t)).get("Relation_type");
+        String relMultStart = (String) ((JSONObject)jsonArrayRelation.get(t)).get("Relation_Multiplicity_Start");
+        String relRoleNameStart = (String) ((JSONObject)jsonArrayRelation.get(t)).get("Relation_Role_Name_Start");
+        String relClassStart = (String) ((JSONObject)jsonArrayRelation.get(t)).get("Relation_Class_Start");
+        String relClassIdStart = (String) ((JSONObject)jsonArrayRelation.get(t)).get("Relation_Class_id_Start");
+        String relMultEnd = (String) ((JSONObject)jsonArrayRelation.get(t)).get("Relation_Multiplicity_End");
+        String relRoleNameEnd= (String) ((JSONObject)jsonArrayRelation.get(t)).get("Relation_Role_Name_End");
+        String relClassEnd = (String) ((JSONObject)jsonArrayRelation.get(t)).get  ("Relation_Class_End");
+        String relClassIdEnd = (String) ((JSONObject)jsonArrayRelation.get(t)).get("Relation_Class_id_End");
+       Relations.add(new Relation(relId, relType, relMultStart, relRoleNameStart, relClassStart, relClassIdStart, relMultEnd, relRoleNameEnd, relClassEnd, relClassIdEnd));
 
-          //Add attributes with o whithout multiplicity
+          
 
-          if(Relations.get(t).relationMultiplicityEnd.contains("..*") || Relations.get(t).relationMultiplicityEnd.contains("..2")){
+
+
+
+          /* if(Relations.get(t).relationMultiplicityEnd.contains("..*") || Relations.get(t).relationMultiplicityEnd.contains("..2")){
             for (TransformerClass transformerClass : classesToTransform) {
               if(transformerClass.id.equals(Relations.get(t).RelationClassId)){
                 String typeAtt = "List<"+transformerClass.name +">";
@@ -71,7 +73,7 @@ public class AddAttributesAggregate {
             
           }else{
             pattributes.add(new Attribute(Relations.get(t).relationRoleNameEnd, Relations.get(t).relationClassEnd, "no", "private","no", null));
-          }
+          } */
           
         }
        

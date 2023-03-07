@@ -8,23 +8,45 @@ public class Relation {
     public String relationMultiplicityStart;
     public String relationRoleNameStart;
     public String relationClassStar;
+    public String relationClassIdStart;
     public String relationMultiplicityEnd;
     public String relationRoleNameEnd;
     public String relationClassEnd;
-    public String RelationClassId;
+    public String RelationClassIdEnd;
+    
+
+    public String getRelationClassIdStart() {
+        return relationClassIdStart;
+    }
+
+    public void setRelationClassIdStart(String relationClassIdStart) {
+        this.relationClassIdStart = relationClassIdStart;
+    }
+
+    public String getRelationClassIdEnd() {
+        return RelationClassIdEnd;
+    }
+
+    public void setRelationClassIdEnd(String relationClassIdEnd) {
+        RelationClassIdEnd = relationClassIdEnd;
+    }
+
+    
 
     public Relation(String relationId, String relationType, String relationMultiplicityStart,
-            String relationRoleNameStart, String relationClassStar, String relationMultiplicityEnd,
-            String relationRoleNameEnd, String relationClassEnd, String RelationClassId) {
+            String relationRoleNameStart, String relationClassStar, String relationClassIdStart,
+            String relationMultiplicityEnd, String relationRoleNameEnd, String relationClassEnd,
+            String relationClassIdEnd) {
         this.relationId = relationId;
         this.relationType = relationType;
         this.relationMultiplicityStart = relationMultiplicityStart;
         this.relationRoleNameStart = relationRoleNameStart;
         this.relationClassStar = relationClassStar;
+        this.relationClassIdStart = relationClassIdStart;
         this.relationMultiplicityEnd = relationMultiplicityEnd;
         this.relationRoleNameEnd = relationRoleNameEnd;
         this.relationClassEnd = relationClassEnd;
-        this.RelationClassId = RelationClassId;
+        RelationClassIdEnd = relationClassIdEnd;
     }
 
     public String getRelationId() {
@@ -99,13 +121,7 @@ public class Relation {
                 + ", relationRoleNameEnd=" + relationRoleNameEnd + ", relationClassEnd=" + relationClassEnd + "]";
     }
 
-    public String getRelationClassId() {
-        return RelationClassId;
-    }
-
-    public void setRelationClassId(String relationClassId) {
-        RelationClassId = relationClassId;
-    }
+    
 
 
     
