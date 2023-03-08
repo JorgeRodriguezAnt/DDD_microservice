@@ -1,15 +1,15 @@
 package generator;
 
-import java.io.FileNotFoundException;
+
 import java.io.FileReader;
-import java.io.IOException;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
+
 
 import model.AggregateRoot;
 import model.Attribute;
@@ -29,7 +29,7 @@ public class Validator {
   private static final String valueObjectType = "Value Object";
   private static final String aggregateRootType = "Aggregate Root";
   
-  AddAttributesAggregate addAttributes = new AddAttributesAggregate();
+  
 
   List<TransformerClass> classesToTransform;
   int count = 0;
@@ -63,8 +63,8 @@ public class Validator {
           // W: Class XX does not have any attributes and operations.
           
 
-          List<Attribute> Attributes = new ArrayList<>();
-          List<Operation> Operations = new ArrayList<>();
+          List<Attribute> attributes = new ArrayList<>();
+          List<Operation> operations = new ArrayList<>();
           
 
 
@@ -94,7 +94,7 @@ public class Validator {
             String attMultiplicity = (String) ((JSONObject)arrayAtt.get(j)).get("attribute_multiplicity");
             String attNull = (String) ((JSONObject)arrayAtt.get(j)).get("attribute_allies_null"); 
             
-            Attributes.add(new Attribute(attName, attType, attIdentifier, attVisibility, attMultiplicity,attNull ));
+            attributes.add(new Attribute(attName, attType, attIdentifier, attVisibility, attMultiplicity,attNull ));
             
           }
 
@@ -113,58 +113,46 @@ public class Validator {
 
               JSONObject param= (JSONObject) arrayOperation.get(k);  
               JSONArray arrayparam= (JSONArray) param.get("operation_parameters");
-              System.out.println("parametros: " + arrayparam);
-              List<Parameter> Parameters = new ArrayList<>();  
+            
+              List<Parameter> parameters = new ArrayList<>();  
               
               for (int l = 0; l < arrayparam.size(); l++) {
                 
                String paramName = (String) ((JSONObject)arrayparam.get(l)).get("param_name");
                String paramType = (String) ((JSONObject)arrayparam.get(l)).get("param_type");
 
-                Parameters.add(new Parameter(paramName, paramType));
+                parameters.add(new Parameter(paramName, paramType));
               }   
              
-             Operations.add(new Operation(opName, opVisibility, opReturn, Parameters));
+             operations.add(new Operation(opName, opVisibility, opReturn, parameters));
              
       
           }
          
           switch (classStereotype ) {
             case entityType:
-              classesToTransform.add(new Entity(classId,className, classStereotype, classVisibility, Attributes, Operations));
+              classesToTransform.add(new Entity(classId,className, classStereotype, classVisibility, attributes, operations));
               break;
             case valueObjectType:
-              classesToTransform.add(new ValueObject(classId,className, classStereotype, classVisibility, Attributes, Operations));
+              classesToTransform.add(new ValueObject(classId,className, classStereotype, classVisibility, attributes, operations));
               break;
             case aggregateRootType:
-              classesToTransform.add(new AggregateRoot(classId, className, classStereotype, classVisibility, Attributes, Operations)); 
-              /* addAttributes.addAttributes(Attributes, classesToTransform); */
+              classesToTransform.add(new AggregateRoot(classId, className, classStereotype, classVisibility, attributes, operations)); 
               break;
           }
 
           
     }
-
-    
+    validateRelations validateRelations = new validateRelations();
+    validateRelations.validate(classesToTransform);
       
     } catch(Exception e) {
        /*  e.printStackTrace(); */
-        
+       errors.append(e);
         
     }
-    validateRelations validateRelations = new validateRelations();
-     try {
-      validateRelations.validate(classesToTransform);
-    } catch (FileNotFoundException e) {
-      // TODO Auto-generated catch block
-      errors.append(e);
-    } catch (IOException e) {
-      // TODO Auto-generated catch block
-      errors.append(e);
-    } catch (ParseException e) {
-      // TODO Auto-generated catch block
-      errors.append(e);
-    } 
+   
+      
     return this.classesToTransform;
   }
 
