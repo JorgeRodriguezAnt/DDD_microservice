@@ -24,7 +24,7 @@ public class AggregateRootTransformer implements TransformationStrategy {
     }
 
     @Override
-    public void writeFile(String className, String classStereotype, String classVisibility, List<Attribute>Attributes, List<Operation> operations) {
+    public void writeFile(String className, String classStereotype, String classVisibility, String classAbstract,String classFather,List<Attribute>Attributes, List<Operation> operations) {
         // TODO Auto-generated method stub
 
         try {  

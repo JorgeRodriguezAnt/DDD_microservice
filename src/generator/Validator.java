@@ -75,6 +75,17 @@ public class Validator {
 
           String classVisibility = (String) ((JSONObject)jsonArray.get(i)).get("class_visibility");
 
+          String classAbstract = (String) ((JSONObject)jsonArray.get(i)).get("class_is_abstract");
+
+          String classFather = (String) ((JSONObject)jsonArray.get(i)).get("class_father");
+
+          
+          //Error si VO or AR es abstract
+          if(classAbstract.equals("yes") && (classAbstract.equals("Value Object") || classAbstract.equals("Aggregate Root"))){
+            errors.toJSON();
+            System.exit(0);
+          }
+
           //In case of missing essential data of the class, send an error
 
           if( (className==null || className.trim().isEmpty()) || (classStereotype==null || classStereotype.trim().isEmpty()) ){
@@ -131,13 +142,13 @@ public class Validator {
          
           switch (classStereotype ) {
             case entityType:
-              classesToTransform.add(new Entity(classId,className, classStereotype, classVisibility, attributes, operations));
+              classesToTransform.add(new Entity(classId,className, classStereotype, classVisibility, classAbstract, classFather, attributes, operations));
               break;
             case valueObjectType:
-              classesToTransform.add(new ValueObject(classId,className, classStereotype, classVisibility, attributes, operations));
+              classesToTransform.add(new ValueObject(classId,className, classStereotype, classVisibility, classAbstract, classFather, attributes, operations));
               break;
             case aggregateRootType:
-              classesToTransform.add(new AggregateRoot(classId, className, classStereotype, classVisibility, attributes, operations)); 
+              classesToTransform.add(new AggregateRoot(classId, className, classStereotype, classVisibility, classAbstract, classFather, attributes, operations)); 
               break;
           }
 

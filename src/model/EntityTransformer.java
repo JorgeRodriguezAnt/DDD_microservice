@@ -25,13 +25,23 @@ public class EntityTransformer implements TransformationStrategy {
     }
 
     @Override
-    public void writeFile(String className, String classStereotype, String classVisibility, List<Attribute>Attributes, List<Operation> operations) {
+    public void writeFile(String className, String classStereotype, String classVisibility, String classAbstract,String classFather,List<Attribute>Attributes, List<Operation> operations) {
         // TODO Auto-generated method stub
 
         try {  
         FileWriter myWriter = new FileWriter("C:\\Users\\JoJa Morrison\\Documents\\Tesis\\Proximo semestre\\implement\\" + className + ".java");
-        myWriter.write(classVisibility + " class " + className + "{\n\n");
-
+        
+        if(classAbstract.equals("yes")){
+          myWriter.write(classVisibility + " abstract class " + className + "{\n\n");
+        }
+        if(classAbstract.equals("no")){
+          if(classFather.trim().isEmpty()){
+            myWriter.write(classVisibility + " class " + className + "{\n\n");
+          }else{
+            myWriter.write(classVisibility + " class " + className + " extends "+classFather + "{\n\n");
+          }
+        }
+        
         //Attributes
          for (int i = 0; i <  Attributes.size(); i++) {
           if(Attributes.get(i).Name.equals(" ") || Attributes.get(i).Type.equals(" ")){

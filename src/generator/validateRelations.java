@@ -22,13 +22,13 @@ public class validateRelations {
 
         JSONParser parser = new JSONParser();
         Object obj = parser.parse(new FileReader("src/Diagram.json"));
-        int count=0;
+        int count = 0;
   
         // Validation: is a JSOn object and containds classess
         JSONObject jsonObject = (JSONObject)obj;
 
         JSONArray jsonArrayRelation = (JSONArray) jsonObject.get("Relation");
-        List<Relation> Relations = new ArrayList<>();
+        List<Relation> objectTRelations = new ArrayList<>();
 
         // Creation list of object of Relations
         for (int t = 0; t < jsonArrayRelation.size(); t++) {
@@ -46,21 +46,28 @@ public class validateRelations {
             String relClassIdEnd = (String) ((JSONObject)jsonArrayRelation.get(t)).get("Relation_Class_id_End");
 
 
-            Relations.add(new Relation(relId, relType, relMultStart, relRoleNameStart, relClassStart, relClassIdStart, relMultEnd, relRoleNameEnd, relClassEnd, relClassIdEnd));
+            objectTRelations.add(new Relation(relId, relType, relMultStart, relRoleNameStart, relClassStart, relClassIdStart, relMultEnd, relRoleNameEnd, relClassEnd, relClassIdEnd));
 
     }
 
 
     // Validate relations with possible warning (E, VO) and add attribute AR ("Exception Entity")
     for (TransformerClass transformerClass : classesToTransform) {
-        for (Relation relations : Relations) {
+        for (Relation relations : objectTRelations) {
+            
             if(relations.relationClassIdStart.equals(transformerClass.id)){
                 if(transformerClass.stereotype.equals("Aggregate Root") || transformerClass.stereotype.equals("Entity")){
                     if(transformerClass.stereotype.equals("Entity")){
                             System.out.println("Warning: There is no aggregate root, but an entity behaves as one, however it is not recommended in your design.  ");
-                    }else{
+                            if( relations.relationType.equals("Generalization")){
+                                String nameClass = transformerClass.name; 
+                                transformerClass.fatherClass = nameClass;
+                            }
+                    }
+                    if(transformerClass.stereotype.equals("Aggregate Root")){
                         count++;
                     }
+                    
                     if(relations.relationMultiplicityEnd.contains("..*") || relations.relationMultiplicityEnd.contains("..2")){   
                         String typeAtt = "List<"+transformerClass.name +">";
                         transformerClass.attributes.add(new model.Attribute(relations.relationRoleNameEnd, typeAtt, "no", "private","yes", null));
@@ -75,6 +82,7 @@ public class validateRelations {
                 
         }
     }
+    //A message of information about have more of a aggregate root
     if(count>1){
         System.out.println("Warning: There are more than one aggregate root, it is recommended that there is only one because of the possible problems or errors it can generate.");
     }
