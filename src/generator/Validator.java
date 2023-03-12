@@ -16,7 +16,7 @@ import model.Attribute;
 import model.Entity;
 import model.Operation;
 import model.Parameter;
-
+import model.Repository;
 import model.TransformerClass;
 import model.ValueObject;
 import util.Errors;
@@ -28,7 +28,7 @@ public class Validator {
   private static final String entityType = "Entity";
   private static final String valueObjectType = "Value Object";
   private static final String aggregateRootType = "Aggregate Root";
-  
+  private static final String repositoryType = "Repository";
   
 
   List<TransformerClass> classesToTransform;
@@ -149,6 +149,9 @@ public class Validator {
               break;
             case aggregateRootType:
               classesToTransform.add(new AggregateRoot(classId, className, classStereotype, classVisibility, classAbstract, classFather, attributes, operations)); 
+              break;
+            case repositoryType:
+              classesToTransform.add(new Repository(classId, className, classStereotype, classVisibility, classAbstract, classFather, attributes, operations)); 
               break;
           }
 

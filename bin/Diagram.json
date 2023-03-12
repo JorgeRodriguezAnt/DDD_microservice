@@ -204,68 +204,40 @@
           ]
         }, {
           "class_id": "6",
-          "class_name": "padre",
-          "class_stereotype": "Entity",
-          "class_visibility": "public",
-          "class_is_abstract": "yes",
-          "class_father": " ",
-          "class_attributes": [
-            {
-              "attribute_name": "test",
-              "attribute_type": "String",
-              "attribute_is_identifier": "no ",
-              "attribute_visibility": " public",
-              "attribute_multiplicity": " no",
-              "attribute_allies_null": "no "
-            }
-          ],
-          "class_operations": [
-            {
-              "operation_visibility": "none",
-              "operation_name": "none",
-              "return_type": "none",
-              "operation_parameters": [
-                {
-                  "param_name": "nonex",
-                  "param_type": "none"
-                },
-                {
-                  "param_name": "nonee",
-                  "param_type": "none"
-                }
-              ]
-            }
-          ]
-        }, {
-          "class_id": "7",
-          "class_name": "hija",
-          "class_stereotype": "Entity",
+          "class_name": "Repository",
+          "class_stereotype": "Repository",
           "class_visibility": "public",
           "class_is_abstract": "no",
           "class_father": " ",
           "class_attributes": [
             {
-              "attribute_name": "test",
-              "attribute_type": "String",
-              "attribute_is_identifier": "no ",
-              "attribute_visibility": " public",
-              "attribute_multiplicity": " no",
-              "attribute_allies_null": "no "
+              "attribute_name": " ",
+              "attribute_type": " ",
+              "attribute_is_identifier": " ",
+              "attribute_visibility": " ",
+              "attribute_multiplicity":" ",
+              "attribute_allies_null":" "
             }
           ],
           "class_operations": [
             {
-              "operation_visibility": "none",
-              "operation_name": "none",
-              "return_type": "none",
+              "operation_visibility": "public",
+              "operation_name": "saveOrder",
+              "return_type": "void",
               "operation_parameters": [
                 {
-                  "param_name": "nonex",
-                  "param_type": "none"
-                },
+                  "param_name": "order",
+                  "param_type": "Order"
+                }
+              ]
+            },{
+              "operation_visibility": "public",
+              "operation_name": "findByOrderId",
+              "return_type": "void",
+              "operation_parameters": [
                 {
-                  "param_name": "nonee",
-                  "param_type": "none"
+                  "param_name": "orderId",
+                  "param_type": "String"
                 }
               ]
             }
@@ -296,17 +268,6 @@
           "Relation_Role_Name_End": "Tiene",
           "Relation_Class_End": "lineItem",
           "Relation_Class_id_End": "1"
-        },{
-          "Relation_Id": "8",
-          "Relation_type": "Generalization",
-          "Relation_Multiplicity_Start": "1",
-          "Relation_Role_Name_Start": "Compra",
-          "Relation_Class_Start": "Padre",
-          "Relation_Class_id_Start": "6",
-          "Relation_Multiplicity_End": "1..*",
-          "Relation_Role_Name_End": "Tiene",
-          "Relation_Class_End": "hija",
-          "Relation_Class_id_End": "6"
         }
       ]
     }
