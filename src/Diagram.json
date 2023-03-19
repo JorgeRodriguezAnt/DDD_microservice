@@ -202,46 +202,6 @@
               ]
             }
           ]
-        }, {
-          "class_id": "6",
-          "class_name": "Repository",
-          "class_stereotype": "Repository",
-          "class_visibility": "public",
-          "class_is_abstract": "no",
-          "class_father": " ",
-          "class_attributes": [
-            {
-              "attribute_name": " ",
-              "attribute_type": " ",
-              "attribute_is_identifier": " ",
-              "attribute_visibility": " ",
-              "attribute_multiplicity":" ",
-              "attribute_allies_null":" "
-            }
-          ],
-          "class_operations": [
-            {
-              "operation_visibility": "public",
-              "operation_name": "saveOrder",
-              "return_type": "void",
-              "operation_parameters": [
-                {
-                  "param_name": "order",
-                  "param_type": "Order"
-                }
-              ]
-            },{
-              "operation_visibility": "public",
-              "operation_name": "findByOrderId",
-              "return_type": "void",
-              "operation_parameters": [
-                {
-                  "param_name": "orderId",
-                  "param_type": "String"
-                }
-              ]
-            }
-          ]
         }
       ],
       "Relation": [
@@ -251,7 +211,7 @@
           "Relation_Multiplicity_Start": "1",
           "Relation_Role_Name_Start": "Permite",
           "Relation_Class_Start": "Order",
-          "Relation_Class_id_Start": "3",
+          "Relation_Class_id_Start": "1",
           "Relation_Multiplicity_End": "1",
           "Relation_Role_Name_End": "Tiene",
           "Relation_Class_End": "moneytoryValue",

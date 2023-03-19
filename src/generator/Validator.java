@@ -16,7 +16,7 @@ import model.Attribute;
 import model.Entity;
 import model.Operation;
 import model.Parameter;
-import model.Repository;
+
 import model.TransformerClass;
 import model.ValueObject;
 import util.Errors;
@@ -28,14 +28,20 @@ public class Validator {
   private static final String entityType = "Entity";
   private static final String valueObjectType = "Value Object";
   private static final String aggregateRootType = "Aggregate Root";
-  private static final String repositoryType = "Repository";
+  
   
 
   List<TransformerClass> classesToTransform;
+
+  /* CreateService service = new CreateService(); */
+
+  CreateRepository repository ;
+
   int count = 0;
   
   public Validator(){
     classesToTransform = new ArrayList<TransformerClass>();
+    repository = new CreateRepository();
     }
 
   public List<TransformerClass> validateJSON(){
@@ -150,15 +156,13 @@ public class Validator {
             case aggregateRootType:
               classesToTransform.add(new AggregateRoot(classId, className, classStereotype, classVisibility, classAbstract, classFather, attributes, operations)); 
               break;
-            case repositoryType:
-              classesToTransform.add(new Repository(classId, className, classStereotype, classVisibility, classAbstract, classFather, attributes, operations)); 
-              break;
           }
 
           
     }
     validateRelations validateRelations = new validateRelations();
     validateRelations.validate(classesToTransform);
+    repository.createFile(classesToTransform);
       
     } catch(Exception e) {
        /*  e.printStackTrace(); */

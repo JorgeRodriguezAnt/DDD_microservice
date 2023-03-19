@@ -23,6 +23,7 @@ public class validateRelations {
         JSONParser parser = new JSONParser();
         Object obj = parser.parse(new FileReader("src/Diagram.json"));
         int count = 0;
+        CreateService service = new CreateService();
   
         // Validation: is a JSOn object and containds classess
         JSONObject jsonObject = (JSONObject)obj;
@@ -64,9 +65,9 @@ public class validateRelations {
                                 transformerClass.fatherClass = nameClass;
                             }
                     }
-                    if(transformerClass.stereotype.equals("Aggregate Root")){
+                    /* if(transformerClass.stereotype.equals("Aggregate Root") ){
                         count++;
-                    }
+                    } */
                     
                     if(relations.relationMultiplicityEnd.contains("..*") || relations.relationMultiplicityEnd.contains("..2")){   
                         String typeAtt = "List<"+transformerClass.name +">";
@@ -74,6 +75,8 @@ public class validateRelations {
                     }else{
                         transformerClass.attributes.add(new model.Attribute(relations.relationRoleNameEnd, relations.relationClassEnd, "no", "private","no", null));
                     } 
+
+                    service.createFile(transformerClass.name, transformerClass.operations);
                 }else{
                     System.out.println("Error: Value Object is can't a cluster of associated objects. Re-design your model for optimal class generation, adding an aggregate root.");
                     System.exit(1);
@@ -83,9 +86,9 @@ public class validateRelations {
         }
     }
     //A message of information about have more of a aggregate root
-    if(count>1){
+    /* if(count>1){
         System.out.println("Warning: There are more than one aggregate root, it is recommended that there is only one because of the possible problems or errors it can generate.");
-    }
+    } */
             
 }
        
