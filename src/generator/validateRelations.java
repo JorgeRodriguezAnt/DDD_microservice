@@ -24,6 +24,7 @@ public class validateRelations {
         Object obj = parser.parse(new FileReader("src/Diagram.json"));
         int count = 0;
         CreateService service = new CreateService();
+        CreateServiceImplementation serviceImplementation = new CreateServiceImplementation();
   
         // Validation: is a JSOn object and containds classess
         JSONObject jsonObject = (JSONObject)obj;
@@ -76,7 +77,9 @@ public class validateRelations {
                         transformerClass.attributes.add(new model.Attribute(relations.relationRoleNameEnd, relations.relationClassEnd, "no", "private","no", null));
                     } 
 
-                    service.createFile(transformerClass.name, transformerClass.operations);
+                    service.invokeCreateService(transformerClass.name, transformerClass.operations);
+                    serviceImplementation.invokeCreateImplementation(transformerClass.name, classesToTransform);
+                    
                 }else{
                     System.out.println("Error: Value Object is can't a cluster of associated objects. Re-design your model for optimal class generation, adding an aggregate root.");
                     System.exit(1);

@@ -13,7 +13,12 @@ public class CreateService {
 
     private static final String serviceClassName = "Service";
 
-    public void createFile(String nameService, List<Operation> operationService) {
+    public void invokeCreateService(String nameService,List<Operation> operationService){
+      createFile(nameService);
+      writeFile(nameService, operationService);
+    }
+
+    public void createFile(String nameService) {
         // TODO Auto-generated method stub
         try {  
             File myObj = new File("C:\\Users\\JoJa Morrison\\Documents\\Tesis\\Proximo semestre\\implement\\" + serviceClassName + nameService+".java");  
@@ -23,7 +28,7 @@ public class CreateService {
             } else {  
               System.out.println("File already exists.");  
             }  
-            writeFile(nameService, operationService);
+            
           } catch (IOException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();  
@@ -45,7 +50,7 @@ public class CreateService {
                       myWriter.write(", ");
                      }
                     }
-                    myWriter.write(")");
+                    myWriter.write(");");
                 }
                 myWriter.write("\n\n}\n");
             }
