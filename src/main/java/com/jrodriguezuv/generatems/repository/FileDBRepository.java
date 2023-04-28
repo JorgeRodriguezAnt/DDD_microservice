@@ -1,4 +1,4 @@
-package com.jrodriguezuv.generatems.repository;
+/* package com.jrodriguezuv.generatems.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -11,3 +11,4 @@ import com.jrodriguezuv.generatems.model.FileDB;
 public interface FileDBRepository extends JpaRepository<FileDB, String> {
 
 }
+ */

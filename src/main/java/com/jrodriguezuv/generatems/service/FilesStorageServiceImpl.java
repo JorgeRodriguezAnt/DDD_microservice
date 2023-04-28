@@ -1,4 +1,4 @@
-package com.jrodriguezuv.generatems.service;
+/* package com.jrodriguezuv.generatems.service;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -118,4 +118,4 @@ public class FilesStorageServiceImpl implements FilesStorageService {
       throw new RuntimeException("Could not load the files!");
     }
   } */
-}
+/* }  */

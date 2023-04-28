@@ -1,4 +1,4 @@
-package com.jrodriguezuv.generatems.exception;
+/* package com.jrodriguezuv.generatems.exception;
 
 import org.springframework.web.multipart.MaxUploadSizeExceededException;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
@@ -18,3 +18,4 @@ public class FileUploadExceptionAdvice extends ResponseEntityExceptionHandler {
     return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(new ResponseMessage("File too large!"));
   }
 }
+ */

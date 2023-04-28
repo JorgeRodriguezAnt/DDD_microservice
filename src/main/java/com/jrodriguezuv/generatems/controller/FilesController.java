@@ -1,4 +1,4 @@
-package com.jrodriguezuv.generatems.controller;
+/* package com.jrodriguezuv.generatems.controller;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -27,7 +27,7 @@ import com.jrodriguezuv.generatems.service.FilesStorageServiceImpl;
 
 @Controller
 /*  @CrossOrigin("http://localhost:8081")  */
-public class FilesController {
+/* public class FilesController {
 
   @Autowired
   private FilesStorageServiceImpl storageService;
@@ -73,4 +73,4 @@ public class FilesController {
         .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + fileDB.getName() + "\"")
         .body(fileDB.getData());
   }
-}
+}  */
