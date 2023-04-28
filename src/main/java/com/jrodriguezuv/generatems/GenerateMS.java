@@ -28,4 +28,5 @@ public class GenerateMS {
   public static void main(String[] args) {
     SpringApplication.run(GenerateMS.class, args);
   }
+  
 }
