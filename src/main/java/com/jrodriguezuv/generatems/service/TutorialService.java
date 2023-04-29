@@ -2,6 +2,9 @@ package com.jrodriguezuv.generatems.service;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +39,7 @@ public class TutorialService {
       if (theDirectory.exists() || theDirectory.mkdirs()){
         System.out.println("The folder has been created or already exists");
       }
-    
+    copy();
 
     /* try {
       File myObj = new File("MS\\" + tutorial.getTitle() +".java");
@@ -56,7 +59,31 @@ public class TutorialService {
     return tutorialRepository.deleteById(id);
   }
 
-  
+  public static void copyDir(Path src, Path dest) throws IOException {
+    Files.walk(src)
+            .forEach(source -> {
+                try {
+                    Files.copy(source, dest.resolve(src.relativize(source)),
+                                    StandardCopyOption.REPLACE_EXISTING);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            });
+}
+
+public static void copy()
+{
+    File from = new File(".mvn");
+    File to = new File("MS\\HOLA");
+
+    try {
+        copyDir(from.toPath(), to.toPath());
+        System.out.println("Copied whole directory successfully.");
+    }
+    catch (IOException ex) {
+        ex.printStackTrace();
+    }
+}
 
   
 }
