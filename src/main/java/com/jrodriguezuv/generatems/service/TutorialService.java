@@ -7,6 +7,7 @@ import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 import java.util.Optional;
 
+import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,24 +35,54 @@ public class TutorialService {
 
   public Mono<Tutorial> save(Tutorial tutorial) {
 
-    
+      //Create microservice directory 
       File theDirectory = new File("MS\\"+tutorial.getTitle());
       if (theDirectory.exists() || theDirectory.mkdirs()){
         System.out.println("The folder has been created or already exists");
       }
-    copy();
 
-    /* try {
-      File myObj = new File("MS\\" + tutorial.getTitle() +".java");
-      if (myObj.createNewFile()) {
-        System.out.println("File created: " + myObj.getName());
-      } else {
-        System.out.println("File already exists.");
-      }
-    } catch (IOException e) {
-      System.out.println("An error occurred.");
+      //Create ".mvn" directory with their files
+      File srcDir = new File(".mvn");
+      File destDir = new File("MS\\" +tutorial.getTitle() +"\\.mvn");
+      try {
+      FileUtils.copyDirectory(srcDir, destDir);
+      } catch (IOException e) {
       e.printStackTrace();
-    }*/
+      }
+
+      //Create spring files
+       File srcDir1 = new File("pom.xml");
+       File destDir1 = new File("MS\\" + tutorial.getTitle() + "\\pom.xml");
+       File srcDir2 = new File("mvnw.cmd");
+       File destDir2 = new File("MS\\" + tutorial.getTitle() + "\\mvnw.cmd");
+       File srcDir3 = new File("mvnw");
+       File destDir3 = new File("MS\\" + tutorial.getTitle() + "\\mvnw");
+       try {
+         Files.copy(srcDir1.toPath(), destDir1.toPath()); 
+        
+      } catch (IOException e) {
+      e.printStackTrace();
+      }    
+
+      try {
+        Files.copy(srcDir2.toPath(), destDir2.toPath());
+        } catch (IOException e) {
+        e.printStackTrace();
+        }  
+     
+     try {
+      Files.copy(srcDir3.toPath(), destDir3.toPath()); 
+      } catch (IOException e) {
+      e.printStackTrace();
+      }   
+      
+      
+
+
+
+  
+
+    
     return tutorialRepository.save(tutorial);
   } 
 
@@ -59,31 +90,6 @@ public class TutorialService {
     return tutorialRepository.deleteById(id);
   }
 
-  public static void copyDir(Path src, Path dest) throws IOException {
-    Files.walk(src)
-            .forEach(source -> {
-                try {
-                    Files.copy(source, dest.resolve(src.relativize(source)),
-                                    StandardCopyOption.REPLACE_EXISTING);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            });
-}
-
-public static void copy()
-{
-    File from = new File(".mvn");
-    File to = new File("MS\\HOLA");
-
-    try {
-        copyDir(from.toPath(), to.toPath());
-        System.out.println("Copied whole directory successfully.");
-    }
-    catch (IOException ex) {
-        ex.printStackTrace();
-    }
-}
 
   
 }
