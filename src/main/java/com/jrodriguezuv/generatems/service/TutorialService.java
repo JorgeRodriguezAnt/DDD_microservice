@@ -3,9 +3,7 @@ package com.jrodriguezuv.generatems.service;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.StandardCopyOption;
-import java.util.Optional;
+import java.util.List;
 
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +11,9 @@ import org.springframework.stereotype.Service;
 
 import com.jrodriguezuv.generatems.model.Tutorial;
 import com.jrodriguezuv.generatems.repository.TutorialRepository;
+import com.jrodriguezuv.generatems.service.generate.Transformer;
+import com.jrodriguezuv.generatems.service.generate.Validator;
+import com.jrodriguezuv.generatems.service.model.TransformerClass;
 
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -78,9 +79,17 @@ public class TutorialService {
       
       
 
+      String jsonEntrada = tutorial.getDescription();
+      /* Validator validator = new Validator();
+      validator.validateJSON( json); */
 
-
-  
+      Validator json = new Validator();
+        
+        List<TransformerClass> classestoTransform = json.validateJSON(jsonEntrada);
+        
+        Transformer myTransfomer = new Transformer(classestoTransform);
+        
+        myTransfomer.transform();
 
     
     return tutorialRepository.save(tutorial);
