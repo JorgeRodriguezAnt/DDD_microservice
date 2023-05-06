@@ -31,10 +31,11 @@ public class validateRelations {
         CreateService service = new CreateService();
         CreateServiceImplementation serviceImplementation = new CreateServiceImplementation();
   
-        // Validation: is a JSOn object and containds classess
-        JSONObject jsonObject = (JSONObject)obj;
+        JSONArray jsonArray2= (JSONArray) obj;
+        for (int z = 0; z < jsonArray2.size(); z++) {
+            JSONObject jsonArray3 = (JSONObject) jsonArray2.get(z);
 
-        JSONArray jsonArrayRelation = (JSONArray) jsonObject.get("Relation");
+        JSONArray jsonArrayRelation = (JSONArray) jsonArray3.get("Relation");
         List<Relation> objectTRelations = new ArrayList<>();
 
         // Creation list of object of Relations
@@ -102,7 +103,7 @@ public class validateRelations {
             
 }
        
-
+    }
 
     
    

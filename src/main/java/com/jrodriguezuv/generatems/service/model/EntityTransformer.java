@@ -4,18 +4,32 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+
 import com.jrodriguezuv.generatems.model.Tutorial;
+import com.jrodriguezuv.generatems.service.generate.CreateStructureSpringBoot;
 
 import java.io.FileWriter;
 public class EntityTransformer implements TransformationStrategy {
     //Create file(s) Entity(ies)
     int finish = 0;
-    Tutorial tutorial;
+    
+    CreateStructureSpringBoot createStructureSpringBoot = new CreateStructureSpringBoot();
+    
+    
+
+
     @Override
     public void createFile(String className) {
         // TODO Auto-generated method stub
+        /* System.out.println(nameMS() + " " + tutorial.getTitle()); */
+        
+        CreateStructureSpringBoot createStructureSpringBoot = new CreateStructureSpringBoot();
+        System.out.println("holaa"+createStructureSpringBoot.dString);
         try {  
-            File myObj = new File( className + ".java");  
+            File myObj = new File(createStructureSpringBoot.dString+"\\"+ className + ".java");  
             if (myObj.createNewFile()) {  
               System.out.println("File created: " + myObj.getName());  
               System.out.println("Absolute path: " + myObj.getAbsolutePath());  
@@ -33,7 +47,7 @@ public class EntityTransformer implements TransformationStrategy {
         // TODO Auto-generated method stub
 
         try {  
-        FileWriter myWriter = new FileWriter( className + ".java");
+        FileWriter myWriter = new FileWriter(createStructureSpringBoot.dString+"\\"+ className + ".java");
         
         /* if(classAbstract.equals("yes")){
           myWriter.write(classVisibility + " abstract class " + className + "{\n\n");

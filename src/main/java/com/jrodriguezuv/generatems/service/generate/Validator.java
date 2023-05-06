@@ -2,13 +2,17 @@ package com.jrodriguezuv.generatems.service.generate;
 
 
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.io.FileUtils;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
+import com.jrodriguezuv.generatems.model.Tutorial;
 import com.jrodriguezuv.generatems.service.model.AggregateRoot;
 import com.jrodriguezuv.generatems.service.model.Attribute;
 import com.jrodriguezuv.generatems.service.model.Entity;
@@ -27,7 +31,7 @@ public class Validator  {
     private static final String valueObjectType = "Value Object";
     private static final String aggregateRootType = "Aggregate Root";
     
-    
+    Tutorial tutorial;
   
     List<TransformerClass> classesToTransform;
   
@@ -52,12 +56,28 @@ public class Validator  {
         /* Object obj = parser.parse(json); */
         Object object = parser.parse(json);
         
-        
         // Validation: is a JSOn object and containds classess
-        JSONObject jsonObject = (JSONObject)object;
+         /* JSONObject jsonObject = (JSONObject)obj;  */
         //Not a Valid JSON object
 
-        JSONArray jsonArray = (JSONArray) jsonObject.get("Class");
+        /* JSONArray jsonarreglo = (JSONArray) jsonObject.get("view_name");  */
+        /* System.out.println(jsonarreglo); */
+
+       
+        JSONArray jsonArray2= (JSONArray) object;
+        for (int z = 0; z < jsonArray2.size(); z++) {
+          /* System.out.println(test.get(i)); */
+          JSONArray viewArray = (JSONArray) jsonArray2;
+          /* System.out.println(testArray.get(i)); */
+          JSONObject jsonObject = (JSONObject) viewArray.get(z);
+          System.out.println(jsonObject.get("view_name"));
+         /*  JSONArray clasArray = (JSONArray) jsonObject.get("Class");
+          System.out.println("class:" + clasArray); */
+        
+          
+
+        JSONObject jsonArray3 = (JSONObject) jsonArray2.get(z);
+        JSONArray jsonArray = (JSONArray) jsonArray3.get("Class");
         //There are no Class objects in the JSON object
           
         //Class
@@ -149,22 +169,23 @@ public class Validator  {
             }
            
             
-
+            System.out.println(classStereotype);
             switch (classStereotype) {
               case entityType:
+                System.out.println("entro_entity");
                 classesToTransform.add(new Entity(classId,className, classStereotype, classVisibility, classAbstract, classFather, attributes, operations));
                 break;
               case valueObjectType:
-                System.out.println("a");
+                System.out.println("entro_vo");
                 classesToTransform.add(new ValueObject(classId,className, classStereotype, classVisibility, classAbstract, classFather, attributes, operations));
                 break;
               case aggregateRootType:
-              System.out.println("b");
+              System.out.println("entro_ar");
                 classesToTransform.add(new AggregateRoot(classId, className, classStereotype, classVisibility, classAbstract, classFather, attributes, operations)); 
                 break;
             }
   
-            
+          }    
       }
       validateRelations validateRelations = new validateRelations();
       validateRelations.validate(classesToTransform,json);

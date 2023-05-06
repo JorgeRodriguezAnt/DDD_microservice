@@ -3,6 +3,7 @@ package com.jrodriguezuv.generatems.service.model;
 import java.util.List;
 
 import com.jrodriguezuv.generatems.model.Tutorial;
+import com.jrodriguezuv.generatems.service.generate.CreateStructureSpringBoot;
 
 import java.io.File; 
 import java.io.IOException;
@@ -11,13 +12,13 @@ import java.io.FileWriter;
 public class ValueObjectTransformer implements TransformationStrategy{
 
   int finish = 0;
-  Tutorial tutorial;
+  CreateStructureSpringBoot createStructureSpringBoot = new CreateStructureSpringBoot();
     //Create file(s) Value Object(s)
     @Override
     public void createFile(String className) {
         // TODO Auto-generated method stub
         try {  
-            File myObj = new File(className + ".java");  
+            File myObj = new File(createStructureSpringBoot.dString+"\\"+className + ".java");  
             if (myObj.createNewFile()) {  
               System.out.println("File created: " + myObj.getName());  
               System.out.println("Absolute path: " + myObj.getAbsolutePath());  
@@ -35,7 +36,7 @@ public class ValueObjectTransformer implements TransformationStrategy{
         // TODO Auto-generated method stub
 
         try {  
-        FileWriter myWriter = new FileWriter( className + ".java");
+        FileWriter myWriter = new FileWriter(createStructureSpringBoot.dString+"\\"+ className + ".java");
         myWriter.write(classVisibility + " class " + className + "{\n\n");
 
           
