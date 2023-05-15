@@ -29,7 +29,7 @@ public class EntityTransformer implements TransformationStrategy {
         CreateStructureSpringBoot createStructureSpringBoot = new CreateStructureSpringBoot();
         System.out.println("holaa"+createStructureSpringBoot.dString);
         try {  
-            File myObj = new File(createStructureSpringBoot.dString+"\\"+ className + ".java");  
+            File myObj = new File(createStructureSpringBoot.dString+"\\model\\"+ className + ".java");  
             if (myObj.createNewFile()) {  
               System.out.println("File created: " + myObj.getName());  
               System.out.println("Absolute path: " + myObj.getAbsolutePath());  
@@ -47,18 +47,15 @@ public class EntityTransformer implements TransformationStrategy {
         // TODO Auto-generated method stub
 
         try {  
-        FileWriter myWriter = new FileWriter(createStructureSpringBoot.dString+"\\"+ className + ".java");
+        FileWriter myWriter = new FileWriter(createStructureSpringBoot.dString+"\\model\\"+ className + ".java");
         
-        /* if(classAbstract.equals("yes")){
-          myWriter.write(classVisibility + " abstract class " + className + "{\n\n");
-        }
-        if(classAbstract.equals("no")){ */
-          /* if(classFather.trim().isEmpty()){ */
+        //Package
+        myWriter.write("package com.demo." + createStructureSpringBoot.view_name + ".model;\n\n\n");
+
+        //import
+        myWriter.write("import org.springframework.data.annotation.Id;\n");
             myWriter.write(classVisibility + " class " + className + "{\n\n");
-          /* }else{
-            myWriter.write(classVisibility + " class " + className + " extends "+classFather + "{\n\n");
-          } */
-        /* } */
+          
         
         //Attributes
          for (int i = 0; i <  Attributes.size(); i++) {
@@ -67,10 +64,13 @@ public class EntityTransformer implements TransformationStrategy {
             finish = 1;
             
           }else{
+            if(Attributes.get(i).IsIdentifier.equals("yes")){
+              myWriter.write("@Id\n" + Attributes.get(i).Visibility + " " + Attributes.get(i).Type.substring(0, 1).toUpperCase() + Attributes.get(i).Type.substring( 1).toLowerCase() + " " +  Attributes.get(i).Name +";\n" );
+            }else{
             myWriter.write(Attributes.get(i).Visibility + " " + Attributes.get(i).Type.substring(0, 1).toUpperCase() + Attributes.get(i).Type.substring( 1).toLowerCase() + " " +  Attributes.get(i).Name +";\n");
           }
         } 
-        
+      }
         if(finish==0){
         //Constructor
         myWriter.write("\n" + classVisibility + " "+ className +"(");

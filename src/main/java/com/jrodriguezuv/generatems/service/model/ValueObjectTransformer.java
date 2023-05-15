@@ -18,7 +18,7 @@ public class ValueObjectTransformer implements TransformationStrategy{
     public void createFile(String className) {
         // TODO Auto-generated method stub
         try {  
-            File myObj = new File(createStructureSpringBoot.dString+"\\"+className + ".java");  
+            File myObj = new File(createStructureSpringBoot.dString+"\\model\\"+className + ".java");  
             if (myObj.createNewFile()) {  
               System.out.println("File created: " + myObj.getName());  
               System.out.println("Absolute path: " + myObj.getAbsolutePath());  
@@ -36,7 +36,7 @@ public class ValueObjectTransformer implements TransformationStrategy{
         // TODO Auto-generated method stub
 
         try {  
-        FileWriter myWriter = new FileWriter(createStructureSpringBoot.dString+"\\"+ className + ".java");
+        FileWriter myWriter = new FileWriter(createStructureSpringBoot.dString+"\\model\\"+ className + ".java");
         myWriter.write(classVisibility + " class " + className + "{\n\n");
 
           

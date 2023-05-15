@@ -11,8 +11,10 @@ import org.json.simple.parser.JSONParser;
 
 public class CreateStructureSpringBoot {
     
-    String view_name;
+    public static String view_name;
     public static String dString;
+    public static String resource;
+    public static String test;
     public void createDirectories(String name, String json){
         JSONParser parser = new JSONParser();
       
@@ -63,8 +65,9 @@ public class CreateStructureSpringBoot {
         System.out.println("The folder has been created or already exists");
       }
 
-     dString = "MS\\"+name+"\\" + view_name + "\\src\\main\\java\\com\\demo\\" + view_name + "\\model";
-      
+     dString = "MS\\"+name+"\\" + view_name + "\\src\\main\\java\\com\\demo\\" + view_name;
+     resource =  "MS\\"+name+"\\" + view_name + "\\src\\main\\resource";
+     test = "MS\\"+name+"\\" + view_name + "\\src\\test\\java\\com\\demo" + view_name ;
 
       File theDirectory3 = new File("MS\\"+name+"\\" + view_name + "\\src\\main\\java\\com\\demo\\" + view_name + "\\repository"  );
       if (theDirectory3.exists() || theDirectory3.mkdirs()){
@@ -78,6 +81,11 @@ public class CreateStructureSpringBoot {
 
       File theDirectory5 = new File("MS\\"+name+"\\" + view_name + "\\src\\main\\resource"  );
       if (theDirectory5.exists() || theDirectory5.mkdirs()){
+        System.out.println("The folder has been created or already exists");
+      }
+
+      File theDirectory6 = new File("MS\\"+name+"\\" + view_name + "\\src\\test\\java\\com\\demo" + view_name  );
+      if (theDirectory6.exists() || theDirectory6.mkdirs()){
         System.out.println("The folder has been created or already exists");
       }
     

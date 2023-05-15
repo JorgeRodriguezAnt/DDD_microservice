@@ -17,6 +17,7 @@ public class CreateServiceImplementation {
     private static final String serviceClassName = "Service";
     private static final String serviceImplementClassName = "ServiceImplement";
     private final static String nameRepository = "Repository";
+    CreateStructureSpringBoot createStructureSpringBoot = new CreateStructureSpringBoot();
 
     public void invokeCreateImplementation(String nameService,List<TransformerClass> classesToTransform){
 
@@ -27,7 +28,7 @@ public class CreateServiceImplementation {
     public void createFile(String nameService) {
         // TODO Auto-generated method stub
         try {  
-            File myObj = new File( serviceImplementClassName + nameService+".java");  
+            File myObj = new File( createStructureSpringBoot.dString+"\\service\\"+serviceImplementClassName + nameService+".java");  
             if (myObj.createNewFile()) {  
               System.out.println("File created: " + myObj.getName());  
               System.out.println("Absolute path: " + myObj.getAbsolutePath());  
@@ -45,7 +46,7 @@ public class CreateServiceImplementation {
         
         try {
             
-            try (FileWriter myWriter = new FileWriter(serviceImplementClassName+ nameService+ ".java")) {
+            try (FileWriter myWriter = new FileWriter(createStructureSpringBoot.dString+"\\service\\"+serviceImplementClassName+ nameService+ ".java")) {
                 myWriter.write("public class " + serviceImplementClassName + nameService +" implements "+ serviceClassName + nameService +"{\n");
                 
                 myWriter.write("private " + nameRepository + " " + "repository;\n");

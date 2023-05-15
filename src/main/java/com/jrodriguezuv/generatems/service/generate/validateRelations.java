@@ -30,7 +30,7 @@ public class validateRelations {
         /* int count = 0; */
         CreateService service = new CreateService();
         CreateServiceImplementation serviceImplementation = new CreateServiceImplementation();
-  
+        CreateController createController = new CreateController();
         JSONArray jsonArray2= (JSONArray) obj;
         for (int z = 0; z < jsonArray2.size(); z++) {
             JSONObject jsonArray3 = (JSONObject) jsonArray2.get(z);
@@ -85,8 +85,10 @@ public class validateRelations {
                         
                     } 
                     System.out.println("entra");
-                    service.invokeCreateService(transformerClass.name, transformerClass.operations);
-                    serviceImplementation.invokeCreateImplementation(transformerClass.name, classesToTransform);
+                    /* service.invokeCreateService(transformerClass.name, transformerClass.operations, classesToTransform); */
+                     /* serviceImplementation.invokeCreateImplementation(transformerClass.name, classesToTransform); */
+                    createController.createFile(classesToTransform);
+                    createController.writeFile(classesToTransform);
                     
                 }else{
                     System.out.println("Error: Value Object is can't a cluster of associated objects. Re-design your model for optimal class generation, adding an aggregate root.");
