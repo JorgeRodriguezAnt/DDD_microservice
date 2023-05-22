@@ -23,7 +23,7 @@ public class CreateRepository {
                   nameClassAR = transformerClass.name;
                 }
               }
-            File myObj = new File( createStructureSpringBoot.dString+"\\repository\\"+nameClassAR+nameRepository +".java");  
+            File myObj = new File( "MS\\tests\\src\\main\\java\\com\\example\\spring\\r2dbc\\mysql\\repository\\"+nameClassAR+nameRepository +".java");  
             if (myObj.createNewFile()) {  
               System.out.println("File created: " + myObj.getName());  
               System.out.println("Absolute path: " + myObj.getAbsolutePath());  
@@ -46,10 +46,10 @@ public class CreateRepository {
                   nameClassAR = transformerClass.name;
                 }
               }
-            try (FileWriter myWriter = new FileWriter( createStructureSpringBoot.dString+"\\repository\\"+nameClassAR+nameRepository +".java")) {
+            try (FileWriter myWriter = new FileWriter( "MS\\tests\\src\\main\\java\\com\\example\\spring\\r2dbc\\mysql\\repository\\"+nameClassAR+nameRepository +".java")) {
 
                  //Package
-                 myWriter.write("package com.demo." + createStructureSpringBoot.view_name + ".repository;\n\n\n");
+                 myWriter.write("package com.example.spring.r2dbc.mysql.repository;\n\n\n");
 
                 //import
                 myWriter.write("import org.springframework.data.repository.reactive.ReactiveCrudRepository;\n");
@@ -58,7 +58,7 @@ public class CreateRepository {
                 //import model and service
                 for (TransformerClass transformerClass : classesToTransform) {
                     if(transformerClass.stereotype.equals("Aggregate Root")){
-                      myWriter.write("import com.demo." + createStructureSpringBoot.view_name + ".model." + transformerClass.name+";\n\n");
+                      myWriter.write("package com.example.spring.r2dbc.mysql.model." + transformerClass.name+";\n\n");
                     }
                   }
 
@@ -66,6 +66,7 @@ public class CreateRepository {
                 for (TransformerClass transformerClass : classesToTransform) {
                     if(transformerClass.stereotype.equals("Aggregate Root")){
                         myWriter.write("public interface " + nameRepository + " extends ReactiveCrudRepository <");
+                        
                         myWriter.write(transformerClass.name +", Integer>{}\n\n");
                         /* for (Attribute attClass : transformerClass.attributes) {
                             if(attClass.Name.contains("id") || attClass.Name.contains("Id") || attClass.Name.contains("ID") || attClass.Name.contains("iD")){

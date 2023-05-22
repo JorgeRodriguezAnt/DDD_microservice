@@ -28,7 +28,7 @@ public class CreateServiceImplementation {
     public void createFile(String nameService) {
         // TODO Auto-generated method stub
         try {  
-            File myObj = new File( createStructureSpringBoot.dString+"\\service\\"+serviceImplementClassName + nameService+".java");  
+            File myObj = new File( "MS\\tests\\src\\main\\java\\com\\bezkoder\\spring\\r2dbc\\mysql\\service"+serviceImplementClassName + nameService+"s.java");  
             if (myObj.createNewFile()) {  
               System.out.println("File created: " + myObj.getName());  
               System.out.println("Absolute path: " + myObj.getAbsolutePath());  
@@ -46,7 +46,7 @@ public class CreateServiceImplementation {
         
         try {
             
-            try (FileWriter myWriter = new FileWriter(createStructureSpringBoot.dString+"\\service\\"+serviceImplementClassName+ nameService+ ".java")) {
+            try (FileWriter myWriter = new FileWriter("MS\\tests\\src\\main\\java\\com\\bezkoder\\spring\\r2dbc\\mysql\\service"+serviceImplementClassName+ nameService+ "s.java")) {
                 myWriter.write("public class " + serviceImplementClassName + nameService +" implements "+ serviceClassName + nameService +"{\n");
                 
                 myWriter.write("private " + nameRepository + " " + "repository;\n");

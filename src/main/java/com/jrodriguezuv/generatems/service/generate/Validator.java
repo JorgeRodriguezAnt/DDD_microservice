@@ -194,16 +194,17 @@ public class Validator  {
       }
       validateRelations validateRelations = new validateRelations();
       validateRelations.validate(classesToTransform,json);
-      repository.createFile(classesToTransform);
+      repository.createFile(classesToTransform); 
+      repository.writeFile(classesToTransform);
       controller.createFile(classesToTransform);
       controller.writeFile(classesToTransform);
       service.invokeCreateService(classesToTransform);
-      properties.createFile(classesToTransform);
+      /* properties.createFile(classesToTransform);
       properties.writeFile(classesToTransform);
       springBootMain.createFile(classesToTransform);
       springBootMain.writeFile(classesToTransform);
       test.createFile(classesToTransform);
-      test.writeFile(classesToTransform);
+      test.writeFile(classesToTransform); */
 
       } catch(Exception e) {
         errors.toJSON();

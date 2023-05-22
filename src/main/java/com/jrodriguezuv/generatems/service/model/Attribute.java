@@ -72,5 +72,7 @@ public class Attribute {
         return "Attribute [Name=" + Name + ", Type=" + Type + ", IsIdentifier=" + IsIdentifier + ", Multiplicity="
                 + Multiplicity + ", IsNuliable=" + IsNuliable + "]";
     }
+
+
     
 }

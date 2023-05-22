@@ -15,7 +15,7 @@ public class AggregateRootTransformer implements TransformationStrategy {
     public void createFile(String className) {
         // TODO Auto-generated method stub
         try {  
-            File myObj = new File(createStructureSpringBoot.dString+"\\model\\"+ className + ".java");  
+            File myObj = new File("MS\\tests\\src\\main\\java\\com\\example\\spring\\r2dbc\\mysql\\model\\"+ className + ".java");  
             if (myObj.createNewFile()) {  
               System.out.println("File created: " + myObj.getName());  
               System.out.println("Absolute path: " + myObj.getAbsolutePath());  
@@ -33,10 +33,10 @@ public class AggregateRootTransformer implements TransformationStrategy {
         // TODO Auto-generated method stub
 
         try {  
-        FileWriter myWriter = new FileWriter(createStructureSpringBoot.dString+"\\model\\"+ className + ".java");
+        FileWriter myWriter = new FileWriter("MS\\tests\\src\\main\\java\\com\\example\\spring\\r2dbc\\mysql\\model\\"+ className + ".java");
 
         //Package
-        myWriter.write("package com.demo." + createStructureSpringBoot.view_name + ".model;\n\n\n");
+        myWriter.write("package com.example.spring.r2dbc.mysql.model;\n\n\n");
 
         //import
         myWriter.write("import org.springframework.data.annotation.Id;\n");
@@ -46,12 +46,17 @@ public class AggregateRootTransformer implements TransformationStrategy {
         //Attributes
          for (int i = 0; i <  Attributes.size(); i++) {
           if(Attributes.get(i).IsIdentifier.equals("yes")){
-            myWriter.write("@Id\n" + Attributes.get(i).Visibility + " " + Attributes.get(i).Type.substring(0, 1).toUpperCase() + Attributes.get(i).Type.substring( 1).toLowerCase() + " " +  Attributes.get(i).Name +";\n" );
+            myWriter.write("@Id\n" + Attributes.get(i).Visibility + " " + Attributes.get(i).Type.toLowerCase() + " " +  Attributes.get(i).Name +";\n" );
           }else{
             if(Attributes.get(i).Multiplicity.equals("yes")){
               myWriter.write(Attributes.get(i).Visibility + " " +Attributes.get(i).Type  + " " +  Attributes.get(i).Name +";\n");
             }else{
-              myWriter.write(Attributes.get(i).Visibility + " " + Attributes.get(i).Type.substring(0, 1).toUpperCase() + Attributes.get(i).Type.substring( 1).toLowerCase() + " " +  Attributes.get(i).Name +";\n");
+              if(Attributes.get(i).Type.equals("string")){
+                myWriter.write(Attributes.get(i).Visibility + " " + Attributes.get(i).Type.substring(0, 1).toUpperCase() + Attributes.get(i).Type.substring( 1).toLowerCase() + " " +  Attributes.get(i).Name +";\n");
+              }else{
+                myWriter.write(Attributes.get(i).Visibility + " " + Attributes.get(i).Type.toLowerCase() + " " +  Attributes.get(i).Name +";\n");
+              }
+              
             } 
           }
           
@@ -62,14 +67,20 @@ public class AggregateRootTransformer implements TransformationStrategy {
         myWriter.write("\n" + classVisibility + " "+ className +"(");
         
         for (int i = 0; i <  Attributes.size(); i++) {
+          if(!Attributes.get(i).Name.contains("id")){
             myWriter.write(Attributes.get(i).Type.substring(0, 1).toUpperCase() + Attributes.get(i).Type.substring( 1).toLowerCase() + " " +  Attributes.get(i).Name);
             if(i !=  Attributes.size()-1){
               myWriter.write(", ");
             }
+          }
+            
         } 
         myWriter.write(") {\n"); 
         for (int j = 0; j <  Attributes.size(); j++) {
+          if(!Attributes.get(j).Name.contains("id")){
             myWriter.write("\tthis." +  Attributes.get(j).Name + " = " +  Attributes.get(j).Name +";\n");
+          }
+            
         }
         myWriter.write("}\n");
 
@@ -99,7 +110,7 @@ public class AggregateRootTransformer implements TransformationStrategy {
        
         for (int i = 0; i < Attributes.size(); i++) {
 
-            myWriter.write( "\n" + Attributes.get(i).Visibility + " " + Attributes.get(i).Type.substring(0,1).toUpperCase() + Attributes.get(i).Type.substring(1).toLowerCase() +" get" +  Attributes.get(i).Name.substring(0, 1).toUpperCase() +  Attributes.get(i).Name.substring( 1).toLowerCase() + "() {\n");
+            myWriter.write( "\n public"  + " " + Attributes.get(i).Type.substring(0,1).toUpperCase() + Attributes.get(i).Type.substring(1).toLowerCase() +" get" +  Attributes.get(i).Name.substring(0, 1).toUpperCase() +  Attributes.get(i).Name.substring( 1).toLowerCase() + "() {\n");
             myWriter.write("\treturn this." +  Attributes.get(i).Name + ";\n");
             myWriter.write("}\n");
             myWriter.write("\n"); 
@@ -108,7 +119,7 @@ public class AggregateRootTransformer implements TransformationStrategy {
         
           for (int i = 0; i < Attributes.size(); i++) {
 
-            myWriter.write( "\n" + Attributes.get(i).Visibility + " " + Attributes.get(i).Type.substring(0,1).toUpperCase() + Attributes.get(i).Type.substring(1).toLowerCase() +" set" +  Attributes.get(i).Name.substring(0, 1).toUpperCase() +  Attributes.get(i).Name.substring( 1).toLowerCase() + "(" + Attributes.get(i).Type.substring(0,1).toUpperCase() + Attributes.get(i).Type.substring(1).toLowerCase() + " " + Attributes.get(i).Name +  ") {\n");
+            myWriter.write( "\n public"  + " " + Attributes.get(i).Type.substring(0,1).toUpperCase() + Attributes.get(i).Type.substring(1).toLowerCase() +" set" +  Attributes.get(i).Name.substring(0, 1).toUpperCase() +  Attributes.get(i).Name.substring( 1).toLowerCase() + "(" + Attributes.get(i).Type.substring(0,1).toUpperCase() + Attributes.get(i).Type.substring(1).toLowerCase() + " " + Attributes.get(i).Name +  ") {\n");
             myWriter.write("\treturn this." +  Attributes.get(i).Name + " = " + Attributes.get(i).Name  + ";\n");
             myWriter.write("}\n");
             myWriter.write("\n"); 

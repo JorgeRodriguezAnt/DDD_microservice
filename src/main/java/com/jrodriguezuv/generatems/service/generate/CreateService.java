@@ -30,7 +30,7 @@ public class CreateService {
     public void createFile(List<TransformerClass> classesToTransform) {
         // TODO Auto-generated method stub
         try {  
-            File myObj = new File( createStructureSpringBoot.dString+"\\service\\"+ nameService+serviceClassName+".java");  
+            File myObj = new File( "MS\\tests\\src\\main\\java\\com\\example\\spring\\r2dbc\\mysql\\service\\"+ nameService+serviceClassName+".java");  
             if (myObj.createNewFile()) {  
               System.out.println("File created: " + myObj.getName());  
               System.out.println("Absolute path: " + myObj.getAbsolutePath());  
@@ -49,10 +49,10 @@ public class CreateService {
         
         try {
             
-            try (FileWriter myWriter = new FileWriter( createStructureSpringBoot.dString+"\\service\\"+ nameService+serviceClassName+ ".java")) {
+            try (FileWriter myWriter = new FileWriter( "MS\\tests\\src\\main\\java\\com\\example\\spring\\r2dbc\\mysql\\service\\"+ nameService+serviceClassName+ ".java")) {
 
               //Package
-              myWriter.write("package com.demo." + createStructureSpringBoot.view_name + ".service;\n\n\n");
+              myWriter.write("package com.example.spring.r2dbc.mysql.service;\n\n\n");
 
               //import
               myWriter.write("import java.util.List;\n");
@@ -63,8 +63,8 @@ public class CreateService {
               //import model and service
               for (TransformerClass transformerClass : classesToTransform) {
                 if(transformerClass.stereotype.equals("Aggregate Root")){
-                  myWriter.write("import com.demo." + createStructureSpringBoot.view_name + ".model." + transformerClass.name+";\n\n");
-                  myWriter.write("import com.demo." + createStructureSpringBoot.view_name + ".repository." + transformerClass.name.toLowerCase()+"Repository;\n\n");
+                  myWriter.write("import com.example.spring.r2dbc.mysql.model." + transformerClass.name+";\n\n");
+                  myWriter.write("import com.example.spring.r2dbc.mysql.repository." + transformerClass.name.toLowerCase()+"Repository;\n\n");
                 }
               }
               
@@ -83,7 +83,7 @@ public class CreateService {
                     for (Attribute transformerClass2 : transformerClass.attributes) {
                       if(transformerClass2.IsIdentifier.equals("yes")){
                         myWriter.write(transformerClass2.Type + " " + transformerClass2.Name + ") {\n");
-                        myWriter.write("\treturn " + transformerClass.name.toLowerCase() + "Repository.findByID(" + transformerClass2.Name +");\n}\n");
+                        myWriter.write("\treturn " + transformerClass.name.toLowerCase() + "Repository.findById(" + transformerClass2.Name +");\n}\n");
                       }
                     }
                     

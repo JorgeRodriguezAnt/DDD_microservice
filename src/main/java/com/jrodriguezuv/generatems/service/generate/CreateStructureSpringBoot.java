@@ -3,8 +3,11 @@ package com.jrodriguezuv.generatems.service.generate;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Paths;
 
 import org.apache.commons.io.FileUtils;
+import org.eclipse.jgit.api.Git;
+import org.eclipse.jgit.api.errors.GitAPIException;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -48,9 +51,44 @@ public class CreateStructureSpringBoot {
         // TODO: handle exception
       }
 
+      String repoUrl = "https://github.com/jorgeRodriguezAntiquera/MSDemo.git";
+    String cloneDirectoryPath = "MS\\"+name; // Ex.in windows c:\\gitProjects\SpringBootMongoDbCRUD\
+    try {
+        System.out.println("Cloning "+repoUrl+" into "+repoUrl);
+        Git.cloneRepository()
+            .setURI(repoUrl)
+            .setDirectory(Paths.get(cloneDirectoryPath).toFile())
+            .call();
+        System.out.println("Completed Cloning");
+    } catch (GitAPIException e) {
+        System.out.println("Exception occurred while cloning repo");
+        e.printStackTrace();
+    }
+
+    File theDirectory1 = new File("MS\\"+name+ "\\src\\main\\java\\com\\example\\spring\\r2dbc\\mysql\\controller\\" );
+      if (theDirectory1.exists() || theDirectory1.mkdirs()){
+        System.out.println("The folder has been created or already exists");
+      }
+
+      File  theDirectory2 = new File("MS\\"+name+ "\\src\\main\\java\\com\\example\\spring\\r2dbc\\mysql\\model"  );
+      if (theDirectory2.exists() || theDirectory2.mkdirs()){
+        System.out.println("The folder has been created or already exists");
+      }
+
+      File theDirectory3 = new File("MS\\"+name+ "\\src\\main\\java\\com\\example\\spring\\r2dbc\\mysql\\repository"  );
+      if (theDirectory3.exists() || theDirectory3.mkdirs()){
+        System.out.println("The folder has been created or already exists");
+      }
+
+      File theDirectory4 = new File("MS\\"+name+ "\\src\\main\\java\\com\\example\\spring\\r2dbc\\mysql\\service"  );
+      if (theDirectory4.exists() || theDirectory4.mkdirs()){
+        System.out.println("The folder has been created or already exists");
+      }
+
+
       /* String view = view_name; */
       //Create microservice directory 
-      File theDirectory = new File("MS\\"+name+"\\" + view_name + "\\src\\main\\java\\com\\demo\\" + view_name );
+     /*  File theDirectory = new File("MS\\"+name+"\\" + view_name + "\\src\\main\\java\\com\\demo\\" + view_name );
       if (theDirectory.exists() || theDirectory.mkdirs()){
         System.out.println("The folder has been created or already exists");
       }
@@ -97,9 +135,9 @@ public class CreateStructureSpringBoot {
       } catch (IOException e) {
       e.printStackTrace();
       }
-
+ */
       //Create spring files
-       File srcDir1 = new File("pom.xml");
+      /*  File srcDir1 = new File("pom.xml");
        File destDir1 = new File("MS\\" + name+"\\" + view_name + "\\pom.xml");
        File srcDir2 = new File("mvnw.cmd");
        File destDir2 = new File("MS\\" + name+"\\" + view_name + "\\mvnw.cmd");
@@ -123,7 +161,7 @@ public class CreateStructureSpringBoot {
       } catch (IOException e) {
       e.printStackTrace();
       }
-   
+    */
     }
  
 

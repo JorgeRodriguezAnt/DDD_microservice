@@ -87,8 +87,8 @@ public class validateRelations {
                     System.out.println("entra");
                     /* service.invokeCreateService(transformerClass.name, transformerClass.operations, classesToTransform); */
                      /* serviceImplementation.invokeCreateImplementation(transformerClass.name, classesToTransform); */
-                    createController.createFile(classesToTransform);
-                    createController.writeFile(classesToTransform);
+                    /* createController.createFile(classesToTransform);
+                    createController.writeFile(classesToTransform); */
                     
                 }else{
                     System.out.println("Error: Value Object is can't a cluster of associated objects. Re-design your model for optimal class generation, adding an aggregate root.");
