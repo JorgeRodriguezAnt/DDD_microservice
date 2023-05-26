@@ -40,9 +40,9 @@ public class Validator  {
     CreateRepository repository ;
     CreateController controller = new CreateController();
     CreateService service = new CreateService();
-    CreateProperties properties = new CreateProperties();
-    CreateSpringBootMain springBootMain = new CreateSpringBootMain();
-    CreateTest test = new CreateTest();
+    pushRepository pushRepository = new pushRepository();
+   
+    
 
     int count = 0;
     
@@ -199,18 +199,17 @@ public class Validator  {
       controller.createFile(classesToTransform);
       controller.writeFile(classesToTransform);
       service.invokeCreateService(classesToTransform);
-      /* properties.createFile(classesToTransform);
-      properties.writeFile(classesToTransform);
-      springBootMain.createFile(classesToTransform);
-      springBootMain.writeFile(classesToTransform);
-      test.createFile(classesToTransform);
-      test.writeFile(classesToTransform); */
+      
+      
 
       } catch(Exception e) {
         errors.toJSON();
         
           
       }
+
+
+      /* pushRepository.push(); */
      
         
       return this.classesToTransform;

@@ -23,7 +23,8 @@ public class CreateRepository {
                   nameClassAR = transformerClass.name;
                 }
               }
-            File myObj = new File( "MS\\tests\\src\\main\\java\\com\\example\\spring\\r2dbc\\mysql\\repository\\"+nameClassAR+nameRepository +".java");  
+            File myObj = new File("MS\\" + createStructureSpringBoot.nameDir + "\\src\\main\\java\\com\\example\\spring\\r2dbc\\mysql\\repository\\" +nameClassAR+nameRepository +".java");
+               /* "MS\\tests\\src\\main\\java\\com\\example\\spring\\r2dbc\\mysql\\repository\\"+nameClassAR+nameRepository +".java");   */
             if (myObj.createNewFile()) {  
               System.out.println("File created: " + myObj.getName());  
               System.out.println("Absolute path: " + myObj.getAbsolutePath());  
@@ -46,7 +47,7 @@ public class CreateRepository {
                   nameClassAR = transformerClass.name;
                 }
               }
-            try (FileWriter myWriter = new FileWriter( "MS\\tests\\src\\main\\java\\com\\example\\spring\\r2dbc\\mysql\\repository\\"+nameClassAR+nameRepository +".java")) {
+            try (FileWriter myWriter = new FileWriter( "MS\\" + createStructureSpringBoot.nameDir + "\\src\\main\\java\\com\\example\\spring\\r2dbc\\mysql\\repository\\"+nameClassAR+nameRepository +".java")) {
 
                  //Package
                  myWriter.write("package com.example.spring.r2dbc.mysql.repository;\n\n\n");
@@ -58,14 +59,15 @@ public class CreateRepository {
                 //import model and service
                 for (TransformerClass transformerClass : classesToTransform) {
                     if(transformerClass.stereotype.equals("Aggregate Root")){
-                      myWriter.write("package com.example.spring.r2dbc.mysql.model." + transformerClass.name+";\n\n");
+                      myWriter.write("import com.example.spring.r2dbc.mysql.model." + transformerClass.name+";\n\n");
                     }
                   }
 
 
                 for (TransformerClass transformerClass : classesToTransform) {
                     if(transformerClass.stereotype.equals("Aggregate Root")){
-                        myWriter.write("public interface " + nameRepository + " extends ReactiveCrudRepository <");
+                        myWriter.write("@Repository\n");
+                        myWriter.write("public interface " + transformerClass.name+ nameRepository + " extends ReactiveCrudRepository <");
                         
                         myWriter.write(transformerClass.name +", Integer>{}\n\n");
                         /* for (Attribute attClass : transformerClass.attributes) {

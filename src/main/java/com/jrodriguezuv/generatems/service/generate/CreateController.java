@@ -20,7 +20,7 @@ public class CreateController {
                 nameClassAR = transformerClass.name;
               }
             }
-            File myObj = new File( "MS\\tests\\src\\main\\java\\com\\example\\spring\\r2dbc\\mysql\\controller\\"+nameClassAR+nameRepository +".java");  
+            File myObj = new File( "MS\\" + createStructureSpringBoot.nameDir + "\\src\\main\\java\\com\\example\\spring\\r2dbc\\mysql\\controller\\"+nameClassAR+nameRepository +".java");  
             if (myObj.createNewFile()) {  
               System.out.println("File created: " + myObj.getName());  
               System.out.println("Absolute path: " + myObj.getAbsolutePath());  
@@ -43,7 +43,7 @@ public class CreateController {
               nameClassAR = transformerClass.name;
             }
           }
-            try (FileWriter myWriter = new FileWriter( "MS\\tests\\src\\main\\java\\com\\example\\spring\\r2dbc\\mysql\\controller\\"+nameClassAR+nameRepository +".java")) {
+            try (FileWriter myWriter = new FileWriter( "MS\\" + createStructureSpringBoot.nameDir + "\\src\\main\\java\\com\\example\\spring\\r2dbc\\mysql\\controller\\"+nameClassAR+nameRepository +".java")) {
 
                 //Package
                 myWriter.write("package com.example.spring.r2dbc.mysql.controller;\n\n\n");
@@ -71,7 +71,7 @@ public class CreateController {
                     myWriter.write("import com.example.spring.r2dbc.mysql.service." + transformerClass.name +"Service;\n\n\n");
                     myWriter.write("@RestController\n");
                 myWriter.write("@RequestMapping(\"/api\")\n");
-                myWriter.write("public class"+ transformerClass.name + " Controller{\n");
+                myWriter.write("public class "+ transformerClass.name + "Controller{\n");
                 myWriter.write("@Autowired\n");
                   }
                 }

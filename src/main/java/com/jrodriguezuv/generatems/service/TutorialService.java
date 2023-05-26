@@ -20,6 +20,7 @@ import com.jrodriguezuv.generatems.repository.TutorialRepository;
 import com.jrodriguezuv.generatems.service.generate.CreateStructureSpringBoot;
 import com.jrodriguezuv.generatems.service.generate.Transformer;
 import com.jrodriguezuv.generatems.service.generate.Validator;
+import com.jrodriguezuv.generatems.service.generate.pushRepository;
 import com.jrodriguezuv.generatems.service.model.TransformerClass;
 
 import reactor.core.publisher.Flux;
@@ -60,7 +61,9 @@ public class TutorialService {
         Transformer myTransfomer = new Transformer(classestoTransform);
         
         myTransfomer.transform(); 
-      
+
+        pushRepository pushRepository = new pushRepository();
+        pushRepository.push();
     
     return tutorialRepository.save(tutorial);
   } 

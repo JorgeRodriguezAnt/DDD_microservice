@@ -18,6 +18,7 @@ public class CreateStructureSpringBoot {
     public static String dString;
     public static String resource;
     public static String test;
+    public static String nameDir;
     public void createDirectories(String name, String json){
         JSONParser parser = new JSONParser();
       
@@ -65,6 +66,7 @@ public class CreateStructureSpringBoot {
         e.printStackTrace();
     }
 
+    nameDir = name;
     File theDirectory1 = new File("MS\\"+name+ "\\src\\main\\java\\com\\example\\spring\\r2dbc\\mysql\\controller\\" );
       if (theDirectory1.exists() || theDirectory1.mkdirs()){
         System.out.println("The folder has been created or already exists");

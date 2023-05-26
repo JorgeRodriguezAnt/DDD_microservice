@@ -30,7 +30,7 @@ public class CreateService {
     public void createFile(List<TransformerClass> classesToTransform) {
         // TODO Auto-generated method stub
         try {  
-            File myObj = new File( "MS\\tests\\src\\main\\java\\com\\example\\spring\\r2dbc\\mysql\\service\\"+ nameService+serviceClassName+".java");  
+            File myObj = new File( "MS\\" + createStructureSpringBoot.nameDir + "\\src\\main\\java\\com\\example\\spring\\r2dbc\\mysql\\service\\"+ nameService+serviceClassName+".java");  
             if (myObj.createNewFile()) {  
               System.out.println("File created: " + myObj.getName());  
               System.out.println("Absolute path: " + myObj.getAbsolutePath());  
@@ -49,7 +49,7 @@ public class CreateService {
         
         try {
             
-            try (FileWriter myWriter = new FileWriter( "MS\\tests\\src\\main\\java\\com\\example\\spring\\r2dbc\\mysql\\service\\"+ nameService+serviceClassName+ ".java")) {
+            try (FileWriter myWriter = new FileWriter( "MS\\" + createStructureSpringBoot.nameDir + "\\src\\main\\java\\com\\example\\spring\\r2dbc\\mysql\\service\\"+ nameService+serviceClassName+ ".java")) {
 
               //Package
               myWriter.write("package com.example.spring.r2dbc.mysql.service;\n\n\n");
