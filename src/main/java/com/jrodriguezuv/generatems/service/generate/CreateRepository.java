@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.util.List;
 
 import com.jrodriguezuv.generatems.service.model.Attribute;
+import com.jrodriguezuv.generatems.service.model.Operation;
 import com.jrodriguezuv.generatems.service.model.TransformerClass;
 
 
@@ -14,16 +15,20 @@ public class CreateRepository {
 
     private final static String nameRepository = "Repository";
     CreateStructureSpringBoot createStructureSpringBoot = new CreateStructureSpringBoot();
-    String nameClassAR;
-    public void createFile(List<TransformerClass> classesToTransform) {
+    String nameClassAR ;
+
+    public void invokeRepository(String classId, String className, String classStereotype, String classVisibility,
+        String classAbstract, String classFather, List<Attribute> attributes, List<Operation> operations) {
+          createFile(className);
+          writeFile(className,attributes);
+    } 
+
+    public void createFile(String className) {
         // TODO Auto-generated method stub
         try {  
-            for (TransformerClass transformerClass : classesToTransform) {
-                if(transformerClass.stereotype.equals("Aggregate Root")){
-                  nameClassAR = transformerClass.name;
-                }
-              }
-            File myObj = new File("MS\\" + createStructureSpringBoot.nameDir + "\\src\\main\\java\\com\\example\\spring\\r2dbc\\mysql\\repository\\" +nameClassAR+nameRepository +".java");
+
+            
+            File myObj = new File("MS\\" + createStructureSpringBoot.nameDir + "\\src\\main\\java\\com\\demo\\spring\\jpa\\msGenerate\\repository\\" +className+nameRepository +".java");
                /* "MS\\tests\\src\\main\\java\\com\\example\\spring\\r2dbc\\mysql\\repository\\"+nameClassAR+nameRepository +".java");   */
             if (myObj.createNewFile()) {  
               System.out.println("File created: " + myObj.getName());  
@@ -31,7 +36,7 @@ public class CreateRepository {
             } else {  
               System.out.println("File already exists.");  
             }  
-            writeFile(classesToTransform);
+            
           } catch (IOException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();  
@@ -39,48 +44,28 @@ public class CreateRepository {
     }
 
     
-    public void writeFile(List<TransformerClass> classesToTransform) {
+    public void writeFile(String className, List<Attribute> attributes) {
         
         try {
-            for (TransformerClass transformerClass : classesToTransform) {
-                if(transformerClass.stereotype.equals("Aggregate Root")){
-                  nameClassAR = transformerClass.name;
-                }
-              }
-            try (FileWriter myWriter = new FileWriter( "MS\\" + createStructureSpringBoot.nameDir + "\\src\\main\\java\\com\\example\\spring\\r2dbc\\mysql\\repository\\"+nameClassAR+nameRepository +".java")) {
+            
+            try (FileWriter myWriter = new FileWriter( "MS\\" + createStructureSpringBoot.nameDir + "\\src\\main\\java\\com\\demo\\spring\\jpa\\msGenerate\\repository\\"+className+nameRepository +".java")) {
 
                  //Package
-                 myWriter.write("package com.example.spring.r2dbc.mysql.repository;\n\n\n");
+                 myWriter.write("package com.demo.spring.jpa.msGenerate.repository;\n\n");
 
                 //import
-                myWriter.write("import org.springframework.data.repository.reactive.ReactiveCrudRepository;\n");
+                myWriter.write("import org.springframework.data.jpa.repository.JpaRepository;\n");
                 myWriter.write("import org.springframework.stereotype.Repository;\n");
-                myWriter.write("import reactor.core.publisher.Flux;\n");
-                //import model and service
-                for (TransformerClass transformerClass : classesToTransform) {
-                    if(transformerClass.stereotype.equals("Aggregate Root")){
-                      myWriter.write("import com.example.spring.r2dbc.mysql.model." + transformerClass.name+";\n\n");
-                    }
+                myWriter.write("import com.demo.spring.jpa.msGenerate.model.*;\n\n");
+
+                myWriter.write("@Repository\n");
+                myWriter.write("public interface " + className + "Repository extends JpaRepository<" + className + ", ");
+                for (Attribute attribute : attributes) {
+                  if(attribute.Name.contains("id") || attribute.Name.contains("id")){
+                    myWriter.write(attribute.Type.substring(0, 1).toUpperCase() + attribute.Type.substring( 1).toLowerCase());
                   }
-
-
-                for (TransformerClass transformerClass : classesToTransform) {
-                    if(transformerClass.stereotype.equals("Aggregate Root")){
-                        myWriter.write("@Repository\n");
-                        myWriter.write("public interface " + transformerClass.name+ nameRepository + " extends ReactiveCrudRepository <");
-                        
-                        myWriter.write(transformerClass.name +", Integer>{}\n\n");
-                        /* for (Attribute attClass : transformerClass.attributes) {
-                            if(attClass.Name.contains("id") || attClass.Name.contains("Id") || attClass.Name.contains("ID") || attClass.Name.contains("iD")){
-                                myWriter.write(attClass.Type + "> {} \n\n");
-                                break;
-                            }
-                             
-                        }*/
-
-                         
-                    }
                 }
+                myWriter.write(">{}\n");
                 
             }
 
@@ -89,7 +74,9 @@ public class CreateRepository {
             // TODO: handle exception
         }
          
-        } 
+        }
+
+    
        
         
         

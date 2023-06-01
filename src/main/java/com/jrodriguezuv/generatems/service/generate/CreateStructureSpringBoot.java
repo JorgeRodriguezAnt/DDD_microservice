@@ -67,103 +67,27 @@ public class CreateStructureSpringBoot {
     }
 
     nameDir = name;
-    File theDirectory1 = new File("MS\\"+name+ "\\src\\main\\java\\com\\example\\spring\\r2dbc\\mysql\\controller\\" );
-      if (theDirectory1.exists() || theDirectory1.mkdirs()){
-        System.out.println("The folder has been created or already exists");
-      }
-
-      File  theDirectory2 = new File("MS\\"+name+ "\\src\\main\\java\\com\\example\\spring\\r2dbc\\mysql\\model"  );
-      if (theDirectory2.exists() || theDirectory2.mkdirs()){
-        System.out.println("The folder has been created or already exists");
-      }
-
-      File theDirectory3 = new File("MS\\"+name+ "\\src\\main\\java\\com\\example\\spring\\r2dbc\\mysql\\repository"  );
-      if (theDirectory3.exists() || theDirectory3.mkdirs()){
-        System.out.println("The folder has been created or already exists");
-      }
-
-      File theDirectory4 = new File("MS\\"+name+ "\\src\\main\\java\\com\\example\\spring\\r2dbc\\mysql\\service"  );
-      if (theDirectory4.exists() || theDirectory4.mkdirs()){
-        System.out.println("The folder has been created or already exists");
-      }
-
-
-      /* String view = view_name; */
-      //Create microservice directory 
-     /*  File theDirectory = new File("MS\\"+name+"\\" + view_name + "\\src\\main\\java\\com\\demo\\" + view_name );
-      if (theDirectory.exists() || theDirectory.mkdirs()){
-        System.out.println("The folder has been created or already exists");
-      }
-
-      File theDirectory1 = new File("MS\\"+name+"\\" + view_name + "\\src\\main\\java\\com\\demo\\" + view_name + "\\controller"  );
-      if (theDirectory1.exists() || theDirectory1.mkdirs()){
-        System.out.println("The folder has been created or already exists");
-      }
-
-      File  theDirectory2 = new File("MS\\"+name+"\\" + view_name + "\\src\\main\\java\\com\\demo\\" + view_name + "\\model"  );
-      if (theDirectory2.exists() || theDirectory2.mkdirs()){
-        System.out.println("The folder has been created or already exists");
-      }
-
-     dString = "MS\\"+name+"\\" + view_name + "\\src\\main\\java\\com\\demo\\" + view_name;
-     resource =  "MS\\"+name+"\\" + view_name + "\\src\\main\\resource";
-     test = "MS\\"+name+"\\" + view_name + "\\src\\test\\java\\com\\demo" + view_name ;
-
-      File theDirectory3 = new File("MS\\"+name+"\\" + view_name + "\\src\\main\\java\\com\\demo\\" + view_name + "\\repository"  );
-      if (theDirectory3.exists() || theDirectory3.mkdirs()){
-        System.out.println("The folder has been created or already exists");
-      }
-
-      File theDirectory4 = new File("MS\\"+name+"\\" + view_name + "\\src\\main\\java\\com\\demo\\" + view_name + "\\service"  );
-      if (theDirectory4.exists() || theDirectory4.mkdirs()){
-        System.out.println("The folder has been created or already exists");
-      }
-
-      File theDirectory5 = new File("MS\\"+name+"\\" + view_name + "\\src\\main\\resource"  );
-      if (theDirectory5.exists() || theDirectory5.mkdirs()){
-        System.out.println("The folder has been created or already exists");
-      }
-
-      File theDirectory6 = new File("MS\\"+name+"\\" + view_name + "\\src\\test\\java\\com\\demo" + view_name  );
-      if (theDirectory6.exists() || theDirectory6.mkdirs()){
-        System.out.println("The folder has been created or already exists");
-      }
+    File theDirectory1 = new File("MS\\"+name+ "\\src\\main\\java\\com\\demo\\spring\\jpa\\msGenerate\\controller\\" );
     
-      //Create ".mvn" directory with their files
-      File srcDir = new File(".mvn");
-      File destDir = new File("MS\\" +name+"\\" + view_name +"\\.mvn");
-      try {
-      FileUtils.copyDirectory(srcDir, destDir);
-      } catch (IOException e) {
-      e.printStackTrace();
+      if (theDirectory1.exists() || theDirectory1.mkdirs()){
+        System.out.println("The folder has been created or already exists");
       }
- */
-      //Create spring files
-      /*  File srcDir1 = new File("pom.xml");
-       File destDir1 = new File("MS\\" + name+"\\" + view_name + "\\pom.xml");
-       File srcDir2 = new File("mvnw.cmd");
-       File destDir2 = new File("MS\\" + name+"\\" + view_name + "\\mvnw.cmd");
-       File srcDir3 = new File("mvnw");
-       File destDir3 = new File("MS\\" + name+"\\" + view_name + "\\mvnw");
-       try {
-         Files.copy(srcDir1.toPath(), destDir1.toPath()); 
-        
-      } catch (IOException e) {
-      e.printStackTrace();
-      }    
 
-      try {
-        Files.copy(srcDir2.toPath(), destDir2.toPath());
-        } catch (IOException e) {
-        e.printStackTrace();
-        }  
-     
-     try {
-      Files.copy(srcDir3.toPath(), destDir3.toPath()); 
-      } catch (IOException e) {
-      e.printStackTrace();
+      File  theDirectory2 = new File("MS\\"+name+ "\\src\\main\\java\\com\\demo\\spring\\jpa\\msGenerate\\model"  );
+      if (theDirectory2.exists() || theDirectory2.mkdirs()){
+        System.out.println("The folder has been created or already exists");
       }
-    */
+
+      File theDirectory3 = new File("MS\\"+name+ "\\src\\main\\java\\com\\demo\\spring\\jpa\\msGenerate\\repository"  );
+      if (theDirectory3.exists() || theDirectory3.mkdirs()){
+        System.out.println("The folder has been created or already exists");
+      }
+
+      File theDirectory4 = new File("MS\\"+name+ "\\src\\main\\java\\com\\demo\\spring\\jpa\\msGenerate\\service"  );
+      if (theDirectory4.exists() || theDirectory4.mkdirs()){
+        System.out.println("The folder has been created or already exists");
+      }
+
     }
  
 

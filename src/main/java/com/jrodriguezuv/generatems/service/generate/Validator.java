@@ -39,7 +39,9 @@ public class Validator  {
   
     CreateRepository repository ;
     CreateController controller = new CreateController();
+    CreateControllerAR controllerAR = new CreateControllerAR();
     CreateService service = new CreateService();
+    CreateServiceAR serviceAR = new CreateServiceAR();
     pushRepository pushRepository = new pushRepository();
    
     
@@ -179,27 +181,51 @@ public class Validator  {
               case entityType:
                 System.out.println("entro_entity");
                 classesToTransform.add(new Entity(classId,className, classStereotype, classVisibility, classAbstract, classFather, attributes, operations));
+              repository.invokeRepository(classId,className, classStereotype, classVisibility, classAbstract, classFather, attributes, operations);
+                service.invokeCreateService(classId,className, classStereotype, classVisibility, classAbstract, classFather, attributes, operations);
+                controller.invokeController(classId,className, classStereotype, classVisibility, classAbstract, classFather, attributes, operations);
                 break;
               case valueObjectType:
                 System.out.println("entro_vo");
                 classesToTransform.add(new ValueObject(classId,className, classStereotype, classVisibility, classAbstract, classFather, attributes, operations));
+                
                 break;
               case aggregateRootType:
               System.out.println("entro_ar");
                 classesToTransform.add(new AggregateRoot(classId, className, classStereotype, classVisibility, classAbstract, classFather, attributes, operations)); 
+               repository.invokeRepository(classId,className, classStereotype, classVisibility, classAbstract, classFather, attributes, operations);
+                /* serviceAR.invokeCreateService(classId,className, classStereotype, classVisibility, classAbstract, classFather, attributes, operations, classesToTransform); */
+                controller.invokeController(classId,className, classStereotype, classVisibility, classAbstract, classFather, attributes, operations); 
                 break;
+                
             }
+            
+
+           /*  repository.invokeRepository(classesToTransform); */
+            /* controller.invokeController(classesToTransform);
+            service.invokeCreateService(classesToTransform); */
   
           }    
       }
       validateRelations validateRelations = new validateRelations();
-      validateRelations.validate(classesToTransform,json);
-      repository.createFile(classesToTransform); 
-      repository.writeFile(classesToTransform);
-      controller.createFile(classesToTransform);
-      controller.writeFile(classesToTransform);
-      service.invokeCreateService(classesToTransform);
       
+      validateRelations.validate(classesToTransform,json);
+      serviceAR.invokeCreateService(classesToTransform);
+      controllerAR.invokeController(classesToTransform);
+     
+      /* if(classStereotype.equals("Aggregate Root")){
+        serviceAR.invokeCreateService(classId,className, classStereotype, classVisibility, classAbstract, classFather, attributes, operations, classesToTransform);
+      } */
+            /* repository.invokeRepository(classesToTransform);
+            controller.invokeController(classesToTransform);
+            service.invokeCreateService(classesToTransform); */
+          
+
+        
+        
+      
+     
+     
       
 
       } catch(Exception e) {

@@ -15,7 +15,7 @@ public class AggregateRootTransformer implements TransformationStrategy {
     public void createFile(String className) {
         // TODO Auto-generated method stub
         try {  
-            File myObj = new File("MS\\" + createStructureSpringBoot.nameDir + "\\src\\main\\java\\com\\example\\spring\\r2dbc\\mysql\\model\\"+ className + ".java");  
+            File myObj = new File("MS\\" + createStructureSpringBoot.nameDir + "\\src\\main\\java\\com\\demo\\spring\\jpa\\msGenerate\\model\\"+ className + ".java");  
             if (myObj.createNewFile()) {  
               System.out.println("File created: " + myObj.getName());  
               System.out.println("Absolute path: " + myObj.getAbsolutePath());  
@@ -33,31 +33,62 @@ public class AggregateRootTransformer implements TransformationStrategy {
         // TODO Auto-generated method stub
 
         try {  
-        FileWriter myWriter = new FileWriter("MS\\" + createStructureSpringBoot.nameDir + "\\src\\main\\java\\com\\example\\spring\\r2dbc\\mysql\\model\\"+ className + ".java");
+        FileWriter myWriter = new FileWriter("MS\\" + createStructureSpringBoot.nameDir + "\\src\\main\\java\\com\\demo\\spring\\jpa\\msGenerate\\model\\"+ className + ".java");
 
         //Package
-        myWriter.write("package com.example.spring.r2dbc.mysql.model;\n\n\n");
+        myWriter.write("package com.demo.spring.jpa.msGenerate.model;\n\n");
 
         //import
-        myWriter.write("import org.springframework.data.annotation.Id;\n");
+        myWriter.write("import javax.persistence.*;\n\n");
 
+        myWriter.write("import com.fasterxml.jackson.annotation.JsonIgnoreProperties;\n\n");
+
+
+        myWriter.write("@JsonIgnoreProperties({\"hibernateLazyInitializer\"})\n");
+        myWriter.write("@Entity\n");
+        myWriter.write("@Table(name = \"" + className + "s\")\n");  
         myWriter.write(classVisibility + " class " + className + "{\n\n");
 
         //Attributes
          for (int i = 0; i <  Attributes.size(); i++) {
           if(Attributes.get(i).IsIdentifier.equals("yes")){
-            myWriter.write("@Id\n" + Attributes.get(i).Visibility + " " + Attributes.get(i).Type.toLowerCase() + " " +  Attributes.get(i).Name +";\n" );
+            myWriter.write("@Id\n"+ "@GeneratedValue(strategy = GenerationType.IDENTITY) \n" + Attributes.get(i).Visibility + " " + Attributes.get(i).Type.toLowerCase() + " " +  Attributes.get(i).Name +";\n\n" );
           }else{
-            if(Attributes.get(i).Multiplicity.equals("yes")){
-              myWriter.write(Attributes.get(i).Visibility + " " +Attributes.get(i).Type  + " " +  Attributes.get(i).Name +";\n");
-            }else{
+            if(Attributes.get(i).Multiplicity.equals("1")){
+              myWriter.write("@OneToOne(fetch = FetchType.LAZY)\n");
+              myWriter.write("@MapsId\n");
+              myWriter.write("@JoinColumn(name = \"" + Attributes.get(i).Name.toLowerCase() + "_id\")\n");
+              myWriter.write(Attributes.get(i).Visibility + " " +Attributes.get(i).Type  + " " +  Attributes.get(i).Name +";\n\n");
+              /* myWriter.write("@Column(name = \"" + Attributes.get(i).Name + "\")\n");
+              myWriter.write(Attributes.get(i).Visibility + " " +Attributes.get(i).Type  + " " +  Attributes.get(i).Name +";\n"); */
+              /*  @ManyToOne(fetch = FetchType.LAZY, optional = false)
+  @JoinColumn(name = "tutorial_id", nullable = false)
+  @OnDelete(action = OnDeleteAction.CASCADE)
+  @JsonIgnore
+  private Tutorial tutorial; */
+            } if(Attributes.get(i).Multiplicity.equals("*")){
+              myWriter.write("@ManyToOne(fetch = FetchType.LAZY, optional = false)\n");
+              myWriter.write("@JoinColumn(name = \"" + Attributes.get(i).Name.toLowerCase() + "_id\")\n");
+              myWriter.write("@JsonIgnore\n");
+              myWriter.write(Attributes.get(i).Visibility + " " +Attributes.get(i).Type  + " " +  Attributes.get(i).Name +";\n\n");
+            }
+            if(Attributes.get(i).Type.equals("string") || Attributes.get(i).Type.equals("String")){
+              myWriter.write("@Column(name = \"" + Attributes.get(i).Name + "\")\n");
+              myWriter.write(Attributes.get(i).Visibility + " " + Attributes.get(i).Type.substring(0, 1).toUpperCase() + Attributes.get(i).Type.substring( 1).toLowerCase() + " " +  Attributes.get(i).Name +";\n\n");
+            }/* else{
+              myWriter.write(Attributes.get(i).Visibility + " " + Attributes.get(i).Type.toLowerCase() + " " +  Attributes.get(i).Name +";\n\n");
+            } */
+            
+            
+            /* else{
               if(Attributes.get(i).Type.equals("string") || Attributes.get(i).Type.equals("String")){
+                myWriter.write("@Column(name = \"" + Attributes.get(i).Name + "\")\n");
                 myWriter.write(Attributes.get(i).Visibility + " " + Attributes.get(i).Type.substring(0, 1).toUpperCase() + Attributes.get(i).Type.substring( 1).toLowerCase() + " " +  Attributes.get(i).Name +";\n");
               }else{
                 myWriter.write(Attributes.get(i).Visibility + " " + Attributes.get(i).Type.toLowerCase() + " " +  Attributes.get(i).Name +";\n");
               }
               
-            } 
+            }  */
           }
           
           /* myWriter.write(Attributes.get(i).Visibility + " " + Attributes.get(i).Type.substring(0, 1).toUpperCase() + Attributes.get(i).Type.substring( 1).toLowerCase() + " " +  Attributes.get(i).Name +";\n"); */
@@ -67,12 +98,20 @@ public class AggregateRootTransformer implements TransformationStrategy {
         myWriter.write("\n" + classVisibility + " "+ className +"(");
         
         for (int i = 0; i <  Attributes.size(); i++) {
-          if(!Attributes.get(i).Name.contains("id")){
+          if(Attributes.get(i).Type.contains("string") || Attributes.get(i).Type.contains("String")){
             myWriter.write(Attributes.get(i).Type.substring(0, 1).toUpperCase() + Attributes.get(i).Type.substring( 1).toLowerCase() + " " +  Attributes.get(i).Name);
             if(i !=  Attributes.size()-1){
               myWriter.write(", ");
             }
           }
+          if(!Attributes.get(i).Type.toLowerCase().contains("long") && !Attributes.get(i).Type.toLowerCase().contains("long") && !Attributes.get(i).Type.toLowerCase().contains("string")  && !Attributes.get(i).Type.toLowerCase().contains("String")){
+            myWriter.write(Attributes.get(i).Type + " " +  Attributes.get(i).Name);
+            if(i !=  Attributes.size()-1){
+              myWriter.write(", ");
+            }
+          }
+          
+          
             
         } 
         myWriter.write(") {\n"); 
@@ -119,7 +158,13 @@ public class AggregateRootTransformer implements TransformationStrategy {
             myWriter.write("\treturn this." +  Attributes.get(i).Name + ";\n");
             myWriter.write("}\n");
             myWriter.write("\n"); 
-          }else{
+          }
+          if(!Attributes.get(i).Type.toLowerCase().contains("long") && !Attributes.get(i).Type.toLowerCase().contains("long") && !Attributes.get(i).Type.toLowerCase().contains("string")  && !Attributes.get(i).Type.toLowerCase().contains("String")){
+            myWriter.write( "\n public"  + " " + Attributes.get(i).Type +" get" +  Attributes.get(i).Name.substring(0, 1).toUpperCase() +  Attributes.get(i).Name.substring( 1).toLowerCase() + "() {\n");
+            myWriter.write("\treturn this." +  Attributes.get(i).Name + ";\n");
+            myWriter.write("}\n");
+            myWriter.write("\n"); 
+          }if(Attributes.get(i).Type.equals("long") || Attributes.get(i).Type.equals("Long")){
             myWriter.write( "\n public"  + " " + Attributes.get(i).Type.toLowerCase() +" get" +  Attributes.get(i).Name.substring(0, 1).toUpperCase() +  Attributes.get(i).Name.substring( 1).toLowerCase() + "() {\n");
             myWriter.write("\treturn this." +  Attributes.get(i).Name + ";\n");
             myWriter.write("}\n");
@@ -136,7 +181,12 @@ public class AggregateRootTransformer implements TransformationStrategy {
             myWriter.write("\treturn this." +  Attributes.get(i).Name + " = " + Attributes.get(i).Name  + ";\n");
             myWriter.write("}\n");
             myWriter.write("\n"); 
-            }else{
+            }  if(!Attributes.get(i).Type.toLowerCase().contains("long") && !Attributes.get(i).Type.toLowerCase().contains("long") && !Attributes.get(i).Type.toLowerCase().contains("string")  && !Attributes.get(i).Type.toLowerCase().contains("String")){
+              myWriter.write( "\n public"  + " void"  +" set" +  Attributes.get(i).Name.substring(0, 1).toUpperCase() +  Attributes.get(i).Name.substring( 1).toLowerCase() + "(" + Attributes.get(i).Type + " " + Attributes.get(i).Name +  ") {\n");
+            myWriter.write("\t this." +  Attributes.get(i).Name + " = " + Attributes.get(i).Name  + ";\n");
+            myWriter.write("}\n");
+            myWriter.write("\n"); 
+            }if(Attributes.get(i).Type.equals("long") || Attributes.get(i).Type.equals("Long")){
               myWriter.write( "\n public"  + " " + Attributes.get(i).Type.toLowerCase() +" set" +  Attributes.get(i).Name.substring(0, 1).toUpperCase() +  Attributes.get(i).Name.substring( 1).toLowerCase() + "(" + Attributes.get(i).Type.toLowerCase() + " " + Attributes.get(i).Name +  ") {\n");
             myWriter.write("\treturn this." +  Attributes.get(i).Name + " = " + Attributes.get(i).Name  + ";\n");
             myWriter.write("}\n");

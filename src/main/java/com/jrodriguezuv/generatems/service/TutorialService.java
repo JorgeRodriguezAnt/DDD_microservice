@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.io.FileUtils;
@@ -57,13 +58,16 @@ public class TutorialService {
        Validator json = new Validator();
         
         List<TransformerClass> classestoTransform = json.validateJSON(jsonEntrada);
+
         
         Transformer myTransfomer = new Transformer(classestoTransform);
+
+
         
         myTransfomer.transform(); 
 
         pushRepository pushRepository = new pushRepository();
-        pushRepository.push();
+        pushRepository.push(); 
     
     return tutorialRepository.save(tutorial);
   } 

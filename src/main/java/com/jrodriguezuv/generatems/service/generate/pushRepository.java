@@ -24,7 +24,8 @@ import java.net.URISyntaxException;
                 
                   // Create a Git object
             Git git = new Git(repository);
-
+            CreateStructureSpringBoot structureSpringBoot = new CreateStructureSpringBoot();
+            String  newBranch = structureSpringBoot.nameDir; 
             // Add a new remote
             StoredConfig config = repository.getConfig();
             config.setString("remote", "new-remote", "url", "https://github.com/jorgeRodriguezAntiquera/generated-microservice.git");
@@ -33,7 +34,7 @@ import java.net.URISyntaxException;
             // Create and checkout a new branch
             git.checkout()
                 .setCreateBranch(true)
-                .setName("new-branch")
+                .setName(newBranch)
                 .call();
 
             // Stage changes
@@ -48,8 +49,8 @@ import java.net.URISyntaxException;
             // Push changes to the new remote and branch
             PushCommand pushCommand = git.push();
             pushCommand.setRemote("new-remote")
-                    .setCredentialsProvider(new UsernamePasswordCredentialsProvider("jorgeRodriguezAntiquera", "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"))
-                    .setRefSpecs(new RefSpec("refs/heads/new-branch:refs/heads/new-branch"))
+                    .setCredentialsProvider(new UsernamePasswordCredentialsProvider("jorgeRodriguezAntiquera", "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"))
+                    .setRefSpecs(new RefSpec("refs/heads/"+ newBranch +":refs/heads/"+newBranch))
                     .call();
 
             // Close the repository and Git objects

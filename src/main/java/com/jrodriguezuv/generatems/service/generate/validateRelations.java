@@ -77,11 +77,11 @@ public class validateRelations {
                     } */
                     
                     if(relations.relationMultiplicityEnd.contains("..*") || relations.relationMultiplicityEnd.contains("..2")){   
-                        String typeAtt = "List<"+transformerClass.name +">";
-                        transformerClass.attributes.add(new Attribute(relations.relationRoleNameEnd, typeAtt, "no", "private","yes", null));
+                        String typeAtt = transformerClass.name;
+                        transformerClass.attributes.add(new Attribute(relations.relationRoleNameEnd, typeAtt, "no", "private","*", null));
                         
                     }else{
-                        transformerClass.attributes.add(new Attribute(relations.relationRoleNameEnd, relations.relationClassEnd, "no", "private","no", null));
+                        transformerClass.attributes.add(new Attribute(relations.relationRoleNameEnd, relations.relationClassEnd, "no", "private","1", null));
                         
                     } 
                     System.out.println("entra");
