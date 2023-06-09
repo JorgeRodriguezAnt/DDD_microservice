@@ -68,6 +68,7 @@ public class TutorialService {
 
         pushRepository pushRepository = new pushRepository();
         pushRepository.push(); 
+        pushRepository.delete();
     
     return tutorialRepository.save(tutorial);
   } 

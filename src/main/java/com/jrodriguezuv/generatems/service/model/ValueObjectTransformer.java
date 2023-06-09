@@ -18,7 +18,7 @@ public class ValueObjectTransformer implements TransformationStrategy{
     public void createFile(String className) {
         // TODO Auto-generated method stub
         try {  
-            File myObj = new File(createStructureSpringBoot.dString+"\\model\\"+className + ".java");  
+            File myObj = new File("MS\\" + createStructureSpringBoot.nameDir + "\\src\\main\\java\\com\\demo\\spring\\jpa\\msGenerate\\model\\"+ className + ".java");  
             if (myObj.createNewFile()) {  
               System.out.println("File created: " + myObj.getName());  
               System.out.println("Absolute path: " + myObj.getAbsolutePath());  
@@ -44,23 +44,17 @@ public class ValueObjectTransformer implements TransformationStrategy{
           //import
           myWriter.write("import javax.persistence.*;\n\n");
   
-          myWriter.write("import com.fasterxml.jackson.annotation.JsonIgnoreProperties;\n\n");
+          myWriter.write("import java.util.*;\n\n");
   
   
-          myWriter.write("@JsonIgnoreProperties({\"hibernateLazyInitializer\"})\n");
-          myWriter.write("@Entity\n");
+         
+          myWriter.write("@Embeddable\n");
           myWriter.write("@Table(name = \"" + className + "s\")\n");  
           myWriter.write(classVisibility + " class " + className + "{\n\n");
   
           //Attributes
            for (int i = 0; i <  Attributes.size(); i++) {
-            if(Attributes.get(i).IsIdentifier.equals("yes")){
-              myWriter.write("@Id\n"+ "@GeneratedValue(strategy = GenerationType.IDENTITY) " + Attributes.get(i).Visibility + " " + Attributes.get(i).Type.toLowerCase() + " " +  Attributes.get(i).Name +";\n" );
-            }else{
-              if(Attributes.get(i).Multiplicity.equals("yes")){
-                myWriter.write("@Column(name = \"" + Attributes.get(i).Name + "\")\n");
-                myWriter.write(Attributes.get(i).Visibility + " " +Attributes.get(i).Type  + " " +  Attributes.get(i).Name +";\n");
-              }else{
+            
                 if(Attributes.get(i).Type.equals("string") || Attributes.get(i).Type.equals("String")){
                   myWriter.write("@Column(name = \"" + Attributes.get(i).Name + "\")\n");
                   myWriter.write(Attributes.get(i).Visibility + " " + Attributes.get(i).Type.substring(0, 1).toUpperCase() + Attributes.get(i).Type.substring( 1).toLowerCase() + " " +  Attributes.get(i).Name +";\n");
@@ -69,10 +63,10 @@ public class ValueObjectTransformer implements TransformationStrategy{
                 }
                 
               } 
-            }
+            
             
             /* myWriter.write(Attributes.get(i).Visibility + " " + Attributes.get(i).Type.substring(0, 1).toUpperCase() + Attributes.get(i).Type.substring( 1).toLowerCase() + " " +  Attributes.get(i).Name +";\n"); */
-          } 
+          
           
           //Constructor
           myWriter.write("\n" + classVisibility + " "+ className +"(");
@@ -97,28 +91,6 @@ public class ValueObjectTransformer implements TransformationStrategy{
   
   
           myWriter.write("\n" + classVisibility + " "+ className +"(){}\n");
-          
-  
-          //Methods
-          
-           for (int t = 0; t < operations.size(); t++) {
-             
-              myWriter.write("\n" + operations.get(t).Visibility + " " + operations.get(t).ReturnType +  " " + operations.get(t).Name+ "(" );
-                /* myWriter.write( operations.get(t).Parameters.get(t).Type + " " + operations.get(t).Parameters.get(t).Name);    */
-              for (int i = 0; i < operations.get(t).Parameters.size(); i++) {
-                      myWriter.write( operations.get(t).Parameters.get(i).Type + " " + operations.get(t).Parameters.get(i).Name); 
-                      if( i != operations.get(t).Parameters.size()-1){
-                        myWriter.write(", ");
-                      }
-                      
-              }   
-              
-               myWriter.write(" )" + "{ }\n");
-               
-           
-          } 
-         
-          
           
   
           //getter

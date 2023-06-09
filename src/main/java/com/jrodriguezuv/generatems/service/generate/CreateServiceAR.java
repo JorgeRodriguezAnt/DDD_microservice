@@ -75,29 +75,61 @@ public class CreateServiceAR {
               myWriter.write("import com.demo.spring.jpa.msGenerate.repository.*;\n\n");
               
               myWriter.write("@Service\n");
-               myWriter.write("public class " + className+serviceClassName+"{\n\n");
+              myWriter.write("public class " + className+serviceClassName+"{\n\n");
 
-              myWriter.write("@Autowired\n");
-              myWriter.write(className + "Repository " + className.toLowerCase() + "Repository;\n\n");
+              //var repositories
+              for (TransformerClass transformerClass : classesToTransform) {
+                if(!transformerClass.stereotype.equals("Value Object")){
+                  myWriter.write("@Autowired\n");
+                myWriter.write(transformerClass.name + "Repository " + transformerClass.name.toLowerCase() + "Repository;\n\n");
+                }
+                
+              }
               
+              
+
+              //GetAll EndPoint
+
+              for (TransformerClass transformerClass : classesToTransform) {
+                if(!transformerClass.stereotype.equals("Value Object")){
+                  myWriter.write("public List<" + transformerClass.name + "> getAll" + transformerClass.name + "s() {\n");
+                myWriter.write("\treturn " + transformerClass.name.toLowerCase() + "Repository.findAll();\n}\n\n");
+                }
+                
+              }
+              
+              //Post Entities EndPoint
               for (TransformerClass transformerClass : classesToTransform) {
                 if(transformerClass.stereotype.equals("Entity")){
-                  myWriter.write("@Autowired\n");
-                  myWriter.write(transformerClass.name + "Repository " + transformerClass.name.toLowerCase() + "Repository;\n\n");
+                  myWriter.write("public " + transformerClass.name + " create" + transformerClass.name + "(" + transformerClass.name + " " + transformerClass.name.toLowerCase() + ") {\n");
+                  myWriter.write(transformerClass.name + " new" + transformerClass.name + " = new " + transformerClass.name + "(");
+                  boolean isFirst = true;
+                  for (Attribute att : transformerClass.attributes) {
+                if (!att.Name.contains("id") && !att.Name.contains("ID")) {
+                  if (!isFirst) {
+                      myWriter.write(",");
+                  } else {
+                      isFirst = false;
+                  }
+                  myWriter.write(transformerClass.name.toLowerCase() + ".get" + att.Name.substring(0, 1).toUpperCase() + att.Name.substring(1).toLowerCase() +"()");
+                  
                 }
               }
-
-              /* TutorialRepository tutorialRepository; */
-              
-              //GetAll
-              myWriter.write("public List<" + className + "> getAll" + className + "s() {\n");
-              myWriter.write("\treturn " + className.toLowerCase() + "Repository.findAll();\n}\n\n");
+              myWriter.write(");\n");
+              myWriter.write("\treturn " + transformerClass.name.toLowerCase() + "Repository.save(new" + transformerClass.name + ");\n}\n\n");
+                }
+              }
+              /* public TutorialDetail createTutorialDetail(TutorialDetail tutorialdetail) {
+TutorialDetail newTutorialDetail = new TutorialDetail(tutorialdetail.getCreatedby());
+	return tutorialdetailRepository.save(newTutorialDetail);
+}
+ */
 
               //GetPost
               /* */
     
                myWriter.write("public " + className + " create" + className + "(Long Id," + className + " " + className.toLowerCase() + "Request) {\n");
-              for (TransformerClass  classes : classesToTransform) {
+              /* for (TransformerClass  classes : classesToTransform) {
                 System.out.println( "nombre de clases:"+ classes.name);
                 if(classes.stereotype.equals("Entity")){
                     myWriter.write(classes.name + " " +"setter" + " = " + classes.name.toLowerCase() + "Repository.findById(Id)\n" );
@@ -114,11 +146,11 @@ public class CreateServiceAR {
                     
                   }
                 }
-              }
+              } */
               
 
              
-              myWriter.write("\treturn " + className.toLowerCase() + "Repository.save(" + className.toLowerCase() + "Request);\n}\n\n"); 
+              myWriter.write("\treturn null;\n}\n\n"); 
               
 
               myWriter.write("}\n");

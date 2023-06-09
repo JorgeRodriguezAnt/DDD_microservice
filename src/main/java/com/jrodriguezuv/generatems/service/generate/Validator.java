@@ -182,8 +182,8 @@ public class Validator  {
                 System.out.println("entro_entity");
                 classesToTransform.add(new Entity(classId,className, classStereotype, classVisibility, classAbstract, classFather, attributes, operations));
               repository.invokeRepository(classId,className, classStereotype, classVisibility, classAbstract, classFather, attributes, operations);
-                service.invokeCreateService(classId,className, classStereotype, classVisibility, classAbstract, classFather, attributes, operations);
-                controller.invokeController(classId,className, classStereotype, classVisibility, classAbstract, classFather, attributes, operations);
+                /* service.invokeCreateService(classId,className, classStereotype, classVisibility, classAbstract, classFather, attributes, operations); */
+                /* controller.invokeController(classId,className, classStereotype, classVisibility, classAbstract, classFather, attributes, operations); */
                 break;
               case valueObjectType:
                 System.out.println("entro_vo");
@@ -195,7 +195,7 @@ public class Validator  {
                 classesToTransform.add(new AggregateRoot(classId, className, classStereotype, classVisibility, classAbstract, classFather, attributes, operations)); 
                repository.invokeRepository(classId,className, classStereotype, classVisibility, classAbstract, classFather, attributes, operations);
                 /* serviceAR.invokeCreateService(classId,className, classStereotype, classVisibility, classAbstract, classFather, attributes, operations, classesToTransform); */
-                controller.invokeController(classId,className, classStereotype, classVisibility, classAbstract, classFather, attributes, operations); 
+                /* controller.invokeController(classId,className, classStereotype, classVisibility, classAbstract, classFather, attributes, operations);  */
                 break;
                 
             }

@@ -5,6 +5,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.*;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -76,11 +77,12 @@ public class validateRelations {
                         count++;
                     } */
                     
-                    if(relations.relationMultiplicityEnd.contains("..*") || relations.relationMultiplicityEnd.contains("..2")){   
+                    if(relations.relationMultiplicityEnd.contains("*") || relations.relationMultiplicityEnd.contains("2")){   
                         String typeAtt = transformerClass.name;
-                        transformerClass.attributes.add(new Attribute(relations.relationRoleNameEnd, typeAtt, "no", "private","*", null));
+                        transformerClass.attributes.add(new Attribute(relations.relationRoleNameEnd, relations.relationClassEnd, "no", "private","*", null));
+                        System.out.println(transformerClass.attributes + "muchos");
                         
-                    }else{
+                    }if(relations.relationMultiplicityEnd.contains("1")){
                         transformerClass.attributes.add(new Attribute(relations.relationRoleNameEnd, relations.relationClassEnd, "no", "private","1", null));
                         
                     } 

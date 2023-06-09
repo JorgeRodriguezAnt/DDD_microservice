@@ -29,7 +29,7 @@ public class EntityTransformer implements TransformationStrategy {
         CreateStructureSpringBoot createStructureSpringBoot = new CreateStructureSpringBoot();
         System.out.println("holaa"+createStructureSpringBoot.dString);
         try {  
-            File myObj = new File(createStructureSpringBoot.dString+"\\model\\"+ className + ".java");  
+            File myObj = new File("MS\\" + createStructureSpringBoot.nameDir + "\\src\\main\\java\\com\\demo\\spring\\jpa\\msGenerate\\model\\"+ className + ".java");  
             if (myObj.createNewFile()) {  
               System.out.println("File created: " + myObj.getName());  
               System.out.println("Absolute path: " + myObj.getAbsolutePath());  
@@ -54,6 +54,7 @@ public class EntityTransformer implements TransformationStrategy {
   
           //import
           myWriter.write("import javax.persistence.*;\n\n");
+          myWriter.write("import java.util.*;\n\n");
   
           myWriter.write("import com.fasterxml.jackson.annotation.JsonIgnoreProperties;\n\n");
   
@@ -76,7 +77,7 @@ public class EntityTransformer implements TransformationStrategy {
                   myWriter.write("@Column(name = \"" + Attributes.get(i).Name + "\")\n");
                   myWriter.write(Attributes.get(i).Visibility + " " + Attributes.get(i).Type.substring(0, 1).toUpperCase() + Attributes.get(i).Type.substring( 1).toLowerCase() + " " +  Attributes.get(i).Name +";\n");
                 }else{
-                  myWriter.write(Attributes.get(i).Visibility + " " + Attributes.get(i).Type.toLowerCase() + " " +  Attributes.get(i).Name +";\n");
+                  myWriter.write(Attributes.get(i).Visibility + " " + Attributes.get(i).Type + " " +  Attributes.get(i).Name +";\n");
                 }
                 
               } 
@@ -90,10 +91,18 @@ public class EntityTransformer implements TransformationStrategy {
           
           for (int i = 0; i <  Attributes.size(); i++) {
             if(!Attributes.get(i).Name.contains("id")){
-              myWriter.write(Attributes.get(i).Type.substring(0, 1).toUpperCase() + Attributes.get(i).Type.substring( 1).toLowerCase() + " " +  Attributes.get(i).Name);
+              if(Attributes.get(i).Type.equals("string") || Attributes.get(i).Type.equals("String")){
+                myWriter.write(Attributes.get(i).Type.substring(0, 1).toUpperCase() + Attributes.get(i).Type.substring( 1).toLowerCase() + " " +  Attributes.get(i).Name);
               if(i !=  Attributes.size()-1){
                 myWriter.write(", ");
               }
+              }else{
+myWriter.write(Attributes.get(i).Type + " " +  Attributes.get(i).Name);
+              if(i !=  Attributes.size()-1){
+                myWriter.write(", ");
+              }
+              }
+              
             }
               
           } 
@@ -122,7 +131,7 @@ public class EntityTransformer implements TransformationStrategy {
               myWriter.write("}\n");
               myWriter.write("\n"); 
             }else{
-              myWriter.write( "\n public"  + " " + Attributes.get(i).Type.toLowerCase() +" get" +  Attributes.get(i).Name.substring(0, 1).toUpperCase() +  Attributes.get(i).Name.substring( 1).toLowerCase() + "() {\n");
+              myWriter.write( "\n public"  + " " + Attributes.get(i).Type +" get" +  Attributes.get(i).Name.substring(0, 1).toUpperCase() +  Attributes.get(i).Name.substring( 1).toLowerCase() + "() {\n");
               myWriter.write("\treturn this." +  Attributes.get(i).Name + ";\n");
               myWriter.write("}\n");
               myWriter.write("\n"); 
@@ -139,7 +148,7 @@ public class EntityTransformer implements TransformationStrategy {
               myWriter.write("}\n");
               myWriter.write("\n"); 
               }else{
-                myWriter.write( "\n public"  + " " + Attributes.get(i).Type.toLowerCase() +" set" +  Attributes.get(i).Name.substring(0, 1).toUpperCase() +  Attributes.get(i).Name.substring( 1).toLowerCase() + "(" + Attributes.get(i).Type.toLowerCase() + " " + Attributes.get(i).Name +  ") {\n");
+                myWriter.write( "\n public"  + " " + Attributes.get(i).Type +" set" +  Attributes.get(i).Name.substring(0, 1).toUpperCase() +  Attributes.get(i).Name.substring( 1).toLowerCase() + "(" + Attributes.get(i).Type + " " + Attributes.get(i).Name +  ") {\n");
               myWriter.write("\treturn this." +  Attributes.get(i).Name + " = " + Attributes.get(i).Name  + ";\n");
               myWriter.write("}\n");
               myWriter.write("\n"); 

@@ -77,13 +77,40 @@ public class CreateControllerAR {
                 myWriter.write("@RequestMapping(\"/api\")\n");
                 myWriter.write("public class " + className + "Controller {\n\n");
                 myWriter.write("@Autowired\n");
-                myWriter.write(className + "Service " + className.toLowerCase() + "Service;\n\n");
+                myWriter.write(className + "Service "  + "Service;\n\n");
+
+
+
+                //GetAll Entity
+                for (TransformerClass transformerClass : classesToTransform) {
+                  if(transformerClass.stereotype.equals("Entity")){
+                    myWriter.write("//GetAll Entity" + transformerClass.name + "\n");
+                    myWriter.write("@GetMapping(\"/"+ transformerClass.name.toLowerCase() + "s\")\n");
+                    myWriter.write("public ResponseEntity<List<" + transformerClass.name + ">> getAll" + transformerClass.name + "() {\n");
+                    myWriter.write("List<" + transformerClass.name + "> " + transformerClass.name.toLowerCase() + " = Service.getAll" + transformerClass.name + "s();\n");
+                    myWriter.write("return new ResponseEntity<>(" + transformerClass.name.toLowerCase() + ", HttpStatus.OK);\n}\n\n");
+                  }
+                }
+
+                //Post Entity
+                for (TransformerClass transformerClass : classesToTransform) {
+                  if(transformerClass.stereotype.equals("Entity")){
+                    myWriter.write("//Post Entity" + transformerClass.name + "\n");
+                    myWriter.write("@PostMapping(\"/"+ transformerClass.name.toLowerCase() + "s\")\n");
+                    myWriter.write("public ResponseEntity<" + transformerClass.name + "> create" + transformerClass.name + "(@RequestBody " + transformerClass.name + " " + transformerClass.name.toLowerCase() + ") {\n");
+
+                    myWriter.write( transformerClass.name + " created" + transformerClass.name.toLowerCase() + " = Service.create" + transformerClass.name + "(" + transformerClass.name.toLowerCase() + ");\n");
+                    myWriter.write("return new ResponseEntity<>(created" + transformerClass.name.toLowerCase() + ", HttpStatus.CREATED);\n}\n\n");
+                  }
+                }
+        
+
 
                 //GetAll
 
                 myWriter.write("@GetMapping(\"/" + className.toLowerCase() + "s\")\n");
                 myWriter.write("public ResponseEntity<List<" + className + ">> getAll" + className + "() {\n");
-                myWriter.write("List<" + className + "> " + className.toLowerCase() + " = " + className.toLowerCase() + "Service.getAll" + className + "s();\n" );
+                myWriter.write("List<" + className + "> " + className.toLowerCase() + " = " + "Service.getAll" + className + "s();\n" );
                 myWriter.write("\treturn new ResponseEntity<>(" + className.toLowerCase() + ", HttpStatus.OK);\n}\n");
                 
                 //Post
@@ -96,7 +123,7 @@ public class CreateControllerAR {
             
                 myWriter.write("@PostMapping(\"/{Id}/" + className.toLowerCase() + "s\")\n");
                 myWriter.write("public ResponseEntity<" + className + "> create" + className + "(@PathVariable(value = \"Id\") Long Id, @RequestBody " + className + " " + className.toLowerCase() + ") {\n");
-                myWriter.write(className + " created" + className + " = " + className.toLowerCase() + "Service.create" + className + "(Id," + className.toLowerCase() + ");\n");
+                myWriter.write(className + " created" + className + " = "  + "Service.create" + className + "(Id," + className.toLowerCase() + ");\n");
                 myWriter.write("\treturn new ResponseEntity<>(created" + className + ", HttpStatus.CREATED);\n}\n\n");
 
               

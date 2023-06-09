@@ -40,6 +40,7 @@ public class AggregateRootTransformer implements TransformationStrategy {
 
         //import
         myWriter.write("import javax.persistence.*;\n\n");
+        myWriter.write("import java.util.*;\n\n");
 
         myWriter.write("import com.fasterxml.jackson.annotation.JsonIgnoreProperties;\n\n");
 
@@ -55,10 +56,10 @@ public class AggregateRootTransformer implements TransformationStrategy {
             myWriter.write("@Id\n"+ "@GeneratedValue(strategy = GenerationType.IDENTITY) \n" + Attributes.get(i).Visibility + " " + Attributes.get(i).Type.toLowerCase() + " " +  Attributes.get(i).Name +";\n\n" );
           }else{
             if(Attributes.get(i).Multiplicity.equals("1")){
-              myWriter.write("@OneToOne(fetch = FetchType.LAZY)\n");
+              myWriter.write("/*@OneToOne(fetch = FetchType.LAZY)\n");
               myWriter.write("@MapsId\n");
               myWriter.write("@JoinColumn(name = \"" + Attributes.get(i).Name.toLowerCase() + "_id\")\n");
-              myWriter.write(Attributes.get(i).Visibility + " " +Attributes.get(i).Type  + " " +  Attributes.get(i).Name +";\n\n");
+              myWriter.write(Attributes.get(i).Visibility + " " +Attributes.get(i).Type  + " " +  Attributes.get(i).Name +";*/\n\n");
               /* myWriter.write("@Column(name = \"" + Attributes.get(i).Name + "\")\n");
               myWriter.write(Attributes.get(i).Visibility + " " +Attributes.get(i).Type  + " " +  Attributes.get(i).Name +";\n"); */
               /*  @ManyToOne(fetch = FetchType.LAZY, optional = false)
@@ -67,10 +68,11 @@ public class AggregateRootTransformer implements TransformationStrategy {
   @JsonIgnore
   private Tutorial tutorial; */
             } if(Attributes.get(i).Multiplicity.equals("*")){
-              myWriter.write("@ManyToOne(fetch = FetchType.LAZY, optional = false)\n");
-              myWriter.write("@JoinColumn(name = \"" + Attributes.get(i).Name.toLowerCase() + "_id\")\n");
-              myWriter.write("@JsonIgnore\n");
-              myWriter.write(Attributes.get(i).Visibility + " " +Attributes.get(i).Type  + " " +  Attributes.get(i).Name +";\n\n");
+              System.out.println("muchos");
+              myWriter.write("/*  @ManyToOne(fetch = FetchType.LAZY, optional = false)\n");
+              myWriter.write("@JoinColumn(name = \"" + Attributes.get(i).Name.toLowerCase() + "_id\") \n");
+              
+              myWriter.write(Attributes.get(i).Visibility + " List<" +Attributes.get(i).Type  + "> " +  Attributes.get(i).Name +";*/\n\n");
             }
             if(Attributes.get(i).Type.equals("string") || Attributes.get(i).Type.equals("String")){
               myWriter.write("@Column(name = \"" + Attributes.get(i).Name + "\")\n");
@@ -104,20 +106,26 @@ public class AggregateRootTransformer implements TransformationStrategy {
               myWriter.write(", ");
             }
           }
-          if(!Attributes.get(i).Type.toLowerCase().contains("long") && !Attributes.get(i).Type.toLowerCase().contains("long") && !Attributes.get(i).Type.toLowerCase().contains("string")  && !Attributes.get(i).Type.toLowerCase().contains("String")){
-            myWriter.write(Attributes.get(i).Type + " " +  Attributes.get(i).Name);
-            if(i !=  Attributes.size()-1){
-              myWriter.write(", ");
-            }
-          }
-          
+          /* if(!Attributes.get(i).Type.toLowerCase().contains("long") && !Attributes.get(i).Type.toLowerCase().contains("long") && !Attributes.get(i).Type.toLowerCase().contains("string")  && !Attributes.get(i).Type.toLowerCase().contains("String")){
+            if(Attributes.get(i).Multiplicity.equals("*")){
+              myWriter.write("List<"+Attributes.get(i).Type + "> " +  Attributes.get(i).Name);
+              if(i !=  Attributes.size()-1){
+                myWriter.write(", ");
+              }
+            } 
+            
+          } */
+                   
           
             
         } 
         myWriter.write(") {\n"); 
         for (int j = 0; j <  Attributes.size(); j++) {
           if(!Attributes.get(j).Name.contains("id")){
-            myWriter.write("\tthis." +  Attributes.get(j).Name + " = " +  Attributes.get(j).Name +";\n");
+            if(Attributes.get(j).Type.contains("string") || Attributes.get(j).Type.contains("String")){
+              myWriter.write("\tthis." +  Attributes.get(j).Name + " = " +  Attributes.get(j).Name +";\n");
+            }
+            
           }
             
         }
@@ -159,12 +167,20 @@ public class AggregateRootTransformer implements TransformationStrategy {
             myWriter.write("}\n");
             myWriter.write("\n"); 
           }
-          if(!Attributes.get(i).Type.toLowerCase().contains("long") && !Attributes.get(i).Type.toLowerCase().contains("long") && !Attributes.get(i).Type.toLowerCase().contains("string")  && !Attributes.get(i).Type.toLowerCase().contains("String")){
-            myWriter.write( "\n public"  + " " + Attributes.get(i).Type +" get" +  Attributes.get(i).Name.substring(0, 1).toUpperCase() +  Attributes.get(i).Name.substring( 1).toLowerCase() + "() {\n");
+          /* if(!Attributes.get(i).Type.toLowerCase().contains("long") && !Attributes.get(i).Type.toLowerCase().contains("long") && !Attributes.get(i).Type.toLowerCase().contains("string")  && !Attributes.get(i).Type.toLowerCase().contains("String")){
+            if(!Attributes.get(i).Multiplicity.equals("*")){
+              myWriter.write( "\n public"  + " List<" + Attributes.get(i).Type +"> get" +  Attributes.get(i).Name.substring(0, 1).toUpperCase() +  Attributes.get(i).Name.substring( 1).toLowerCase() + "() {\n");
             myWriter.write("\treturn this." +  Attributes.get(i).Name + ";\n");
             myWriter.write("}\n");
             myWriter.write("\n"); 
-          }if(Attributes.get(i).Type.equals("long") || Attributes.get(i).Type.equals("Long")){
+            }if(!Attributes.get(i).Multiplicity.equals("1")){
+              myWriter.write( "\n public"  + " " + Attributes.get(i).Type +" get" +  Attributes.get(i).Name.substring(0, 1).toUpperCase() +  Attributes.get(i).Name.substring( 1).toLowerCase() + "() {\n");
+            myWriter.write("\treturn this." +  Attributes.get(i).Name + ";\n");
+            myWriter.write("}\n");
+            myWriter.write("\n"); 
+            } */
+            
+          if(Attributes.get(i).Type.equals("long") || Attributes.get(i).Type.equals("Long")){
             myWriter.write( "\n public"  + " " + Attributes.get(i).Type.toLowerCase() +" get" +  Attributes.get(i).Name.substring(0, 1).toUpperCase() +  Attributes.get(i).Name.substring( 1).toLowerCase() + "() {\n");
             myWriter.write("\treturn this." +  Attributes.get(i).Name + ";\n");
             myWriter.write("}\n");
@@ -181,12 +197,20 @@ public class AggregateRootTransformer implements TransformationStrategy {
             myWriter.write("\treturn this." +  Attributes.get(i).Name + " = " + Attributes.get(i).Name  + ";\n");
             myWriter.write("}\n");
             myWriter.write("\n"); 
-            }  if(!Attributes.get(i).Type.toLowerCase().contains("long") && !Attributes.get(i).Type.toLowerCase().contains("long") && !Attributes.get(i).Type.toLowerCase().contains("string")  && !Attributes.get(i).Type.toLowerCase().contains("String")){
-              myWriter.write( "\n public"  + " void"  +" set" +  Attributes.get(i).Name.substring(0, 1).toUpperCase() +  Attributes.get(i).Name.substring( 1).toLowerCase() + "(" + Attributes.get(i).Type + " " + Attributes.get(i).Name +  ") {\n");
-            myWriter.write("\t this." +  Attributes.get(i).Name + " = " + Attributes.get(i).Name  + ";\n");
-            myWriter.write("}\n");
-            myWriter.write("\n"); 
-            }if(Attributes.get(i).Type.equals("long") || Attributes.get(i).Type.equals("Long")){
+            }  /* if(!Attributes.get(i).Type.toLowerCase().contains("long") && !Attributes.get(i).Type.toLowerCase().contains("long") && !Attributes.get(i).Type.toLowerCase().contains("string")  && !Attributes.get(i).Type.toLowerCase().contains("String")){
+              if(Attributes.get(i).Multiplicity.equals("*")){
+                myWriter.write( "\n public"  + " void"  +" set" +  Attributes.get(i).Name.substring(0, 1).toUpperCase() +  Attributes.get(i).Name.substring( 1).toLowerCase() + "(List<" + Attributes.get(i).Type + "> " + Attributes.get(i).Name +  ") {\n");
+                myWriter.write("\t this." +  Attributes.get(i).Name + " = " + Attributes.get(i).Name  + ";\n");
+                myWriter.write("}\n");
+                myWriter.write("\n"); 
+              }else{
+                myWriter.write( "\n public"  + " void"  +" set" +  Attributes.get(i).Name.substring(0, 1).toUpperCase() +  Attributes.get(i).Name.substring( 1).toLowerCase() + "(" + Attributes.get(i).Type + " " + Attributes.get(i).Name +  ") {\n");
+                myWriter.write("\t this." +  Attributes.get(i).Name + " = " + Attributes.get(i).Name  + ";\n");
+                myWriter.write("}\n");
+                myWriter.write("\n"); 
+              }
+              
+            } */if(Attributes.get(i).Type.equals("long") || Attributes.get(i).Type.equals("Long")){
               myWriter.write( "\n public"  + " " + Attributes.get(i).Type.toLowerCase() +" set" +  Attributes.get(i).Name.substring(0, 1).toUpperCase() +  Attributes.get(i).Name.substring( 1).toLowerCase() + "(" + Attributes.get(i).Type.toLowerCase() + " " + Attributes.get(i).Name +  ") {\n");
             myWriter.write("\treturn this." +  Attributes.get(i).Name + " = " + Attributes.get(i).Name  + ";\n");
             myWriter.write("}\n");
@@ -197,7 +221,7 @@ public class AggregateRootTransformer implements TransformationStrategy {
           }
 
         //toString
-        myWriter.write("\n@Override\n");
+        /* myWriter.write("\n@Override\n");
         myWriter.write("public String toString() {\n");
         myWriter.write("\treturn " + "\"" );
         myWriter.write(className + " [");
@@ -209,7 +233,7 @@ public class AggregateRootTransformer implements TransformationStrategy {
         } 
         
         myWriter.write("]\";\n");
-        myWriter.write("}\n");
+        myWriter.write("}\n"); */
         myWriter.write("\n}\n");
         
         myWriter.close();

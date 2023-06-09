@@ -66,18 +66,18 @@ public class CreateController {
                 myWriter.write("@RequestMapping(\"/api\")\n");
                 myWriter.write("public class " + className + "Controller {\n\n");
                 myWriter.write("@Autowired\n");
-                myWriter.write(className + "Service " + className.toLowerCase() + "Service;\n\n");
+                myWriter.write(className + "Service "  + "Service;\n\n");
 
                 //GetAll
                 myWriter.write("@GetMapping(\"/" + className.toLowerCase() + "s\")\n");
                 myWriter.write("public ResponseEntity<List<" + className + ">> getAll" + className + "() {\n");
-                myWriter.write("List<" + className + "> " + className.toLowerCase() + " = " + className.toLowerCase() + "Service.getAll" + className + "s();\n" );
+                myWriter.write("List<" + className + "> " + className.toLowerCase() + " = " + "Service.getAll" + className + "s();\n" );
                 myWriter.write("\treturn new ResponseEntity<>(" + className.toLowerCase() + ", HttpStatus.OK);\n}\n");
                 
                 //Post
                 myWriter.write("@PostMapping(\"/" + className.toLowerCase() + "s\")\n");
                 myWriter.write("public ResponseEntity<" + className + "> create" + className + "(@RequestBody " + className + " " + className.toLowerCase() + ") {\n");
-                myWriter.write(className + " created" + className + " = " + className.toLowerCase() + "Service.create" + className + "(" + className.toLowerCase() + ");\n");
+                myWriter.write(className + " created" + className + " = " +"Service.create" + className + "(" + className.toLowerCase() + ");\n");
                 myWriter.write("\treturn new ResponseEntity<>(created" + className + ", HttpStatus.CREATED);\n}\n\n");
 
               
