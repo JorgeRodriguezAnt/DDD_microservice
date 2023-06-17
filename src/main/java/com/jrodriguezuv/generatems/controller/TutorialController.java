@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.jrodriguezuv.generatems.model.Tutorial;
-import com.jrodriguezuv.generatems.service.TutorialService;
+import com.jrodriguezuv.generatems.service.msService;
 
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -25,7 +25,7 @@ import reactor.core.publisher.Mono;
 @RequestMapping("/api")
 public class TutorialController {
   @Autowired
-  TutorialService tutorialService;
+  msService tutorialService;
   
   @GetMapping("/tutorials")
   @ResponseStatus(HttpStatus.OK)

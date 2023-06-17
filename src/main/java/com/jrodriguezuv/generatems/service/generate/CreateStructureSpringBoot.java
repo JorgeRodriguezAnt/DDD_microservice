@@ -53,7 +53,7 @@ public class CreateStructureSpringBoot {
       }
 
       String repoUrl = "https://github.com/jorgeRodriguezAntiquera/MSDemo.git";
-    String cloneDirectoryPath = "MS\\"+name; // Ex.in windows c:\\gitProjects\SpringBootMongoDbCRUD\
+    String cloneDirectoryPath = "MS/"+name; // Ex.in windows c:\\gitProjects\SpringBootMongoDbCRUD\
     try {
         System.out.println("Cloning "+repoUrl+" into "+repoUrl);
         Git.cloneRepository()

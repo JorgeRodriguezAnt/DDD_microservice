@@ -13,13 +13,13 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
 import com.jrodriguezuv.generatems.model.Tutorial;
-import com.jrodriguezuv.generatems.service.model.AggregateRoot;
-import com.jrodriguezuv.generatems.service.model.Attribute;
-import com.jrodriguezuv.generatems.service.model.Entity;
-import com.jrodriguezuv.generatems.service.model.Operation;
-import com.jrodriguezuv.generatems.service.model.Parameter;
-import com.jrodriguezuv.generatems.service.model.TransformerClass;
-import com.jrodriguezuv.generatems.service.model.ValueObject;
+import com.jrodriguezuv.generatems.service.modelTransformation.AggregateRoot;
+import com.jrodriguezuv.generatems.service.modelTransformation.Attribute;
+import com.jrodriguezuv.generatems.service.modelTransformation.Entity;
+import com.jrodriguezuv.generatems.service.modelTransformation.Operation;
+import com.jrodriguezuv.generatems.service.modelTransformation.Parameter;
+import com.jrodriguezuv.generatems.service.modelTransformation.TransformerClass;
+import com.jrodriguezuv.generatems.service.modelTransformation.ValueObject;
 import com.jrodriguezuv.generatems.service.util.Errors;
 
 

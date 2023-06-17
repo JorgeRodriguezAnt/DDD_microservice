@@ -5,9 +5,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
 
-import com.jrodriguezuv.generatems.service.model.Attribute;
-import com.jrodriguezuv.generatems.service.model.Operation;
-import com.jrodriguezuv.generatems.service.model.TransformerClass;
+import com.jrodriguezuv.generatems.service.modelTransformation.Attribute;
+import com.jrodriguezuv.generatems.service.modelTransformation.Operation;
+import com.jrodriguezuv.generatems.service.modelTransformation.TransformerClass;
 
 public class CreateController {
     private final static String nameRepository = "Controller";

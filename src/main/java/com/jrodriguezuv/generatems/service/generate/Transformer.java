@@ -2,7 +2,7 @@ package com.jrodriguezuv.generatems.service.generate;
 
 import java.util.List;
 
-import com.jrodriguezuv.generatems.service.model.TransformerClass;
+import com.jrodriguezuv.generatems.service.modelTransformation.TransformerClass;
 
 public class Transformer{
     

@@ -51,7 +51,7 @@ import java.io.File;
             // Push changes to the new remote and branch
             PushCommand pushCommand = git.push();
             pushCommand.setRemote("new-remote")
-                    .setCredentialsProvider(new UsernamePasswordCredentialsProvider("jorgeRodriguezAntiquera", "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"))
+                    .setCredentialsProvider(new UsernamePasswordCredentialsProvider("jorgeRodriguezAntiquera", "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"))
                     .setRefSpecs(new RefSpec("refs/heads/"+ newBranch +":refs/heads/"+newBranch))
                     .call();
 

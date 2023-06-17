@@ -22,13 +22,13 @@ import com.jrodriguezuv.generatems.service.generate.CreateStructureSpringBoot;
 import com.jrodriguezuv.generatems.service.generate.Transformer;
 import com.jrodriguezuv.generatems.service.generate.Validator;
 import com.jrodriguezuv.generatems.service.generate.pushRepository;
-import com.jrodriguezuv.generatems.service.model.TransformerClass;
+import com.jrodriguezuv.generatems.service.modelTransformation.TransformerClass;
 
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @Service
-public class TutorialService {
+public class msService {
   String view_name;
   @Autowired
   TutorialRepository tutorialRepository;

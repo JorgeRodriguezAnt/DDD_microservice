@@ -1,4 +1,4 @@
-package com.jrodriguezuv.generatems.service.model;
+package com.jrodriguezuv.generatems.service.modelTransformation;
 
 public class Relation {
     

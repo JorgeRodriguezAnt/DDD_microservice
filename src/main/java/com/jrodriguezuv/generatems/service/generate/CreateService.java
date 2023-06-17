@@ -4,10 +4,10 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
-import com.jrodriguezuv.generatems.service.model.Attribute;
-import com.jrodriguezuv.generatems.service.model.Operation;
-import com.jrodriguezuv.generatems.service.model.Parameter;
-import com.jrodriguezuv.generatems.service.model.TransformerClass;
+import com.jrodriguezuv.generatems.service.modelTransformation.Attribute;
+import com.jrodriguezuv.generatems.service.modelTransformation.Operation;
+import com.jrodriguezuv.generatems.service.modelTransformation.Parameter;
+import com.jrodriguezuv.generatems.service.modelTransformation.TransformerClass;
 
 import kotlin.reflect.jvm.internal.impl.descriptors.Visibilities.Public;
 

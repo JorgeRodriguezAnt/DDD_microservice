@@ -13,9 +13,9 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import com.jrodriguezuv.generatems.model.Tutorial;
-import com.jrodriguezuv.generatems.service.model.Attribute;
-import com.jrodriguezuv.generatems.service.model.Relation;
-import com.jrodriguezuv.generatems.service.model.TransformerClass;
+import com.jrodriguezuv.generatems.service.modelTransformation.Attribute;
+import com.jrodriguezuv.generatems.service.modelTransformation.Relation;
+import com.jrodriguezuv.generatems.service.modelTransformation.TransformerClass;
 
 
 
