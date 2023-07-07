@@ -33,7 +33,7 @@ public class CreateControllerAR {
         // TODO Auto-generated method stub
         try {  
             
-            File myObj = new File( "MS\\" + createStructureSpringBoot.nameDir + "\\src\\main\\java\\com\\demo\\spring\\jpa\\msGenerate\\controller\\"+className+nameRepository +".java");  
+            File myObj = new File(  "MS/"+createStructureSpringBoot.nameDir+ "/src/main/java/com/demo/spring/jpa/msGenerate/controller/"+className+nameRepository +".java");  
             if (myObj.createNewFile()) {  
               System.out.println("File created: " + myObj.getName());  
               System.out.println("Absolute path: " + myObj.getAbsolutePath());  
@@ -55,7 +55,7 @@ public class CreateControllerAR {
                 className = transformerClass.name;
               }
           
-            try (FileWriter myWriter = new FileWriter( "MS\\" + createStructureSpringBoot.nameDir + "\\src\\main\\java\\com\\demo\\spring\\jpa\\msGenerate\\controller\\"+className+nameRepository +".java")) {
+            try (FileWriter myWriter = new FileWriter( "MS/"+createStructureSpringBoot.nameDir+ "/src/main/java/com/demo/spring/jpa/msGenerate/controller/"+className+nameRepository +".java")) {
 
                 //Package
                 myWriter.write("package com.demo.spring.jpa.msGenerate.controller;\n\n");

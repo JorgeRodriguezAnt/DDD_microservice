@@ -12,7 +12,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-import com.jrodriguezuv.generatems.model.Tutorial;
+/* import com.jrodriguezuv.generatems.model.Tutorial; */
 import com.jrodriguezuv.generatems.service.modelTransformation.Attribute;
 import com.jrodriguezuv.generatems.service.modelTransformation.Relation;
 import com.jrodriguezuv.generatems.service.modelTransformation.TransformerClass;
@@ -24,14 +24,14 @@ public class validateRelations {
 
 
     public void validate(List<TransformerClass> classesToTransform, String json) throws FileNotFoundException, IOException, ParseException{
-        Tutorial tutorial;
+      /*   Tutorial tutorial; */
         JSONParser parser = new JSONParser();
         
         Object obj = parser.parse(json);
         /* int count = 0; */
-        CreateService service = new CreateService();
+        /* CreateService service = new CreateService(); */
         
-        CreateController createController = new CreateController();
+        /* CreateController createController = new CreateController(); */
         JSONArray jsonArray2= (JSONArray) obj;
         for (int z = 0; z < jsonArray2.size(); z++) {
             JSONObject jsonArray3 = (JSONObject) jsonArray2.get(z);

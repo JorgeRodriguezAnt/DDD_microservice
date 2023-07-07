@@ -8,7 +8,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
-import com.jrodriguezuv.generatems.model.Tutorial;
+/* import com.jrodriguezuv.generatems.model.Tutorial; */
 import com.jrodriguezuv.generatems.service.generate.CreateStructureSpringBoot;
 
 import java.io.FileWriter;
@@ -29,7 +29,7 @@ public class EntityTransformer implements TransformationStrategy {
         CreateStructureSpringBoot createStructureSpringBoot = new CreateStructureSpringBoot();
         System.out.println("holaa"+createStructureSpringBoot.dString);
         try {  
-            File myObj = new File("MS\\" + createStructureSpringBoot.nameDir + "\\src\\main\\java\\com\\demo\\spring\\jpa\\msGenerate\\model\\"+ className + ".java");  
+            File myObj = new File("MS/" + createStructureSpringBoot.nameDir + "/src/main/java/com/demo/spring/jpa/msGenerate/model/"+ className + ".java");  
             if (myObj.createNewFile()) {  
               System.out.println("File created: " + myObj.getName());  
               System.out.println("Absolute path: " + myObj.getAbsolutePath());  
@@ -47,7 +47,7 @@ public class EntityTransformer implements TransformationStrategy {
         // TODO Auto-generated method stub
 
         try {  
-          FileWriter myWriter = new FileWriter("MS\\" + createStructureSpringBoot.nameDir + "\\src\\main\\java\\com\\demo\\spring\\jpa\\msGenerate\\model\\"+ className + ".java");
+          FileWriter myWriter = new FileWriter("MS/" + createStructureSpringBoot.nameDir + "/src/main/java/com/demo/spring/jpa/msGenerate/model/"+ className + ".java");
   
           //Package
           myWriter.write("package com.demo.spring.jpa.msGenerate.model;\n\n");

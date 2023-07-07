@@ -28,7 +28,7 @@ public class CreateRepository {
         try {  
 
             
-            File myObj = new File("MS\\" + createStructureSpringBoot.nameDir + "\\src\\main\\java\\com\\demo\\spring\\jpa\\msGenerate\\repository\\" +className+nameRepository +".java");
+            File myObj = new File("MS/" + createStructureSpringBoot.nameDir + "/src/main/java/com/demo/spring/jpa/msGenerate/repository/" +className+nameRepository +".java");
                /* "MS\\tests\\src\\main\\java\\com\\example\\spring\\r2dbc\\mysql\\repository\\"+nameClassAR+nameRepository +".java");   */
             if (myObj.createNewFile()) {  
               System.out.println("File created: " + myObj.getName());  
@@ -48,7 +48,7 @@ public class CreateRepository {
         
         try {
             
-            try (FileWriter myWriter = new FileWriter( "MS\\" + createStructureSpringBoot.nameDir + "\\src\\main\\java\\com\\demo\\spring\\jpa\\msGenerate\\repository\\"+className+nameRepository +".java")) {
+            try (FileWriter myWriter = new FileWriter( "MS/" + createStructureSpringBoot.nameDir + "/src/main/java/com/demo/spring/jpa/msGenerate/repository/"+className+nameRepository +".java")) {
 
                  //Package
                  myWriter.write("package com.demo.spring.jpa.msGenerate.repository;\n\n");

@@ -2,7 +2,7 @@ package com.jrodriguezuv.generatems.service.modelTransformation;
 
 import java.util.List;
 
-import com.jrodriguezuv.generatems.model.Tutorial;
+/* import com.jrodriguezuv.generatems.model.Tutorial; */
 import com.jrodriguezuv.generatems.service.generate.CreateStructureSpringBoot;
 
 import java.io.File; 
@@ -18,7 +18,7 @@ public class ValueObjectTransformer implements TransformationStrategy{
     public void createFile(String className) {
         // TODO Auto-generated method stub
         try {  
-            File myObj = new File("MS\\" + createStructureSpringBoot.nameDir + "\\src\\main\\java\\com\\demo\\spring\\jpa\\msGenerate\\model\\"+ className + ".java");  
+            File myObj = new File("MS/" + createStructureSpringBoot.nameDir + "/src/main/java/com/demo/spring/jpa/msGenerate/model/"+ className + ".java");  
             if (myObj.createNewFile()) {  
               System.out.println("File created: " + myObj.getName());  
               System.out.println("Absolute path: " + myObj.getAbsolutePath());  
@@ -36,7 +36,7 @@ public class ValueObjectTransformer implements TransformationStrategy{
         // TODO Auto-generated method stub
 
         try {  
-          FileWriter myWriter = new FileWriter("MS\\" + createStructureSpringBoot.nameDir + "\\src\\main\\java\\com\\demo\\spring\\jpa\\msGenerate\\model\\"+ className + ".java");
+          FileWriter myWriter = new FileWriter("MS/" + createStructureSpringBoot.nameDir + "/src/main/java/com/demo/spring/jpa/msGenerate/model/"+ className + ".java");
   
           //Package
           myWriter.write("package com.demo.spring.jpa.msGenerate.model;\n\n");

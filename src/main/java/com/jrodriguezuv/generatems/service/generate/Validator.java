@@ -12,7 +12,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
-import com.jrodriguezuv.generatems.model.Tutorial;
+/* import com.jrodriguezuv.generatems.model.Tutorial; */
 import com.jrodriguezuv.generatems.service.modelTransformation.AggregateRoot;
 import com.jrodriguezuv.generatems.service.modelTransformation.Attribute;
 import com.jrodriguezuv.generatems.service.modelTransformation.Entity;
@@ -31,16 +31,16 @@ public class Validator  {
     private static final String valueObjectType = "Value Object";
     private static final String aggregateRootType = "Aggregate Root";
     
-    Tutorial tutorial;
+    /* Tutorial tutorial; */
   
     List<TransformerClass> classesToTransform;
   
     /* CreateService service = new CreateService(); */
   
     CreateRepository repository ;
-    CreateController controller = new CreateController();
+    /* CreateController controller = new CreateController(); */
     CreateControllerAR controllerAR = new CreateControllerAR();
-    CreateService service = new CreateService();
+    /* CreateService service = new CreateService(); */
     CreateServiceAR serviceAR = new CreateServiceAR();
     pushRepository pushRepository = new pushRepository();
    

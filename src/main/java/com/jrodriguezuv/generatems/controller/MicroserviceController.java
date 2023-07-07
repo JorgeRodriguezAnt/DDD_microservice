@@ -14,7 +14,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.jrodriguezuv.generatems.model.Tutorial;
+import com.jrodriguezuv.generatems.model.Microservice;
+/* import com.jrodriguezuv.generatems.model.Tutorial; */
 import com.jrodriguezuv.generatems.service.msService;
 
 import reactor.core.publisher.Flux;
@@ -23,36 +24,38 @@ import reactor.core.publisher.Mono;
 @CrossOrigin(origins = "http://localhost:8081")
 @RestController
 @RequestMapping("/api")
-public class TutorialController {
+public class MicroserviceController {
   @Autowired
-  msService tutorialService;
+  msService microserviceService;
+
   
-  @GetMapping("/tutorials")
+  @GetMapping("/msGenerates")
   @ResponseStatus(HttpStatus.OK)
-  public Flux<Tutorial> getAllTutorials(@RequestParam(required = false) String title) {
-    if (title == null)
-      return tutorialService.findAll();
+  public Flux<Microservice> getAllMicroservices(@RequestParam(required = false) String name) {
+    if (name == null)
+      return microserviceService.findAll();
     else
-      return tutorialService.findAll();
+      return microserviceService.findAll();
   }
 
-  @GetMapping("/tutorials/{id}")
+  @GetMapping("/msGenerates/{id}")
   @ResponseStatus(HttpStatus.OK)
-  public Mono<Tutorial> getTutorialById(@PathVariable("id") int id) {
-    return tutorialService.findById(id);
+  public Mono<Microservice> getMicroserviceById(@PathVariable("id") int id) {
+    return microserviceService.findById(id);
   }
 
-  @PostMapping("/tutorials")
+  @PostMapping("/msGenerates")
   @ResponseStatus(HttpStatus.CREATED)
-  public Mono<Tutorial> createTutorial(@RequestBody Tutorial tutorial) {
-    return tutorialService.save(new Tutorial(tutorial.getTitle(), tutorial.getDescription()));
+  public Mono<Microservice> createMicroservice(@RequestBody Microservice microservice) {
+    /* return microserviceService.save(new Tutorial(tutorial.getTitle(), tutorial.getDescription())); */
+    return microserviceService.save(new Microservice(microservice.getName(), microservice.getJson()));
   }
 
 
-  @DeleteMapping("/tutorials/{id}")
+  @DeleteMapping("/msGenerates/{id}")
   @ResponseStatus(HttpStatus.NO_CONTENT)
-  public Mono<Void> deleteTutorial(@PathVariable("id") int id) {
-    return tutorialService.deleteById(id);
+  public Mono<Void> deleteMicroservice(@PathVariable("id") int id) {
+    return microserviceService.deleteById(id);
   }
 
 

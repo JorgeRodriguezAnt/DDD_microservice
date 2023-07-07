@@ -39,7 +39,7 @@
 	<dependency>
     <groupId>org.eclipse.jgit</groupId>
     <artifactId>org.eclipse.jgit</artifactId>
-    <version>4.8.0.201706111038-r</version>
+    <version>6.6.0.202305301015-r</version>
 </dependency>
 
 		<dependency>
@@ -88,6 +88,11 @@
 			<scope>test</scope>
 		</dependency>
 
+		<dependency>
+    	<groupId>com.google.cloud</groupId>
+    	<artifactId>google-cloud-storage</artifactId>
+    	<version>2.23.0</version>
+</dependency>
  	</dependencies>
 
 	<!-- <build>

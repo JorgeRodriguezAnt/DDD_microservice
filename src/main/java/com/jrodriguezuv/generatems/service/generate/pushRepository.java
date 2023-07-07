@@ -5,6 +5,7 @@ import org.eclipse.jgit.api.*;
 import org.eclipse.jgit.api.errors.GitAPIException;
 import org.eclipse.jgit.internal.storage.file.FileRepository;
 import org.eclipse.jgit.lib.*;
+import org.eclipse.jgit.storage.file.FileRepositoryBuilder;
 import org.eclipse.jgit.transport.*;
 
 import java.io.File;
@@ -12,27 +13,56 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.io.File;
 
+import java.time.LocalTime;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
     public class pushRepository {
 
         CreateStructureSpringBoot createStructureSpringBoot = new CreateStructureSpringBoot();
         public void push(){
             
+      
 
-            try {
+
+
+
+
+
+
+
+
+           try {
                 // Open the local repository
-                Repository repository = new FileRepository("MS\\" + createStructureSpringBoot.nameDir+ "\\.git");
+                 Repository repository = new FileRepository("MS/" + createStructureSpringBoot.nameDir+ "/.git"); 
+                
     
                 
                   // Create a Git object
+            LocalTime horaActual = LocalTime.now();
+
+            // Obtener el día actual
+            LocalDate diaActual = LocalDate.now();
+
+            // Formatear la hora
+            DateTimeFormatter formatoHora = DateTimeFormatter.ofPattern("HH-mm-ss");
+            String horaFormateada = horaActual.format(formatoHora);
+
+            // Formatear el día
+            DateTimeFormatter formatoDia = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            String diaFormateado = diaActual.format(formatoDia);
+
             Git git = new Git(repository);
             CreateStructureSpringBoot structureSpringBoot = new CreateStructureSpringBoot();
-            String  newBranch = structureSpringBoot.nameDir; 
+            String  newBranch = structureSpringBoot.nameDir +"_" + diaFormateado + "_" + horaFormateada; 
+            
             // Add a new remote
             StoredConfig config = repository.getConfig();
             config.setString("remote", "new-remote", "url", "https://github.com/jorgeRodriguezAntiquera/generated-microservice.git");
             config.save();
 
+            
+            
             // Create and checkout a new branch
             git.checkout()
                 .setCreateBranch(true)
@@ -51,7 +81,7 @@ import java.io.File;
             // Push changes to the new remote and branch
             PushCommand pushCommand = git.push();
             pushCommand.setRemote("new-remote")
-                    .setCredentialsProvider(new UsernamePasswordCredentialsProvider("jorgeRodriguezAntiquera", "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"))
+                    .setCredentialsProvider(new UsernamePasswordCredentialsProvider("jorgeRodriguezAntiquera", "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"))
                     .setRefSpecs(new RefSpec("refs/heads/"+ newBranch +":refs/heads/"+newBranch))
                     .call();
 
@@ -62,7 +92,7 @@ import java.io.File;
             System.out.println("Changes pushed successfully to the new remote and branch!");
         } catch (IOException | GitAPIException e) {
             e.printStackTrace();
-        }
+        } 
          }
 
 

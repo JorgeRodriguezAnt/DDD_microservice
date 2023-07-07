@@ -33,7 +33,7 @@ public class CreateServiceAR {
     public void createFile(String className) {
         // TODO Auto-generated method stub
         try {  
-            File myObj = new File( "MS\\" + createStructureSpringBoot.nameDir + "\\src\\main\\java\\com\\demo\\spring\\jpa\\msGenerate\\service\\"+ className+serviceClassName+".java");  
+            File myObj = new File( "MS/" + createStructureSpringBoot.nameDir + "/src/main/java/com/demo/spring/jpa/msGenerate/service/"+ className+serviceClassName+".java");  
             if (myObj.createNewFile()) {  
               System.out.println("File created: " + myObj.getName());  
               System.out.println("Absolute path: " + myObj.getAbsolutePath());  
@@ -57,7 +57,7 @@ public class CreateServiceAR {
               className = transformerClass.name;
             }
 
-            try (FileWriter myWriter = new FileWriter( "MS\\" + createStructureSpringBoot.nameDir + "\\src\\main\\java\\com\\demo\\spring\\jpa\\msGenerate\\service\\"+ className +serviceClassName+ ".java")) {
+            try (FileWriter myWriter = new FileWriter( "MS/" + createStructureSpringBoot.nameDir + "/src/main/java/com/demo/spring/jpa/msGenerate/service/"+ className +serviceClassName+ ".java")) {
             
               //Package
               myWriter.write("package com.demo.spring.jpa.msGenerate.service;\n\n");

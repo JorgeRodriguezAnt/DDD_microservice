@@ -16,8 +16,10 @@ import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.jrodriguezuv.generatems.model.Tutorial;
-import com.jrodriguezuv.generatems.repository.TutorialRepository;
+import com.jrodriguezuv.generatems.model.Microservice;
+/* import com.jrodriguezuv.generatems.model.Tutorial; */
+import com.jrodriguezuv.generatems.repository.MicroserviceRepository;
+/* import com.jrodriguezuv.generatems.repository.TutorialRepository; */
 import com.jrodriguezuv.generatems.service.generate.CreateStructureSpringBoot;
 import com.jrodriguezuv.generatems.service.generate.Transformer;
 import com.jrodriguezuv.generatems.service.generate.Validator;
@@ -30,29 +32,33 @@ import reactor.core.publisher.Mono;
 @Service
 public class msService {
   String view_name;
-  @Autowired
-  TutorialRepository tutorialRepository;
 
-  public Flux<Tutorial> findAll() {
+
+  @Autowired
+  MicroserviceRepository microserviceRepository;
+
+  public Flux<Microservice> findAll() {
     
 
-    return tutorialRepository.findAll();
+    /* return tutorialRepository.findAll(); */
+    return microserviceRepository.findAll();
   }
 
-  public Mono<Tutorial> findById(int id) {
-    return tutorialRepository.findById(id);
+  public Mono<Microservice> findById(int id) {
+    /* return tutorialRepository.findById(id); */
+    return microserviceRepository.findById(id);
   }
 
-  public Mono<Tutorial> save(Tutorial tutorial) {
+  public Mono<Microservice> save(Microservice microservice) {
 
       
     
       
       
       CreateStructureSpringBoot createStructureSpringBoot = new CreateStructureSpringBoot();
-      createStructureSpringBoot.createDirectories(  tutorial.getTitle(), tutorial.getDescription());
+      createStructureSpringBoot.createDirectories(  microservice.getName(), microservice.getJson());
 
-      String jsonEntrada = tutorial.getDescription();
+      String jsonEntrada = microservice.getJson();
      
 
        Validator json = new Validator();
@@ -68,13 +74,14 @@ public class msService {
 
         pushRepository pushRepository = new pushRepository();
         pushRepository.push(); 
-        pushRepository.delete();
+        /* pushRepository.delete(); */
     
-    return tutorialRepository.save(tutorial);
+    /* return tutorialRepository.save(tutorial); */
+    return microserviceRepository.save(microservice);
   } 
 
   public Mono<Void> deleteById(int id) {
-    return tutorialRepository.deleteById(id);
+    return microserviceRepository.deleteById(id);
   }
 
 
