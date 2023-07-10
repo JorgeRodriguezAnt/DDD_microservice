@@ -81,7 +81,7 @@ import java.time.format.DateTimeFormatter;
             // Push changes to the new remote and branch
             PushCommand pushCommand = git.push();
             pushCommand.setRemote("new-remote")
-                    .setCredentialsProvider(new UsernamePasswordCredentialsProvider("jorgeRodriguezAntiquera", "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"))
+                    .setCredentialsProvider(new UsernamePasswordCredentialsProvider("jorgeRodriguezAntiquera", "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"))
                     .setRefSpecs(new RefSpec("refs/heads/"+ newBranch +":refs/heads/"+newBranch))
                     .call();
 
