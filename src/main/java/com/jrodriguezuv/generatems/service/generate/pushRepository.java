@@ -74,14 +74,14 @@ import java.time.format.DateTimeFormatter;
 
             // Commit changes
             git.commit()
-                    .setMessage("Generated microservice")
+                    .setMessage("Generated microservice" + newBranch)
                     .setAuthor("Jorge Rodriguez", "jorge.rodrigueza@alumnos.uv.cl")
                     .call();
 
             // Push changes to the new remote and branch
             PushCommand pushCommand = git.push();
             pushCommand.setRemote("new-remote")
-                    .setCredentialsProvider(new UsernamePasswordCredentialsProvider("jorgeRodriguezAntiquera", "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"))
+                    .setCredentialsProvider(new UsernamePasswordCredentialsProvider("jorgeRodriguezAntiquera", "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"))
                     .setRefSpecs(new RefSpec("refs/heads/"+ newBranch +":refs/heads/"+newBranch))
                     .call();
 
