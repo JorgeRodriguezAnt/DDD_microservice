@@ -70,9 +70,11 @@ public class msService {
 
 
         
-        myTransfomer.transform(); 
+        myTransfomer.transform() ; 
 
-        pushRepository pushRepository = new pushRepository();
+        pushRepository pushRepository = new pushRepository(); 
+
+
         /* pushRepository.push(); */ 
         /* pushRepository.delete(); */
     
