@@ -58,7 +58,8 @@ import java.time.format.DateTimeFormatter;
             
             // Add a new remote
             StoredConfig config = repository.getConfig();
-            config.setString("remote", "new-remote", "url", "https://github.com/jorgeRodriguezAntiquera/generated-microservice.git");
+            /* config.setString("remote", "new-remote", "url", "https://github.com/jorgeRodriguezAntiquera/generated-microservice.git"); */
+            config.setString("remote", "new-remote", "url", "http://gitlab.informatica.uv.cl/Jorge.Rodriguez/generatems.git");
             config.save();
 
             
@@ -74,14 +75,15 @@ import java.time.format.DateTimeFormatter;
 
             // Commit changes
             git.commit()
-                    .setMessage("Generated microservice" + newBranch)
+                    .setMessage("Generated microservice " + newBranch)
                     .setAuthor("Jorge Rodriguez", "jorge.rodrigueza@alumnos.uv.cl")
                     .call();
 
             // Push changes to the new remote and branch
             PushCommand pushCommand = git.push();
             pushCommand.setRemote("new-remote")
-                    .setCredentialsProvider(new UsernamePasswordCredentialsProvider("jorgeRodriguezAntiquera", "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"))
+                    /* .setCredentialsProvider(new UsernamePasswordCredentialsProvider("jorgeRodriguezAntiquera", "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")) */
+                    .setCredentialsProvider(new UsernamePasswordCredentialsProvider("Jorge.Rodriguez", "mhZYktCCfGzvocHkYT6D")) 
                     .setRefSpecs(new RefSpec("refs/heads/"+ newBranch +":refs/heads/"+newBranch))
                     .call();
 

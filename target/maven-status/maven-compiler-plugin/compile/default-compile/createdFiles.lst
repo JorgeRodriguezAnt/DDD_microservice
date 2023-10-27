@@ -1,3 +1,4 @@
+com\jrodriguezuv\generatems\service\util\Error.json
 com\jrodriguezuv\generatems\service\msService.class
 com\jrodriguezuv\generatems\service\generate\CreateRepository.class
 com\jrodriguezuv\generatems\service\modelTransformation\Entity.class

@@ -73,7 +73,7 @@ public class msService {
         myTransfomer.transform(); 
 
         pushRepository pushRepository = new pushRepository();
-        pushRepository.push(); 
+        /* pushRepository.push(); */ 
         /* pushRepository.delete(); */
     
     /* return tutorialRepository.save(tutorial); */

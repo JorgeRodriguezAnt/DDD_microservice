@@ -69,11 +69,16 @@ public class AggregateRootTransformer implements TransformationStrategy {
   private Tutorial tutorial; */
             } if(Attributes.get(i).Multiplicity.equals("*")){
               System.out.println("muchos");
-              myWriter.write("/*  @ManyToOne(fetch = FetchType.LAZY, optional = false)\n");
+              myWriter.write("  @ManyToOne(fetch = FetchType.LAZY, optional = false)\n");
               myWriter.write("@JoinColumn(name = \"" + Attributes.get(i).Name.toLowerCase() + "_id\") \n");
               
-              myWriter.write(Attributes.get(i).Visibility + " List<" +Attributes.get(i).Type  + "> " +  Attributes.get(i).Name +";*/\n\n");
+              myWriter.write(Attributes.get(i).Visibility + " " +Attributes.get(i).Type  + " " +  Attributes.get(i).Name +";\n\n");
             }
+           
+              if(Attributes.get(i).Multiplicity.equals("VO")){
+              myWriter.write("@Column(name = \"" + Attributes.get(i).Name + "\")\n");
+              myWriter.write(Attributes.get(i).Visibility + " " + Attributes.get(i).Type.substring(0, 1).toUpperCase() + Attributes.get(i).Type.substring( 1).toLowerCase() + " " +  Attributes.get(i).Name +";\n\n");
+            }  
             if(Attributes.get(i).Type.equals("string") || Attributes.get(i).Type.equals("String")){
               myWriter.write("@Column(name = \"" + Attributes.get(i).Name + "\")\n");
               myWriter.write(Attributes.get(i).Visibility + " " + Attributes.get(i).Type.substring(0, 1).toUpperCase() + Attributes.get(i).Type.substring( 1).toLowerCase() + " " +  Attributes.get(i).Name +";\n\n");
@@ -100,21 +105,13 @@ public class AggregateRootTransformer implements TransformationStrategy {
         myWriter.write("\n" + classVisibility + " "+ className +"(");
         
         for (int i = 0; i <  Attributes.size(); i++) {
-          if(Attributes.get(i).Type.contains("string") || Attributes.get(i).Type.contains("String")){
+          /* if(Attributes.get(i).Type.contains("string") || Attributes.get(i).Type.contains("String")){ */
             myWriter.write(Attributes.get(i).Type.substring(0, 1).toUpperCase() + Attributes.get(i).Type.substring( 1).toLowerCase() + " " +  Attributes.get(i).Name);
             if(i !=  Attributes.size()-1){
               myWriter.write(", ");
             }
-          }
-          /* if(!Attributes.get(i).Type.toLowerCase().contains("long") && !Attributes.get(i).Type.toLowerCase().contains("long") && !Attributes.get(i).Type.toLowerCase().contains("string")  && !Attributes.get(i).Type.toLowerCase().contains("String")){
-            if(Attributes.get(i).Multiplicity.equals("*")){
-              myWriter.write("List<"+Attributes.get(i).Type + "> " +  Attributes.get(i).Name);
-              if(i !=  Attributes.size()-1){
-                myWriter.write(", ");
-              }
-            } 
-            
-          } */
+          /* } */
+          
                    
           
             

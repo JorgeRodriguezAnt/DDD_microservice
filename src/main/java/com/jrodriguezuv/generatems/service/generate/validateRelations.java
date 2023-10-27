@@ -83,7 +83,13 @@ public class validateRelations {
                         System.out.println(transformerClass.attributes + "muchos");
                         
                     }if(relations.relationMultiplicityEnd.contains("1")){
+                       
                         transformerClass.attributes.add(new Attribute(relations.relationRoleNameEnd, relations.relationClassEnd, "no", "private","1", null));
+                        
+                    } 
+                    if(relations.relationMultiplicityEnd.contains("VO")){
+                       
+                        transformerClass.attributes.add(new Attribute(relations.relationRoleNameEnd, relations.relationClassEnd, "no", "private","VO", null));
                         
                     } 
                     System.out.println("entra");
