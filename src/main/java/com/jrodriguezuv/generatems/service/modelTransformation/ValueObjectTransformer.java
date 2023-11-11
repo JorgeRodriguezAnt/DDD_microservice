@@ -40,6 +40,9 @@ public class ValueObjectTransformer implements TransformationStrategy{
   
           //Package
           myWriter.write("package com.demo.spring.jpa.msGenerate.model;\n\n");
+
+          //Stereotype 
+          myWriter.write("//Value Object\n\n");
   
           //import
           myWriter.write("import javax.persistence.*;\n\n");

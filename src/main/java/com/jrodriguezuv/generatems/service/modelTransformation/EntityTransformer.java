@@ -51,6 +51,9 @@ public class EntityTransformer implements TransformationStrategy {
   
           //Package
           myWriter.write("package com.demo.spring.jpa.msGenerate.model;\n\n");
+
+          //Stereotype
+          myWriter.write("//Entity\n\n");
   
           //import
           myWriter.write("import javax.persistence.*;\n\n");
@@ -67,7 +70,7 @@ public class EntityTransformer implements TransformationStrategy {
           //Attributes
            for (int i = 0; i <  Attributes.size(); i++) {
             if(Attributes.get(i).IsIdentifier.equals("yes")){
-              myWriter.write("@Id\n"+ "@GeneratedValue(strategy = GenerationType.IDENTITY) " + Attributes.get(i).Visibility + " " + Attributes.get(i).Type.toLowerCase() + " " +  Attributes.get(i).Name +";\n" );
+              myWriter.write("@Id\n"+ "@GeneratedValue(strategy = GenerationType.IDENTITY) \n" + Attributes.get(i).Visibility + " " + Attributes.get(i).Type.toLowerCase() + " " +  Attributes.get(i).Name +";\n" );
             }else{
               if(Attributes.get(i).Multiplicity.equals("yes")){
                 myWriter.write("@Column(name = \"" + Attributes.get(i).Name + "\")\n");

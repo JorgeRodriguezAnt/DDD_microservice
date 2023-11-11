@@ -61,9 +61,12 @@ public class CreateRepository {
                 myWriter.write("@Repository\n");
                 myWriter.write("public interface " + className + "Repository extends JpaRepository<" + className + ", ");
                 for (Attribute attribute : attributes) {
-                  if(attribute.Name.contains("id") || attribute.Name.contains("id")){
-                    myWriter.write(attribute.Type.substring(0, 1).toUpperCase() + attribute.Type.substring( 1).toLowerCase());
+                  if (attribute.IsIdentifier.equals("yes")) {
+                     myWriter.write(attribute.Type.substring(0, 1).toUpperCase() + attribute.Type.substring( 1).toLowerCase());
                   }
+                  /* if(attribute.Name.contains("id") || attribute.Name.contains("id")){
+                    myWriter.write(attribute.Type.substring(0, 1).toUpperCase() + attribute.Type.substring( 1).toLowerCase());
+                  } */
                 }
                 myWriter.write(">{}\n");
                 
