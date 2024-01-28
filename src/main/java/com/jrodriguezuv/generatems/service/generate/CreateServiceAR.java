@@ -119,34 +119,13 @@ public class CreateServiceAR {
               myWriter.write("\treturn " + transformerClass.name.toLowerCase() + "Repository.save(new" + transformerClass.name + ");\n}\n\n");
                 }
               }
-              /* public TutorialDetail createTutorialDetail(TutorialDetail tutorialdetail) {
-TutorialDetail newTutorialDetail = new TutorialDetail(tutorialdetail.getCreatedby());
-	return tutorialdetailRepository.save(newTutorialDetail);
-}
- */
+             
 
               //GetPost
               /* */
     
                myWriter.write("public " + className + " create" + className + "(Long Id," + className + " " + className.toLowerCase() + "Request) {\n");
-              /* for (TransformerClass  classes : classesToTransform) {
-                System.out.println( "nombre de clases:"+ classes.name);
-                if(classes.stereotype.equals("Entity")){
-                    myWriter.write(classes.name + " " +"setter" + " = " + classes.name.toLowerCase() + "Repository.findById(Id)\n" );
-                    myWriter.write("\t\t\t.orElseThrow(() -> new ResourceNotFoundException(\"Not found with id = \" + Id));\n\n");
-                }
-              }
-              for (TransformerClass transformerClass : classesToTransform) {
-                if(transformerClass.stereotype.equals("Aggregate Root")){
-                  for(Attribute  att : transformerClass.attributes){
-                    if(!att.getType().toLowerCase().contains("string") && !att.getName().toLowerCase().contains("string") &&
-                    !att.getType().toLowerCase().contains("long") && !att.getName().toLowerCase().contains("long")){
-                      myWriter.write(className.toLowerCase() + "Request.set" + att.Name.substring(0, 1).toUpperCase() + att.Name.substring(1).toLowerCase() + "(setter);\n");
-                    }
-                    
-                  }
-                }
-              } */
+           
               
 
              

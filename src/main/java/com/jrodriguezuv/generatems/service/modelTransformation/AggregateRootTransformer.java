@@ -63,13 +63,7 @@ public class AggregateRootTransformer implements TransformationStrategy {
               myWriter.write("@MapsId\n");
               myWriter.write("@JoinColumn(name = \"" + Attributes.get(i).Name.toLowerCase() + "_id\")\n");
               myWriter.write(Attributes.get(i).Visibility + " " +Attributes.get(i).Type  + " " +  Attributes.get(i).Name +";*/\n\n");
-              /* myWriter.write("@Column(name = \"" + Attributes.get(i).Name + "\")\n");
-              myWriter.write(Attributes.get(i).Visibility + " " +Attributes.get(i).Type  + " " +  Attributes.get(i).Name +";\n"); */
-              /*  @ManyToOne(fetch = FetchType.LAZY, optional = false)
-  @JoinColumn(name = "tutorial_id", nullable = false)
-  @OnDelete(action = OnDeleteAction.CASCADE)
-  @JsonIgnore
-  private Tutorial tutorial; */
+             
             } if(Attributes.get(i).Multiplicity.equals("*")){
               System.out.println("muchos");
               myWriter.write("/*  @ManyToOne(fetch = FetchType.LAZY, optional = false)\n");
@@ -79,29 +73,17 @@ public class AggregateRootTransformer implements TransformationStrategy {
             }
            
               if(Attributes.get(i).Multiplicity.equals("VO")){
+             
               myWriter.write("@Column(name = \"" + Attributes.get(i).Name + "\")\n");
-              myWriter.write(Attributes.get(i).Visibility + " " + Attributes.get(i).Type.substring(0, 1).toUpperCase() + Attributes.get(i).Type.substring( 1).toLowerCase() + " " +  Attributes.get(i).Name +";\n\n");
+              myWriter.write(Attributes.get(i).Visibility + " " + Attributes.get(i).Type + " " +  Attributes.get(i).Name +";\n\n");
             }  
             if(Attributes.get(i).Type.equals("string") || Attributes.get(i).Type.equals("String")){
               myWriter.write("@Column(name = \"" + Attributes.get(i).Name + "\")\n");
               myWriter.write(Attributes.get(i).Visibility + " " + Attributes.get(i).Type.substring(0, 1).toUpperCase() + Attributes.get(i).Type.substring( 1).toLowerCase() + " " +  Attributes.get(i).Name +";\n\n");
-            }/* else{
-              myWriter.write(Attributes.get(i).Visibility + " " + Attributes.get(i).Type.toLowerCase() + " " +  Attributes.get(i).Name +";\n\n");
-            } */
-            
-            
-            /* else{
-              if(Attributes.get(i).Type.equals("string") || Attributes.get(i).Type.equals("String")){
-                myWriter.write("@Column(name = \"" + Attributes.get(i).Name + "\")\n");
-                myWriter.write(Attributes.get(i).Visibility + " " + Attributes.get(i).Type.substring(0, 1).toUpperCase() + Attributes.get(i).Type.substring( 1).toLowerCase() + " " +  Attributes.get(i).Name +";\n");
-              }else{
-                myWriter.write(Attributes.get(i).Visibility + " " + Attributes.get(i).Type.toLowerCase() + " " +  Attributes.get(i).Name +";\n");
-              }
-              
-            }  */
+            }
           }
           
-          /* myWriter.write(Attributes.get(i).Visibility + " " + Attributes.get(i).Type.substring(0, 1).toUpperCase() + Attributes.get(i).Type.substring( 1).toLowerCase() + " " +  Attributes.get(i).Name +";\n"); */
+       
         } 
         
         //Constructor
@@ -111,11 +93,19 @@ public class AggregateRootTransformer implements TransformationStrategy {
            /* if(Attributes.get(i).Type.contains("string") || Attributes.get(i).Type.contains("String")){  */
             if (!Attributes.get(i).Multiplicity.equals("1") && !Attributes.get(i).Multiplicity.equals("*")) {
               
-            
+              if(Attributes.get(i).Multiplicity.equals("VO")){
+                myWriter.write(Attributes.get(i).Type + " " +  Attributes.get(i).Name);
+              }else{
+
+              
             myWriter.write(Attributes.get(i).Type.substring(0, 1).toUpperCase() + Attributes.get(i).Type.substring( 1).toLowerCase() + " " +  Attributes.get(i).Name);
+
+
             if(i !=  Attributes.size()-1){
               myWriter.write(", ");
             }
+          } 
+
           } 
           
                    
@@ -165,23 +155,27 @@ public class AggregateRootTransformer implements TransformationStrategy {
         for (int i = 0; i < Attributes.size(); i++) {
 
           if(!Attributes.get(i).Multiplicity.equals("1") && !Attributes.get(i).Multiplicity.equals("*") && !Attributes.get(i).Type.equals("long") && !Attributes.get(i).Type.equals("Long")){ 
-            myWriter.write( "\n public"  + " " + Attributes.get(i).Type.substring(0,1).toUpperCase() + Attributes.get(i).Type.substring(1).toLowerCase() +" get" +  Attributes.get(i).Name.substring(0, 1).toUpperCase() +  Attributes.get(i).Name.substring( 1).toLowerCase() + "() {\n");
-            myWriter.write("\treturn this." +  Attributes.get(i).Name + ";\n");
-            myWriter.write("}\n");
-            myWriter.write("\n"); 
-          }
-          /* if(!Attributes.get(i).Type.toLowerCase().contains("long") && !Attributes.get(i).Type.toLowerCase().contains("long") && !Attributes.get(i).Type.toLowerCase().contains("string")  && !Attributes.get(i).Type.toLowerCase().contains("String")){
-            if(!Attributes.get(i).Multiplicity.equals("*")){
-              myWriter.write( "\n public"  + " List<" + Attributes.get(i).Type +"> get" +  Attributes.get(i).Name.substring(0, 1).toUpperCase() +  Attributes.get(i).Name.substring( 1).toLowerCase() + "() {\n");
-            myWriter.write("\treturn this." +  Attributes.get(i).Name + ";\n");
-            myWriter.write("}\n");
-            myWriter.write("\n"); 
-            }if(!Attributes.get(i).Multiplicity.equals("1")){
+
+            if(Attributes.get(i).Multiplicity.equals("VO")){
+
               myWriter.write( "\n public"  + " " + Attributes.get(i).Type +" get" +  Attributes.get(i).Name.substring(0, 1).toUpperCase() +  Attributes.get(i).Name.substring( 1).toLowerCase() + "() {\n");
             myWriter.write("\treturn this." +  Attributes.get(i).Name + ";\n");
             myWriter.write("}\n");
-            myWriter.write("\n"); 
-            } */
+            myWriter.write("\n");
+             
+            
+            }else{
+              myWriter.write( "\n public"  + " " + Attributes.get(i).Type.substring(0,1).toUpperCase() + Attributes.get(i).Type.substring(1).toLowerCase() +" get" +  Attributes.get(i).Name.substring(0, 1).toUpperCase() +  Attributes.get(i).Name.substring( 1).toLowerCase() + "() {\n");
+              myWriter.write("\treturn this." +  Attributes.get(i).Name + ";\n");
+              myWriter.write("}\n");
+              myWriter.write("\n");
+
+            }
+            
+            
+            
+          }
+          
             
           if(Attributes.get(i).Type.equals("long") || Attributes.get(i).Type.equals("Long")){
             myWriter.write( "\n public"  + " " + Attributes.get(i).Type.toLowerCase() +" get" +  Attributes.get(i).Name.substring(0, 1).toUpperCase() +  Attributes.get(i).Name.substring( 1).toLowerCase() + "() {\n");
@@ -189,6 +183,8 @@ public class AggregateRootTransformer implements TransformationStrategy {
             myWriter.write("}\n");
             myWriter.write("\n"); 
           } 
+
+          
             
         }
         //setter
@@ -196,24 +192,23 @@ public class AggregateRootTransformer implements TransformationStrategy {
           for (int i = 0; i < Attributes.size(); i++) {
 
             if(!Attributes.get(i).Multiplicity.equals("1") && !Attributes.get(i).Multiplicity.equals("*") && !Attributes.get(i).Type.equals("long") && !Attributes.get(i).Type.equals("Long")){
-              myWriter.write( "\n public"  + " " + Attributes.get(i).Type.substring(0,1).toUpperCase() + Attributes.get(i).Type.substring(1).toLowerCase() +" set" +  Attributes.get(i).Name.substring(0, 1).toUpperCase() +  Attributes.get(i).Name.substring( 1).toLowerCase() + "(" + Attributes.get(i).Type.substring(0,1).toUpperCase() + Attributes.get(i).Type.substring(1).toLowerCase() + " " + Attributes.get(i).Name +  ") {\n");
+
+              if(Attributes.get(i).Multiplicity.equals("VO")){
+                myWriter.write( "\n public"  + " " + Attributes.get(i).Type +" set" +  Attributes.get(i).Name.substring(0, 1).toUpperCase() +  Attributes.get(i).Name.substring( 1).toLowerCase() + "(" + Attributes.get(i).Type + " " + Attributes.get(i).Name +  ") {\n");
             myWriter.write("\treturn this." +  Attributes.get(i).Name + " = " + Attributes.get(i).Name  + ";\n");
             myWriter.write("}\n");
             myWriter.write("\n"); 
-            }  /* if(!Attributes.get(i).Type.toLowerCase().contains("long") && !Attributes.get(i).Type.toLowerCase().contains("long") && !Attributes.get(i).Type.toLowerCase().contains("string")  && !Attributes.get(i).Type.toLowerCase().contains("String")){
-              if(Attributes.get(i).Multiplicity.equals("*")){
-                myWriter.write( "\n public"  + " void"  +" set" +  Attributes.get(i).Name.substring(0, 1).toUpperCase() +  Attributes.get(i).Name.substring( 1).toLowerCase() + "(List<" + Attributes.get(i).Type + "> " + Attributes.get(i).Name +  ") {\n");
-                myWriter.write("\t this." +  Attributes.get(i).Name + " = " + Attributes.get(i).Name  + ";\n");
-                myWriter.write("}\n");
-                myWriter.write("\n"); 
+
               }else{
-                myWriter.write( "\n public"  + " void"  +" set" +  Attributes.get(i).Name.substring(0, 1).toUpperCase() +  Attributes.get(i).Name.substring( 1).toLowerCase() + "(" + Attributes.get(i).Type + " " + Attributes.get(i).Name +  ") {\n");
-                myWriter.write("\t this." +  Attributes.get(i).Name + " = " + Attributes.get(i).Name  + ";\n");
-                myWriter.write("}\n");
-                myWriter.write("\n"); 
+                myWriter.write( "\n public"  + " " + Attributes.get(i).Type.substring(0,1).toUpperCase() + Attributes.get(i).Type.substring(1).toLowerCase() +" set" +  Attributes.get(i).Name.substring(0, 1).toUpperCase() +  Attributes.get(i).Name.substring( 1).toLowerCase() + "(" + Attributes.get(i).Type.substring(0,1).toUpperCase() + Attributes.get(i).Type.substring(1).toLowerCase() + " " + Attributes.get(i).Name +  ") {\n");
+            myWriter.write("\treturn this." +  Attributes.get(i).Name + " = " + Attributes.get(i).Name  + ";\n");
+            myWriter.write("}\n");
+            myWriter.write("\n"); 
               }
+
+
               
-            } */if(Attributes.get(i).Type.equals("long") || Attributes.get(i).Type.equals("Long")){
+            }  if(Attributes.get(i).Type.equals("long") || Attributes.get(i).Type.equals("Long")){
               myWriter.write( "\n public"  + " " + Attributes.get(i).Type.toLowerCase() +" set" +  Attributes.get(i).Name.substring(0, 1).toUpperCase() +  Attributes.get(i).Name.substring( 1).toLowerCase() + "(" + Attributes.get(i).Type.toLowerCase() + " " + Attributes.get(i).Name +  ") {\n");
             myWriter.write("\treturn this." +  Attributes.get(i).Name + " = " + Attributes.get(i).Name  + ";\n");
             myWriter.write("}\n");

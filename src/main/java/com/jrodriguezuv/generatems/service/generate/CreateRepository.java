@@ -64,9 +64,7 @@ public class CreateRepository {
                   if (attribute.IsIdentifier.equals("yes")) {
                      myWriter.write(attribute.Type.substring(0, 1).toUpperCase() + attribute.Type.substring( 1).toLowerCase());
                   }
-                  /* if(attribute.Name.contains("id") || attribute.Name.contains("id")){
-                    myWriter.write(attribute.Type.substring(0, 1).toUpperCase() + attribute.Type.substring( 1).toLowerCase());
-                  } */
+               
                 }
                 myWriter.write(">{}\n");
                 

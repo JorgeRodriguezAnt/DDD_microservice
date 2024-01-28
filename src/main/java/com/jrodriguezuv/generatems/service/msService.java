@@ -40,12 +40,12 @@ public class msService {
   public Flux<Microservice> findAll() {
     
 
-    /* return tutorialRepository.findAll(); */
+   
     return microserviceRepository.findAll();
   }
 
   public Mono<Microservice> findById(int id) {
-    /* return tutorialRepository.findById(id); */
+    
     return microserviceRepository.findById(id);
   }
 
@@ -75,10 +75,10 @@ public class msService {
         pushRepository pushRepository = new pushRepository(); 
 
 
-        /* pushRepository.push(); */ 
-        /* pushRepository.delete(); */
+        pushRepository.push(); 
+        /* pushRepository.delete();  */
     
-    /* return tutorialRepository.save(tutorial); */
+
     return microserviceRepository.save(microservice);
   } 
 
