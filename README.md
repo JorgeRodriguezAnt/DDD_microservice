@@ -7,5 +7,8 @@ para su uso.
 
 El microservicio generado presenta un CRUD basico en donde el usuario podra realizar las funciones esenciales, además de poder agregar nuevos servicios.
 
+Se utilizo Spring boot para crear esta API y MySQL para guardar todos los modelos que son ingresados por el usuario.
+
 
 ![Understanding the data](https://github.com/JorgeRodriguezAnt/DDD_microservice/blob/develop/ddd.png)
+
